@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import { site } from "@/data/site";
 import { GradualBlur } from "@/components/gradual-blur";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -97,6 +99,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           curve="bezier"
           exponential
         />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
