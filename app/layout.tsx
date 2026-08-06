@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque } from "next/font/google";
+import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import { site } from "@/data/site";
 import { GradualBlur } from "@/components/gradual-blur";
 import { Analytics } from "@vercel/analytics/next";
@@ -9,6 +9,11 @@ import "./globals.css";
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   variable: "--font-bricolage",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
 });
 
 const description =
@@ -96,7 +101,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${bricolage.variable} h-full antialiased`}>
+    <html lang="en" className={`${bricolage.variable} ${jetbrains.variable} h-full antialiased`}>
       <body className="wallpaper min-h-full font-sans text-ink">
         <script
           type="application/ld+json"
@@ -105,6 +110,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="blob blob-a" aria-hidden />
         <div className="blob blob-b" aria-hidden />
         <div className="blob blob-c" aria-hidden />
+        <div className="grain" aria-hidden />
         {children}
         <GradualBlur
           target="page"
