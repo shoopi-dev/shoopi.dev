@@ -16,7 +16,7 @@ export function Pill({ href, delay = 0, icon, children }: Props) {
       href={href}
       {...externalProps(href)}
       delay={delay}
-      className="glass hover-glow relative isolate inline-flex items-center gap-2 rounded-full px-5 py-2 text-base font-semibold transition-transform hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+      className="glass relative isolate inline-flex items-center gap-2 rounded-full px-5 py-2 text-base font-semibold transition-transform duration-300 hover:scale-105 active:scale-[0.97]"
     >
       <span aria-hidden className="liquid-refract" />
       {icon && (
