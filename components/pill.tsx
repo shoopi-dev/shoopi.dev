@@ -1,3 +1,4 @@
+import { externalProps } from "@/lib/link";
 import { Pop } from "./animate";
 
 type Props = {
@@ -13,6 +14,7 @@ export function Pill({ href, delay = 0, icon, children }: Props) {
     <Pop
       as="a"
       href={href}
+      {...externalProps(href)}
       delay={delay}
       className="tile-glossy hover-glow inline-flex items-center gap-2 rounded-full px-5 py-2 text-base font-semibold transition-transform hover:-translate-y-0.5 hover:scale-105 active:scale-95"
     >

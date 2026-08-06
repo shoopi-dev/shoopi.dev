@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Work in progress">
+  <defs>
+    <linearGradient id="wip-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2c2545"/>
+      <stop offset="60%" stop-color="#221c37"/>
+      <stop offset="100%" stop-color="#16121f"/>
+    </linearGradient>
+    <radialGradient id="wip-glow" cx="0.5" cy="0.45" r="0.55">
+      <stop offset="0%" stop-color="#9333ea" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#9333ea" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="wip-grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M60 0 H0 V60" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#wip-bg)"/>
+  <rect width="1200" height="630" fill="url(#wip-grid)"/>
+  <rect width="1200" height="630" fill="url(#wip-glow)"/>
+
+  <!-- unrevealed slot -->
+  <rect x="430" y="180" width="340" height="270" rx="76"
+        fill="#ffffff" fill-opacity="0.05"
+        stroke="#ffffff" stroke-opacity="0.3" stroke-width="4"
+        stroke-dasharray="22 18"/>
+  <text x="600" y="345" text-anchor="middle" dominant-baseline="middle"
+        font-family="ui-sans-serif, system-ui, -apple-system, sans-serif"
+        font-size="120" font-weight="700" fill="#ffffff" fill-opacity="0.5">?</text>
+</svg>
