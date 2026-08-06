@@ -174,7 +174,25 @@ section[id] {
   border-radius: inherit;
   overflow: hidden;
   pointer-events: none;
+  /* Safari/Firefox can't do url() in backdrop-filter: they drop that line and
+     keep this blur; Chromium takes the last valid value - the refraction */
+  backdrop-filter: blur(16px) saturate(1.6);
   backdrop-filter: url("#liquid-glass");
+}
+
+/* liquid pill surface: no fill, no border - specular rim shadows only,
+   the refract layer does the rest (reference: liquid-glass-button) */
+.liquid-glass {
+  box-shadow:
+    0 0 6px rgb(0 0 0 / 0.03),
+    0 2px 6px rgb(0 0 0 / 0.08),
+    inset 3px 3px 0.5px -3px rgb(0 0 0 / 0.9),
+    inset -3px -3px 0.5px -3px rgb(0 0 0 / 0.85),
+    inset 1px 1px 1px -0.5px rgb(0 0 0 / 0.6),
+    inset -1px -1px 1px -0.5px rgb(0 0 0 / 0.6),
+    inset 0 0 6px 6px rgb(0 0 0 / 0.12),
+    inset 0 0 2px 2px rgb(0 0 0 / 0.06),
+    0 0 12px rgb(255 255 255 / 0.15);
 }
 
 /* glossy squircle tile: inner top highlight + soft drop, catchy.fan inspired */
@@ -394,6 +412,9 @@ section[id] {
   .liquid-refract {
     backdrop-filter: none;
   }
+  .liquid-glass {
+    background: rgb(244 255 255 / 0.96);
+  }
   .tile-soon {
     background: rgb(244 255 255 / 0.88);
   }
@@ -403,7 +424,8 @@ section[id] {
 @media (prefers-contrast: more) {
   .glass,
   .tile-soon,
-  .tile-glossy {
+  .tile-glossy,
+  .liquid-glass {
     background: #fff;
     border: 1.5px solid var(--color-ink);
     backdrop-filter: none;
