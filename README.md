@@ -1,6 +1,6 @@
 # shoopi.dev
 
-My public bet: **$1,000,000 from my own apps before I turn 30.**
+My public bet: **$1,000,000 before I turn 30** - from the apps I build and the companies I build for.
 
 This is the site that tracks it - every project, every dollar, every failure, in the open.
 Live at **[shoopi.dev](https://shoopi.dev)**.

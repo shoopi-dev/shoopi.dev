@@ -1,6 +1,7 @@
 import type { Project } from "@/data/site";
 import { fmtMoney } from "@/lib/format";
 import { statusDot } from "@/lib/status";
+import { externalProps } from "@/lib/link";
 import { Pop } from "./animate";
 
 /** jurre.me-style project card: cover, title + arrow, description, revenue pill.
@@ -19,9 +20,11 @@ export function ProjectCard({
     <Pop delay={delay} className="h-full">
       <article
         className={`${live ? "neon-border " : ""}glass float hover-glow flex h-full flex-col gap-3 rounded-[22px] p-4 shadow-lg transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl`}
-        style={{ animationDelay: `${-index * 1.7}s`, animationDuration: `${6 + index}s` }}
+        /* same 6s cycle for every card, offset by even thirds - the row reads
+           as one gentle wave instead of three cards drifting out of phase */
+        style={{ animationDelay: `${-index * 2}s`, animationDuration: "6s" }}
       >
-        {p.cover ? (
+        {p.cover && (
           <div className="sheen rounded-xl">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -30,10 +33,6 @@ export function ProjectCard({
               className="aspect-[1200/630] w-full rounded-xl object-cover"
             />
           </div>
-        ) : (
-          <div className="tile-soon flex aspect-[1200/630] w-full items-center justify-center rounded-xl">
-            <span className="text-4xl text-ink/25">?</span>
-          </div>
         )}
         <div className="flex items-center gap-2">
           <span className="text-lg">{p.emoji}</span>
@@ -41,6 +40,7 @@ export function ProjectCard({
           {p.link && (
             <a
               href={p.link}
+              {...externalProps(p.link)}
               aria-label={`Open ${p.name}`}
               className="ml-auto flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-white transition-transform hover:scale-110 active:scale-95"
             >

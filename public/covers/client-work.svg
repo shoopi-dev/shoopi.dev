@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Client work">
+  <defs>
+    <linearGradient id="cw-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7222b8"/>
+      <stop offset="55%" stop-color="#9333ea"/>
+      <stop offset="100%" stop-color="#1e9de8"/>
+    </linearGradient>
+    <radialGradient id="cw-glow" cx="0.78" cy="0.15" r="0.7">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#cw-bg)"/>
+  <rect width="1200" height="630" fill="url(#cw-glow)"/>
+
+  <!-- browser window: the "websites" half -->
+  <g transform="translate(120 130)">
+    <rect width="520" height="370" rx="26" fill="#ffffff" fill-opacity="0.14" stroke="#ffffff" stroke-opacity="0.45" stroke-width="3"/>
+    <path d="M0 66 H520" stroke="#ffffff" stroke-opacity="0.4" stroke-width="3"/>
+    <circle cx="40" cy="33" r="9" fill="#ffffff" fill-opacity="0.75"/>
+    <circle cx="72" cy="33" r="9" fill="#ffffff" fill-opacity="0.5"/>
+    <circle cx="104" cy="33" r="9" fill="#ffffff" fill-opacity="0.35"/>
+    <rect x="44" y="112" width="300" height="26" rx="13" fill="#ffffff" fill-opacity="0.75"/>
+    <rect x="44" y="160" width="420" height="16" rx="8" fill="#ffffff" fill-opacity="0.4"/>
+    <rect x="44" y="192" width="360" height="16" rx="8" fill="#ffffff" fill-opacity="0.4"/>
+    <rect x="44" y="248" width="150" height="44" rx="22" fill="#ffffff" fill-opacity="0.85"/>
+  </g>
+
+  <!-- node graph: the "system architecture" half -->
+  <g transform="translate(760 150)" stroke="#ffffff" stroke-opacity="0.55" stroke-width="3" fill="none">
+    <path d="M150 60 L60 190 M150 60 L240 190 M60 190 L150 320 M240 190 L150 320 M60 190 L240 190"/>
+  </g>
+  <g transform="translate(760 150)" fill="#ffffff">
+    <circle cx="150" cy="60" r="26" fill-opacity="0.95"/>
+    <circle cx="60" cy="190" r="20" fill-opacity="0.7"/>
+    <circle cx="240" cy="190" r="20" fill-opacity="0.7"/>
+    <circle cx="150" cy="320" r="20" fill-opacity="0.55"/>
+  </g>
+</svg>

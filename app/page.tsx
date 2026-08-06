@@ -15,24 +15,23 @@ import { Countdown } from "@/components/countdown";
 
 /* one entrance timeline for the whole page (seconds) */
 const T = {
-  word: (i: number) => 0.05 + i * 0.08,
-  floaters: 0.9,
-  pills: 1.15,
-  widgets: 1.25,
-  projects: 1.4,
-  apps: 1.5,
-  about: 1.6,
-  updates: 1.7,
-  contact: 1.8,
+  word: (i: number) => 0.04 + i * 0.045,
+  floaters: 0.5,
+  pills: 0.62,
+  widgets: 0.72,
+  projects: 0.84,
+  apps: 0.94,
+  about: 1.02,
+  updates: 1.1,
+  contact: 1.18,
 };
-
 export default function Home() {
   const pct = (site.revenue / site.goal) * 100;
   const filled = Math.round((site.revenue / site.goal) * 100);
   const day = dayOfChallenge(site.startDate);
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col">
+    <div className="mx-auto flex min-h-dvh w-full max-w-4xl flex-col">
       <main className="flex flex-1 flex-col gap-4 px-4 pb-40 pt-6">
         {/* Hero: staggered headline, inline avatar, floating pics, social pills */}
         <section className="group relative px-2 py-16 text-center">
@@ -88,20 +87,20 @@ export default function Home() {
             <Pill href={site.socials.github} icon="/icons/github.svg" delay={T.pills}>
               @sho0pi
             </Pill>
-            <Pill href={site.socials.x} icon="/icons/x.svg" delay={T.pills + 0.08}>
+            <Pill href={site.socials.x} icon="/icons/x.svg" delay={T.pills + 0.05}>
               @sho0pi
             </Pill>
             <Pill
               href={site.socials.instagram}
               icon="/icons/instagram.svg"
-              delay={T.pills + 0.16}
+              delay={T.pills + 0.1}
             >
               @shoopi.dev
             </Pill>
             <Pill
               href={`mailto:${site.socials.email}`}
               icon="/icons/mail.svg"
-              delay={T.pills + 0.24}
+              delay={T.pills + 0.15}
             >
               say hi
             </Pill>
@@ -131,7 +130,7 @@ export default function Home() {
             </p>
           </Widget>
 
-          <Widget label="time left" delay={T.widgets + 0.1}>
+          <Widget label="time left" delay={T.widgets + 0.06}>
             <Countdown deadline={site.deadline} />
           </Widget>
         </section>
@@ -143,9 +142,9 @@ export default function Home() {
             subtitle="Everything I'm working on to support the journey."
             delay={T.projects}
           />
-          <div className="mt-5 grid w-full gap-5 sm:grid-cols-2">
+          <div className="mt-5 grid w-full gap-4 sm:grid-cols-3">
             {site.projects.map((p, i) => (
-              <ProjectCard key={p.name} p={p} index={i} delay={T.projects + 0.15 + i * 0.12} />
+              <ProjectCard key={p.name} p={p} index={i} delay={T.projects + 0.08 + i * 0.07} />
             ))}
           </div>
         </section>
@@ -155,13 +154,13 @@ export default function Home() {
           <SectionHeader title="Apps" small delay={T.apps} />
           <div className="mt-2 flex flex-wrap justify-center gap-x-6 gap-y-5 px-2">
             {site.apps.map((p, i) => (
-              <AppIcon key={p.name} p={p} delay={T.apps + 0.1 + i * 0.1} />
+              <AppIcon key={p.name} p={p} delay={T.apps + 0.06 + i * 0.06} />
             ))}
             {Array.from({ length: Math.max(0, 4 - site.apps.length) }, (_, i) => (
               <AppIcon
                 key={`slot-${i}`}
                 p={{ name: "???", emoji: "", description: "", status: "soon" }}
-                delay={T.apps + 0.1 + (site.apps.length + i) * 0.1}
+                delay={T.apps + 0.06 + (site.apps.length + i) * 0.06}
               />
             ))}
           </div>
@@ -176,20 +175,28 @@ export default function Home() {
           id="contact"
           className="mt-14 flex flex-col items-center gap-4 text-center"
         >
-          <SectionHeader title="Wanna get in touch?" delay={T.contact} />
+          <SectionHeader
+            title="Wanna get in touch?"
+            subtitle={
+              site.openForWork
+                ? "Open for client work - websites, architecture, and R&D."
+                : undefined
+            }
+            delay={T.contact}
+          />
           <Pill
             href={`mailto:${site.socials.email}`}
             icon="/icons/mail.svg"
-            delay={T.contact + 0.1}
+            delay={T.contact + 0.06}
           >
             Shoot me an email!
           </Pill>
-          <Rise as="p" delay={T.contact + 0.2} className="text-sm text-ink/60">
+          <Rise as="p" delay={T.contact + 0.12} className="text-sm text-ink/60">
             {site.socials.email}
           </Rise>
         </section>
 
-        <Footer delay={T.contact + 0.3} />
+        <Footer delay={T.contact + 0.18} />
       </main>
     </div>
   );

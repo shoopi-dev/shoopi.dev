@@ -1,6 +1,7 @@
 import type { Project } from "@/data/site";
 import { fmtMoney } from "@/lib/format";
 import { statusDot } from "@/lib/status";
+import { externalProps } from "@/lib/link";
 import { Pop } from "./animate";
 
 /** springboard tile: glossy squircle for live apps, dark glass "?" for coming soon */
@@ -30,13 +31,13 @@ export function AppIcon({ p, delay = 0 }: { p: Project; delay?: number }) {
         />
       </div>
       <span className="max-w-18 truncate text-xs font-medium">{soon ? "???" : p.name}</span>
-      <span className="text-[10px] tabular-nums text-ink/60">
+      <span className="text-xs tabular-nums text-ink/60">
         {p.status === "live" && p.revenue !== undefined ? fmtMoney(p.revenue) : p.status}
       </span>
     </Pop>
   );
   return p.link ? (
-    <a href={p.link} className="block">
+    <a href={p.link} {...externalProps(p.link)} className="block">
       {icon}
     </a>
   ) : (

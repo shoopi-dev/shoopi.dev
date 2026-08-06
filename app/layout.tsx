@@ -12,7 +12,7 @@ const bricolage = Bricolage_Grotesque({
 });
 
 const description =
-  "Itay Blokh (sho0pi) is a cybersecurity R&D engineer and agentic AI builder from Israel, living in Singapore. Creator of Gaia, an open-source AI agent. Follow his journey of making $1,000,000 from his own apps before turning 30 - built in public.";
+  "Itay Blokh (sho0pi) is a cybersecurity R&D engineer and agentic AI builder based in Singapore. Creator of Gaia, an open-source AI agent. Available for client work - websites, system architecture and hands-on R&D - while chasing $1,000,000 before turning 30, built in public.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://shoopi.dev"),
@@ -55,10 +55,26 @@ const jsonLd = {
         "Cybersecurity",
         "Agentic AI",
         "AI Agents",
+        "Software Architecture",
+        "Web Development",
         "Go",
         "Kotlin",
         "Android",
       ],
+      makesOffer: {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Software development and R&D",
+          serviceType: [
+            "Web development",
+            "System architecture",
+            "Research and development",
+          ],
+          provider: { "@id": "https://shoopi.dev/#itay" },
+          areaServed: "Worldwide",
+        },
+      },
     },
     {
       "@type": "SoftwareApplication",
@@ -95,7 +111,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           position="bottom"
           height="5rem"
           strength={2}
-          divCount={6}
+          divCount={3}
           curve="bezier"
           exponential
         />
