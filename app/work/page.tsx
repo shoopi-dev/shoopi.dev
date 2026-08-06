@@ -26,8 +26,7 @@ const T = {
   services: 0.4,
   recent: 0.55,
   process: 0.7,
-  pricing: 0.85,
-  contact: 1,
+  contact: 0.85,
 };
 
 export default function WorkPage() {
@@ -72,8 +71,8 @@ export default function WorkPage() {
             <Pill href={`mailto:${site.socials.email}`} icon="/icons/mail.svg" delay={T.hero + 0.24}>
               Start a project
             </Pill>
-            <Pill href="#pricing" delay={T.hero + 0.3}>
-              See pricing
+            <Pill href="#process" delay={T.hero + 0.3}>
+              How I work
             </Pill>
           </div>
         </section>
@@ -140,26 +139,6 @@ export default function WorkPage() {
                   </span>
                   <h3 className="font-display font-bold">{step.title}</h3>
                   <p className="text-sm leading-relaxed text-ink/70">{step.body}</p>
-                </div>
-              </Pop>
-            ))}
-          </div>
-        </section>
-
-        {/* Pricing */}
-        <section id="pricing" className="mt-14 flex flex-col items-center gap-2">
-          <SectionHeader
-            title="Rough pricing"
-            subtitle="Every project is quoted properly after we talk - this is the ballpark."
-            delay={T.pricing}
-          />
-          <div className="mt-5 grid w-full gap-4 sm:grid-cols-3">
-            {work.pricing.map((tier, i) => (
-              <Pop key={tier.label} delay={T.pricing + 0.12 + i * 0.07} className="h-full">
-                <div className="glass flex h-full flex-col gap-1 rounded-[22px] p-5">
-                  <h3 className="font-display font-bold">{tier.label}</h3>
-                  <p className="font-mono text-2xl font-bold">{tier.price}</p>
-                  <p className="text-sm text-ink/60">{tier.note}</p>
                 </div>
               </Pop>
             ))}
