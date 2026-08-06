@@ -162,6 +162,21 @@ section[id] {
   -webkit-backdrop-filter: blur(28px) saturate(1.9) brightness(1.06);
 }
 
+/* liquid refraction layer: SVG displacement of whatever is behind the pill.
+   Chromium-only (Safari/Firefox drop the declaration and keep the .glass blur
+   on the parent) - render it as an absolutely-positioned child of a .glass
+   element that has position:relative + isolation:isolate. Filter lives in
+   components/glass-filter.tsx. */
+.liquid-refract {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+  backdrop-filter: url("#liquid-glass");
+}
+
 /* glossy squircle tile: inner top highlight + soft drop, catchy.fan inspired */
 .tile-glossy {
   background: linear-gradient(180deg, #ffffff 0%, #e8f1f7 100%);
@@ -376,6 +391,9 @@ section[id] {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
+  .liquid-refract {
+    backdrop-filter: none;
+  }
   .tile-soon {
     background: rgb(244 255 255 / 0.88);
   }
@@ -390,6 +408,9 @@ section[id] {
     border: 1.5px solid var(--color-ink);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+  .liquid-refract {
+    backdrop-filter: none;
   }
 }
 

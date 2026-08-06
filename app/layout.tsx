@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import { site } from "@/data/site";
 import { GradualBlur } from "@/components/gradual-blur";
+import { GlassFilter } from "@/components/glass-filter";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -111,6 +112,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="blob blob-b" aria-hidden />
         <div className="blob blob-c" aria-hidden />
         <div className="grain" aria-hidden />
+        <GlassFilter />
         {children}
         <GradualBlur
           target="page"
