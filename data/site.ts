@@ -133,12 +133,6 @@ export const site = {
         body: "Documented, deployed, and yours. I'll show you how to run it, and I'm around afterwards if something breaks.",
       },
     ] satisfies ProcessStep[]) as ProcessStep[],
-    // placeholder numbers - replace with your real rates
-    pricing: [
-      { label: "Landing page", price: "from $1,500", note: "1-2 weeks, design and build" },
-      { label: "Full site or MVP", price: "from $6,000", note: "3-6 weeks, scoped per project" },
-      { label: "Ongoing / advisory", price: "from $1,200/mo", note: "retainer, part-time" },
-    ],
     recent: ([
       {
         name: "Flow With Grace",
