@@ -35,11 +35,26 @@ export default function Home() {
       <main className="flex flex-1 flex-col gap-4 px-4 pb-40 pt-6">
         {/* Hero: staggered headline, inline avatar, floating pics, social pills */}
         <section className="group relative px-2 py-16 text-center">
-          <Floater emoji="📱" delay={T.floaters} className="-left-1 top-2 -rotate-12" />
-          <Floater emoji="🚀" delay={T.floaters + 0.1} className="-right-1 top-6 rotate-10" />
-          <Floater emoji="🌍" delay={T.floaters + 0.2} className="-left-2 bottom-24 rotate-6" />
+          <Floater
+            src="/photos/desert.jpg"
+            alt="Standing beside a giant cactus in the desert"
+            delay={T.floaters}
+            className="-left-20 top-0 -rotate-12 xl:-left-28"
+          />
+          <Floater
+            src="/photos/city.jpg"
+            alt="A lit-up city at night in winter"
+            delay={T.floaters + 0.1}
+            className="-right-20 top-8 rotate-10 xl:-right-28"
+          />
+          <Floater
+            src="/photos/mountain.jpg"
+            alt="Climbing mountain steps in the mist"
+            delay={T.floaters + 0.2}
+            className="-left-24 bottom-16 rotate-6 xl:-left-32"
+          />
 
-          <h1 className="font-display text-4xl font-bold leading-snug tracking-tight text-balance sm:text-5xl sm:leading-[1.2]">
+          <h1 className="relative z-10 font-display text-4xl font-bold leading-snug tracking-tight text-balance sm:text-5xl sm:leading-[1.2]">
             <Rise as="span" delay={T.word(0)} className="text-ink/40">
               I&apos;m{" "}
             </Rise>
@@ -49,8 +64,8 @@ export default function Home() {
             <Rise as="span" delay={T.word(2)} className="inline-block align-middle">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/avatar.png"
-                alt="sho0pi avatar"
+                src="/avatar.jpg"
+                alt="Itay Blokh"
                 className="mx-1 inline h-14 w-[3.75rem] rounded-2xl object-cover shadow-md"
               />{" "}
             </Rise>
@@ -83,7 +98,7 @@ export default function Home() {
             </Rise>
           </h1>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="relative z-10 mt-8 flex flex-wrap justify-center gap-3">
             <Pill href={site.socials.github} icon="/icons/github.svg" delay={T.pills}>
               @sho0pi
             </Pill>
@@ -121,7 +136,7 @@ export default function Home() {
               ))}
             </div>
             <p className="mt-3 flex flex-wrap items-baseline gap-x-2 text-sm text-ink/60">
-              <span className="font-display text-lg font-bold tabular-nums text-ink">
+              <span className="font-mono text-lg font-bold text-ink">
                 {fmtMoney(site.revenue)}
               </span>
               <span>· {pct.toFixed(2)}% of {fmtMoney(site.goal)}</span>

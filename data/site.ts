@@ -165,6 +165,7 @@ export const site = {
         summary:
           "An AI agent that forges specialist sub-agents on demand and remembers across sessions. Multi-channel, MIT licensed - the code is public, so you can judge the engineering rather than take my word for it.",
         tags: ["AI agents", "Go", "Open source"],
+        image: "/work/gaia.jpg",
       },
       {
         name: "shoopi.dev",
@@ -173,6 +174,7 @@ export const site = {
         summary:
           "This site. A design system, generated OG images, structured data and a content model that lets one file drive the whole page.",
         tags: ["Next.js", "Design system", "SEO"],
+        image: "/work/shoopi-dev.jpg",
       },
     ] satisfies WorkItem[]) as WorkItem[],
   },

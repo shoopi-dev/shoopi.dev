@@ -135,7 +135,7 @@ export default function WorkPage() {
             {work.process.map((step, i) => (
               <Pop key={step.title} delay={T.process + 0.12 + i * 0.07} className="h-full">
                 <div className="glass flex h-full flex-col gap-2 rounded-[22px] p-5">
-                  <span className="font-display text-2xl font-bold tabular-nums text-accent">
+                  <span className="font-mono text-2xl font-bold text-accent">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="font-display font-bold">{step.title}</h3>
@@ -158,7 +158,7 @@ export default function WorkPage() {
               <Pop key={tier.label} delay={T.pricing + 0.12 + i * 0.07} className="h-full">
                 <div className="glass flex h-full flex-col gap-1 rounded-[22px] p-5">
                   <h3 className="font-display font-bold">{tier.label}</h3>
-                  <p className="font-display text-2xl font-bold tabular-nums">{tier.price}</p>
+                  <p className="font-mono text-2xl font-bold">{tier.price}</p>
                   <p className="text-sm text-ink/60">{tier.note}</p>
                 </div>
               </Pop>
