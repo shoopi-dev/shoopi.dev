@@ -1,0 +1,16 @@
+{
+  "projectId": "10c75904-edd5-4a79-9daa-927b98da9a8d",
+  "pkg": "shoopi.dev",
+  "globalName": "Shoopi",
+  "shape": "package",
+  "entry": "./dist/index.js",
+  "srcDir": "components",
+  "tsconfig": ".design-sync/tsconfig.json",
+  "buildCmd": "bunx @tailwindcss/cli -i .design-sync/styles/entry.css -o .design-sync/build/tailwind.css",
+  "cssEntry": ".design-sync/build/tailwind.css",
+  "readmeHeader": ".design-sync/conventions.md",
+  "overrides": {
+    "Floater": { "viewport": "1200x360" },
+    "Countdown": { "cardMode": "column" }
+  }
+}

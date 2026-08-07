@@ -1,0 +1,13 @@
+/* design-sync stylesheet source — compiled by cfg.buildCmd into
+   .design-sync/build/tailwind.css (the cfg.cssEntry the bundle ships).
+   Fonts load from Google Fonts at runtime — the same families
+   next/font/google loads on the site. */
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+@import "../../app/globals.css";
+
+/* next/font injects these variables on <html> at runtime; outside Next.js
+   they must resolve to the loaded family names. */
+:root {
+  --font-jetbrains: "JetBrains Mono";
+  --font-bricolage: "Bricolage Grotesque";
+}
