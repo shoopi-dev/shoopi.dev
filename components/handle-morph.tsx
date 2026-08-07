@@ -1,7 +1,8 @@
 /** (sho[o|0]pi) - the o morphs into a slashed zero while hovering the hero (group).
-    Same colour throughout: the glyph change is the whole point, not a colour change.
-    The slash is drawn rather than typed, because most display faces have no
-    slashed-zero feature and the combining-overlay character renders unreliably. */
+    The slash is coral at 35 degrees - the same slash the o0 mark carries, so the
+    hover ties the handle to the logo. Drawn rather than typed, because most
+    display faces have no slashed-zero feature and the combining-overlay
+    character renders unreliably. */
 export function HandleMorph() {
   return (
     <span className="inline-grid">
@@ -13,7 +14,7 @@ export function HandleMorph() {
         aria-hidden
       >
         0
-        <span className="absolute left-1/2 top-1/2 h-[0.68em] w-[0.07em] -translate-x-1/2 -translate-y-1/2 rotate-[28deg] rounded-full bg-current" />
+        <span className="absolute left-1/2 top-1/2 h-[0.68em] w-[0.07em] -translate-x-1/2 -translate-y-1/2 rotate-[35deg] rounded-full bg-accent" />
       </span>
     </span>
   );
