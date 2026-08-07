@@ -1,0 +1,13 @@
+{
+  // Used only by design-sync's esbuild bundling (cfg.tsconfig). The paths
+  // plugin reads THIS file's compilerOptions.paths directly (no `extends`
+  // resolution), so the repo's "@/*" alias is duplicated here.
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "..",
+    "paths": {
+      "@/*": ["./*"],
+      "next/link": [".design-sync/shims/next-link.tsx"]
+    }
+  }
+}

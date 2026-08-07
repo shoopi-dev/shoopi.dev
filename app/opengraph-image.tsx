@@ -8,7 +8,9 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OpengraphImage() {
-  const mark = await readFile(join(process.cwd(), "public/brand/png/mark-512.png"));
+  const mark = await readFile(
+    join(process.cwd(), "public/brand/png/avatar-squircle-light-512.png"),
+  );
   const markSrc = `data:image/png;base64,${mark.toString("base64")}`;
 
   return new ImageResponse(
@@ -54,7 +56,7 @@ export default async function OpengraphImage() {
                 width: 34,
                 height: 12,
                 borderRadius: 4,
-                background: i === 0 ? "#DB3FFF" : "rgba(2,5,13,0.12)",
+                background: i === 0 ? "#EC5968" : "rgba(2,5,13,0.12)",
               }}
             />
           ))}

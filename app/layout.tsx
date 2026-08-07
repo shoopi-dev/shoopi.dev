@@ -27,6 +27,24 @@ export const metadata: Metadata = {
   },
   description,
   alternates: { canonical: "https://shoopi.dev" },
+  /* theme-aware favicons per the brand asset sheet: light/dark SVG picked by
+     the browser's scheme, PNG fallback + apple-touch stay light */
+  icons: {
+    icon: [
+      {
+        url: "/brand/favicon-small-light.svg",
+        media: "(prefers-color-scheme: light)",
+        type: "image/svg+xml",
+      },
+      {
+        url: "/brand/favicon-small.svg",
+        media: "(prefers-color-scheme: dark)",
+        type: "image/svg+xml",
+      },
+      { url: "/brand/png/favicon-light-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [{ url: "/brand/png/apple-touch-light-180.png", sizes: "180x180" }],
+  },
   openGraph: {
     title: "Itay Blokh (sho0pi) - $1M from apps before 30",
     description,
