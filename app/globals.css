@@ -2,16 +2,18 @@
 
 @theme {
   /* JetBrains Mono carries everything except the poster headline. Its default
-     slashed zero is the same glyph as the logo and the hero's o -> 0 morph. */
+     slashed zero is the same glyph the sho0pi wordmark carries. */
   --font-sans: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-display: var(--font-bricolage), -apple-system, BlinkMacSystemFont, sans-serif;
 
-  /* brand palette - matches the o0 mark in public/brand/: ink rings on
-     paper, one coral slash at 35 degrees */
-  --color-accent: #ec5968; /* coral - the slash; shapes and display type */
+  /* brand palette - matches the Sh mark in public/brand/: a blue S and a coral h
+     fused around a masked face. Blue leads in the mark, coral leads in the UI, so
+     the two never compete for the same job. */
+  --color-accent: #ec5968; /* coral - the h; shapes and display type */
   --color-accent-text: #d13355; /* deepened coral - small text on light ground */
-  --color-sky-blue: #0094ff; /* supporting - wallpaper aurora, building dot */
+  --color-sky-blue: #0094ff; /* the S - wallpaper aurora, building dot */
+  --color-violet: #ba32f2; /* the mask - mark only, not a UI colour */
   --color-paper: #f4ffff;
   --color-ink: #02050d;
 
