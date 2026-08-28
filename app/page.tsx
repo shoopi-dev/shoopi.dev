@@ -7,7 +7,7 @@ import { Floater } from "@/components/floater";
 import { Widget } from "@/components/widget";
 import { ProjectCard } from "@/components/project-card";
 import { AppIcon } from "@/components/app-icon";
-import { HandleMorph } from "@/components/handle-morph";
+import { Wordmark } from "@/components/wordmark";
 import { About } from "@/components/about";
 import { Updates } from "@/components/updates";
 import { Footer } from "@/components/footer";
@@ -74,9 +74,14 @@ export default function Home() {
               delay={T.word(3)}
               className="inline-block whitespace-nowrap text-ink/40"
             >
-              (sho
-              <HandleMorph />
-              pi),
+              (
+              {/* the handle is set in the mark's own lettering rather than the body
+                  face. The wordmark's cap is 86.6% of its height, so 0.88em lands the
+                  cap just above the surrounding text's; its p descends 13.2% of that,
+                  and the negative margin drops it by exactly that much so the
+                  wordmark's own baseline sits on the text baseline. */}
+              <Wordmark className="inline -mb-[0.116em] h-[0.88em] w-auto align-baseline" />
+              ),
             </Rise>{" "}
             <Rise as="span" delay={T.word(4)} className="text-ink/40">
               follow{" "}
