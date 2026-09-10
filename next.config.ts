@@ -9,6 +9,15 @@ import type { NextConfig } from "next";
 const STAMPSTORY_HOST = "stampstory.shoopi.dev";
 
 const nextConfig: NextConfig = {
+  /* the pages link to /stampstory/... so they work on shoopi.dev too; on the subdomain those
+     links bounce to the clean path. Files keep their extension-bearing paths untouched. */
+  async redirects() {
+    const has = [{ type: "host" as const, value: STAMPSTORY_HOST }];
+    return [
+      { source: "/stampstory", has, destination: "/", permanent: true },
+      { source: "/stampstory/:path((?!.*\\.[a-z0-9]+$).*)", has, destination: "/:path", permanent: true },
+    ];
+  },
   async rewrites() {
     return {
       beforeFiles: [
