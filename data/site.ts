@@ -89,7 +89,18 @@ export const site = {
       status: "soon",
     },
   ] satisfies Project[]) as Project[],
-  apps: [] as Project[],
+  apps: ([
+    {
+      name: "StampStory",
+      emoji: "🛂",
+      icon: "/stampstory/icon.png",
+      description:
+        "Scratch map for your travels: mark every country you have visited and share the passport it makes.",
+      status: "building",
+      revenue: 0,
+      link: "https://stampstory.shoopi.dev",
+    },
+  ] satisfies Project[]) as Project[],
   work: {
     tagline: "Websites, systems, and R&D for people building something real.",
     intro:
