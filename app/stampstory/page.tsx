@@ -3,7 +3,7 @@ import Link from "next/link";
 import { stampstory as s } from "@/data/stampstory";
 import { Rise, Pop } from "@/components/animate";
 import { SectionHeader } from "@/components/section-header";
-import { BackLink, StampFooter, StoreBadge } from "@/components/stampstory";
+import { BackLink, HOME_URL, StampFooter, StoreBadge } from "@/components/stampstory";
 
 const description = `${s.subtitle} No account, no server, no analytics - your travel map stays on your phone.`;
 
@@ -51,7 +51,7 @@ export default function StampStoryPage() {
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-4xl flex-col">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <BackLink href="/" label="shoopi.dev" delay={T.hero} />
+      <BackLink href={HOME_URL} label="shoopi.dev" delay={T.hero} />
 
       <main className="flex flex-1 flex-col gap-4 px-4 pb-40 pt-6">
         {/* Hero */}
@@ -95,15 +95,15 @@ export default function StampStoryPage() {
             className="mt-2 flex items-center gap-2 font-display text-base font-semibold text-ink/45"
           >
             made by
-            <Link
-              href="/"
+            <a
+              href={HOME_URL}
               aria-label="shoopi.dev"
               className="inline-flex transition-transform hover:scale-110 active:scale-95"
             >
               {/* the mark with its paper face dropped, so the ground shows between the S and the h */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/stampstory/mark-open.svg" alt="sho0pi" className="h-7 w-auto" />
-            </Link>
+            </a>
           </Rise>
         </section>
 
