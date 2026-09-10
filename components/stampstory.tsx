@@ -16,7 +16,7 @@ export function BackLink({
 }) {
   return (
     <Rise delay={delay} className="fixed left-4 top-4 z-50 sm:left-6 sm:top-6">
-      <Link
+      <a
         href={href}
         className="glass inline-flex items-center gap-1 rounded-full py-2 pl-2.5 pr-4 text-sm font-semibold shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95"
       >
@@ -33,29 +33,32 @@ export function BackLink({
           <path d="M15 5 8 12l7 7" />
         </svg>
         {label}
-      </Link>
+      </a>
     </Rise>
   );
 }
+
+/** Absolute on purpose: on stampstory.shoopi.dev a bare "/" is the StampStory landing, not the personal site. */
+export const HOME_URL = "https://shoopi.dev";
 
 const footerLinks = [
   { href: "/stampstory", label: "StampStory" },
   { href: "/stampstory/privacy", label: "privacy" },
   { href: "/stampstory/terms", label: "terms" },
   { href: "/stampstory/support", label: "support" },
-  { href: "/", label: "shoopi.dev" },
+  { href: HOME_URL, label: "shoopi.dev" },
 ];
 
 /** Every StampStory page ends the same way, so the documents are always one tap apart. */
 export function StampFooter({ delay, plain = false }: { delay?: number; plain?: boolean }) {
   const inner = footerLinks.map((l, i) => (
     <span key={l.href} className="flex items-center gap-2">
-      <Link
+      <a
         href={l.href}
         className="underline decoration-dotted underline-offset-4 transition-colors hover:text-ink"
       >
         {l.label}
-      </Link>
+      </a>
       {i < footerLinks.length - 1 && <span aria-hidden>·</span>}
     </span>
   ));
