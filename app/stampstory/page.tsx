@@ -102,7 +102,7 @@ export default function StampStoryPage() {
             >
               {/* the mark with its paper face dropped, so the ground shows between the S and the h */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/stampstory/mark-open.svg" alt="sho0pi" className="h-7 w-auto" />
+              <img src="/brand/mark-open.svg" alt="sho0pi" className="h-7 w-auto" />
             </a>
           </Rise>
         </section>

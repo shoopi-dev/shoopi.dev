@@ -29,6 +29,8 @@ def write(name, text):
 # the mark paints its own paper face, so light and dark are one asset
 write("mark", svg(t.w, t.h, MARK, "shoopi.dev"))
 write("mark-on-dark", svg(t.w, t.h, MARK, "shoopi.dev"))
+# no paper face: for small inline use on light grounds, where the face reads as a hole
+write("mark-open", svg(t.w, t.h, t.body(face=None), "shoopi.dev"))
 # one colour cannot carry the face - the mask inverts against the pocket - so the
 # mono reduction is the solid silhouette
 write("mark-mono", svg(t.w, t.h,
@@ -62,4 +64,4 @@ for out, (src, size) in PNGS.items():
     subprocess.run(["rsvg-convert", "-w", str(size), f"{BRAND}/{src}.svg",
                     "-o", f"{BRAND}/png/{out}.png"], check=True)
 
-print(f"mark {t.w}x{t.h} -> 9 svg, {len(PNGS)} png")
+print(f"mark {t.w}x{t.h} -> 10 svg, {len(PNGS)} png")
