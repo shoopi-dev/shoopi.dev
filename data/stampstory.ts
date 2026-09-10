@@ -38,7 +38,7 @@ export const stampstory = {
   name: "StampStory",
   tagline: "Where have you been?",
   subtitle:
-    "Mark every country you have ever visited, and StampStory turns it into a passport worth sharing.",
+    "Mark every country you have ever visited and turn it into a passport. Share it with friends and see where they have been.",
   bundleId: "dev.shoopi.stampstory",
   price,
   support,
@@ -56,9 +56,9 @@ export const stampstory = {
   },
 
   steps: [
-    { n: "01", title: "Mark where you've been", body: "Tap countries on the globe, or tick them off the checklist in one go." },
-    { n: "02", title: "Watch the passport fill", body: "Stamps, continent bars and a rank appear as you go. All of it computed, none of it stored." },
-    { n: "03", title: "Share the card", body: "One tap sends a 1080 x 1920 passport image to Stories, or anywhere else you like." },
+    { n: "01", title: "Mark where you've been", body: "Tap countries on the globe, or tick them off the list in one go." },
+    { n: "02", title: "Watch the passport fill", body: "Stamps and continents appear every time you add a country." },
+    { n: "03", title: "Share it", body: "Post your passport to your Stories or send it to friends, and see where they have been." },
   ],
 
   gold: {
@@ -68,7 +68,7 @@ export const stampstory = {
     perks: [
       "Every theme, not just the two free ones",
       "All twelve traveler avatars",
-      "Gold paper on every card you share: brushed gold pages, engraving, foil frame and a member badge",
+      "A golden passport on every card you share",
       "Future Gold styles as they land",
     ],
   },
