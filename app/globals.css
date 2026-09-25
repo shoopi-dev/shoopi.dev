@@ -173,6 +173,82 @@ section[id] {
     0 8px 20px rgb(2 5 13 / 0.18);
 }
 
+/* liquid glass button (Pill): a clear lens over the wallpaper - a specular
+   highlight up top, a bright rim, light caught at the base, a small lift.
+   Springs on hover, sinks on press. Unlayered like .glass, so these beat
+   Tailwind utilities; the entrance pop sits on a wrapper so scale stays free */
+.glass-pill {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.58) 0%, rgb(255 255 255 / 0.2) 100%);
+  border: 1px solid rgb(255 255 255 / 0.7);
+  box-shadow:
+    inset 0 1px 1px rgb(255 255 255 / 0.95),
+    inset 0 -2px 3px rgb(255 255 255 / 0.35),
+    inset 0 -1px 1px rgb(2 5 13 / 0.08),
+    0 1px 2px rgb(2 5 13 / 0.08),
+    0 10px 24px -10px rgb(2 5 13 / 0.35);
+  backdrop-filter: blur(10px) saturate(1.9) brightness(1.05);
+  -webkit-backdrop-filter: blur(10px) saturate(1.9) brightness(1.05);
+  transition:
+    scale 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.glass-pill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(120% 70% at 30% 0%, rgb(255 255 255 / 0.55), transparent 60%);
+  pointer-events: none;
+}
+/* only links spring: a glass-pill tag (an <li>, a <span>) keeps the lens but
+   stays still, so it never looks clickable */
+@media (hover: hover) {
+  a.glass-pill:hover {
+    scale: 1.07;
+    background-color: rgb(255 255 255 / 0.3);
+    box-shadow:
+      inset 0 1px 1px rgb(255 255 255 / 1),
+      inset 0 -2px 3px rgb(255 255 255 / 0.45),
+      inset 0 -1px 1px rgb(2 5 13 / 0.08),
+      0 2px 4px rgb(2 5 13 / 0.08),
+      0 14px 30px -10px rgb(2 5 13 / 0.4);
+  }
+}
+a.glass-pill:active {
+  scale: 0.93;
+  transition-duration: 0.15s;
+}
+/* inside a .glass panel: same lens, no second backdrop blur (glass on glass
+   turns to mud), a little more fill to make up for it */
+.glass-pill.in-glass {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.78) 0%, rgb(255 255 255 / 0.42) 100%);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* cards that go somewhere rise on hover. Plain CSS on purpose: .glass owns
+   box-shadow outside Tailwind's layers, so a shadow utility never lands */
+.lift {
+  transition:
+    translate 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.4s ease;
+}
+@media (hover: hover) {
+  .lift:hover {
+    translate: 0 -4px;
+    box-shadow:
+      inset 0 1.5px 1px rgb(255 255 255 / 0.95),
+      inset 1px 0 1px rgb(255 255 255 / 0.35),
+      inset -1px 0 1px rgb(255 255 255 / 0.35),
+      inset 0 -1px 2px rgb(2 5 13 / 0.06),
+      0 22px 50px rgb(2 5 13 / 0.2);
+  }
+}
+
 /* liquid-glass squircle tile (AppIcon): heavier blur + saturation than
    .tile-glossy, magnet-follow hover and a cursor-tracking glow. --tx/--ty
    and --mx/--my are written by AppIcon's onPointerMove. */
@@ -285,58 +361,6 @@ section[id] {
   }
 }
 
-/* neon gradient border for live cards (Magic UI inspired, brand-tuned):
-   animated purple->blue gradient ring + soft halo behind */
-.neon-border {
-  position: relative;
-}
-.neon-border::before,
-.neon-border::after {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  z-index: -1;
-  border-radius: 24px;
-  /* stops weighted like the mark: coral dominant, deepened coral the band,
-     a paper flash rather than a third of the ring */
-  background: linear-gradient(
-    var(--neon-angle, 0deg),
-    #ec5968 0%,
-    #ec5968 42%,
-    #d13355 72%,
-    #f4ffff 88%,
-    #d13355 94%,
-    #ec5968 100%
-  );
-  animation: neon-spin 6s linear infinite;
-}
-/* ring only: mask out the center so the translucent glass stays clean */
-.neon-border::before {
-  padding: 2px;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-}
-.neon-border::after {
-  filter: blur(18px);
-  opacity: 0.3;
-}
-@property --neon-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-@keyframes neon-spin {
-  to {
-    --neon-angle: 360deg;
-  }
-}
-
 /* hover glow on interactive surfaces */
 .hover-glow {
   transition:
@@ -401,6 +425,55 @@ section[id] {
   pointer-events: none;
 }
 
+/* the next square to earn breathes coral, so the grid reads as live even at
+   $0. Opacity only, which keeps it on the compositor */
+.next-square {
+  position: relative;
+}
+.next-square::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--color-accent);
+  opacity: 0;
+  animation: next-square 6s ease-in-out infinite;
+}
+@keyframes next-square {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* touch screens never hover, so the hero handle plays its o -> 0 once on its
+   own, after the entrance settles. The generated wordmark has two groups and
+   logo/build-wordmark.py emits them in this order: the o at rest, then the
+   zero. The keyframes mirror its group-hover values */
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  h1 svg[aria-label="sho0pi"] > g:first-of-type {
+    animation: wink-o 2s ease-in-out 1.6s backwards;
+  }
+  h1 svg[aria-label="sho0pi"] > g:last-of-type {
+    animation: wink-zero 2s ease-in-out 1.6s backwards;
+  }
+}
+@keyframes wink-o {
+  15%,
+  80% {
+    scale: 0.75;
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+@keyframes wink-zero {
+  15%,
+  80% {
+    scale: 1;
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rise,
   .pop {
@@ -409,10 +482,25 @@ section[id] {
   }
   .float,
   .sheen::after,
-  .blob,
-  .neon-border::before,
-  .neon-border::after {
+  .blob {
     animation: none;
+  }
+  /* a still hint instead of the breath */
+  .next-square::after {
+    animation: none;
+    opacity: 0.3;
+  }
+  /* hover and press still brighten, they just don't move */
+  .glass-pill,
+  .lift {
+    transition: none;
+  }
+  .glass-pill:hover,
+  .glass-pill:active {
+    scale: none;
+  }
+  .lift:hover {
+    translate: none;
   }
   .tile-liquid:hover {
     transform: scale(1.02);
@@ -446,11 +534,17 @@ section[id] {
   .tile-soon {
     background: rgb(244 255 255 / 0.88);
   }
+  .glass-pill {
+    background: rgb(255 255 255 / 0.94);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 /* defined borders when the user asks for more contrast */
 @media (prefers-contrast: more) {
   .glass,
+  .glass-pill,
   .tile-soon,
   .tile-glossy,
   .tile-liquid {

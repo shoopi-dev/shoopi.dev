@@ -8,7 +8,7 @@ export function Footer({ delay = 0 }: { delay?: number }) {
     <Rise
       as="footer"
       delay={delay}
-      className="mt-16 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-ink/10 pt-6 text-xs text-ink/50"
+      className="mt-16 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-ink/10 pt-6 text-xs text-ink/60"
     >
       <span>© {new Date().getFullYear()}</span>
       <Link

@@ -64,7 +64,7 @@ export function AppIcon({ p, delay = 0 }: { p: Project; delay?: number }) {
       <span className={`max-w-24 truncate text-sm font-medium ${soon ? "text-ink/45" : ""}`}>
         {soon ? "???" : p.name}
       </span>
-      <span className="text-[13px] text-ink/50">{statusLabel[p.status]}</span>
+      <span className="text-[13px] text-ink/60">{statusLabel[p.status]}</span>
     </Pop>
   );
 

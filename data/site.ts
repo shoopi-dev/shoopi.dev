@@ -8,7 +8,7 @@ export type Project = {
   icon?: string;
   cover?: string;
   revenueLabel?: string; // overrides the revenue amount in the pill
-  revenue?: number;
+  revenue?: number; // US$ last full month, net - same basis as site.monthly
   link?: string;
 };
 
@@ -42,21 +42,53 @@ export const site = {
   name: "Itay",
   fullName: "Itay Blokh",
   handle: "shoopi",
+  say: 'Like "Italy" without the L 🇮🇹, or just think "eat Thai food" 🍜', // how to say "Itay"
   jobTitle: "Cybersecurity R&D Engineer",
   location: "Singapore",
-  bio: "Cybersecurity R&D engineer who builds tools that make everyday life better. Right now that means two things: shipping the apps I actually want to use, and helping companies and founders build theirs - websites, system architecture, hands-on R&D. Gaia, my open-source AI agent, is the biggest of them. This site tracks the bet: $1,000,000 before I turn 30, in public.",
-  chips: ["Singapore", "Cybersecurity R&D", "Agentic AI", "Go · Kotlin · Android"],
+  bio: "I'm from Israel, living in Singapore, and spent over two years traveling the world, collecting people and cultures along the way. These days I'm a cybersecurity R&D engineer who builds tools that make everyday life better. Right now that means two things: shipping the apps I actually want to use, and helping companies and founders build theirs - websites, system architecture, hands-on R&D. Gaia, my open-source AI agent, is the biggest of them. This site tracks the bet: $13,000 a month in passive income before I turn 30, in public. Only what my own products earn counts; client work pays the bills.",
+  // About: who I am as icon capsules, then "Tech I Love" from the GitHub README
+  // as logo-only capsules in each brand's colour (the README badge colours;
+  // Kotlin's official gradient). Logos are Simple Icons (CC0)
+  chips: [
+    { label: "Israel → Singapore", icon: "/icons/pin.svg" },
+    { label: "Cybersecurity R&D", icon: "/icons/shield.svg" },
+    { label: "Agentic AI", icon: "/icons/sparkle.svg" },
+  ],
+  // `size` is optical: Go's wordmark is wide and thin, Kotlin's K is a solid
+  // block, so each gets the size that makes the row read even (default h-4)
+  stack: [
+    { name: "Go", icon: "/icons/tech/go.svg", size: "h-6 w-6" },
+    { name: "Kotlin", icon: "/icons/tech/kotlin.svg", size: "h-3 w-3" },
+    { name: "Android", icon: "/icons/tech/android.svg" },
+    { name: "Vim", icon: "/icons/tech/vim.svg", size: "h-[17px] w-[17px]" },
+    { name: "Functional programming", icon: "/icons/tech/lambda.svg" },
+  ] as { name: string; icon: string; size?: string }[],
+  // ponytail: the About row is sized for exactly 3 (see about.tsx). A 4th spills
+  // out of the column on phones - more photos means a swipeable strip or a gallery
+  photos: [
+    { src: "/photos/desert.jpg", alt: "Standing beside a giant cactus in the desert" },
+    { src: "/photos/city.jpg", alt: "A lit-up city at night in winter" },
+    { src: "/photos/mountain.jpg", alt: "Climbing mountain steps in the mist" },
+  ],
   openForWork: true, // flip to false to drop the client-work pitch
-  goal: 1_000_000,
+  // ponytail: fixed figure, no FX. HKD is pegged at 7.75-7.85, so $13k is at
+  // least HK$100k (the real target) anywhere in the band
+  goal: 13_000, // US$ a month, passive
   startDate: "2026-08-05", // day 1 of the challenge
   deadline: "2031-07-07T00:00:00Z", // 30th birthday (born 2001-07-07)
-  revenue: 0, // total across every stream (apps + client work)
+  monthly: 0, // US$ last full month, net of store fees. Own products only, never client work
   repo: "https://github.com/shoopi-dev/shoopi.dev",
   socials: {
     github: "https://github.com/sho0pi",
     x: "https://x.com/sho0pi",
     instagram: "https://instagram.com/shoopi.dev",
     email: "hi@shoopi.dev",
+  },
+  // the travel blog, written with my girlfriend. It moves to babees.biz when that
+  // launches: swap both lines (the list hides itself if the feed is missing)
+  blog: {
+    url: "https://itay.world",
+    feed: "https://itay.world/index.xml",
   },
   projects: ([
     {
@@ -78,7 +110,7 @@ export const site = {
       description:
         "Websites, system architecture, and hands-on R&D for founders and small teams. See what I have shipped and how I work.",
       status: "live",
-      revenue: 0,
+      revenueLabel: "Pays the bills, not counted", // active income never fills the grid
       link: "/work",
     },
     {
@@ -130,6 +162,15 @@ export const site = {
           "Agentic systems that do real work rather than demo well. I build these for myself too - Gaia is open source, so you can read exactly how I think.",
       },
     ] satisfies Service[]) as Service[],
+    // curated from the GitHub profile README - grouped for clients, not a badge wall
+    toolbox: [
+      {
+        label: "Languages",
+        items: ["Go", "Kotlin", "TypeScript", "Python", "C / C++", "Java", "Assembly", "SQL"],
+      },
+      { label: "Platforms", items: ["Android & AOSP", "Linux", "Next.js", "NestJS", "Docker"] },
+      { label: "AI", items: ["AI agents", "MCP"] },
+    ],
     process: ([
       {
         title: "Scope it honestly",
@@ -183,16 +224,7 @@ export const site = {
       },
     ] satisfies WorkItem[]) as WorkItem[],
   },
-  updates: [
-    {
-      date: "2026-08-05",
-      title: "shoopi.dev is live",
-      body: "Day 1 of the challenge. Everything from here happens in public - every app, every dollar, every failure.",
-    },
-    {
-      date: "2026-08-01", // edit me to the real date
-      title: "Gaia goes open source",
-      body: "MIT licensed, install in one command, runs on your own API keys.",
-    },
-  ] satisfies Update[],
+  // weekly, and only when something moved: "+100 premium subs",
+  // "1 new SaaS client, 2 cancellations". The section hides while empty
+  updates: [] as Update[],
 };

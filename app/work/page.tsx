@@ -25,8 +25,9 @@ const T = {
   hero: 0.05,
   services: 0.4,
   recent: 0.55,
-  process: 0.7,
-  contact: 0.85,
+  toolbox: 0.65,
+  process: 0.75,
+  contact: 0.9,
 };
 
 export default function WorkPage() {
@@ -99,7 +100,7 @@ export default function WorkPage() {
           <div className="mt-5 grid w-full gap-4 sm:grid-cols-3">
             {work.services.map((s, i) => (
               <Pop key={s.title} delay={T.services + 0.12 + i * 0.07} className="h-full">
-                <div className="glass hover-glow flex h-full flex-col gap-2 rounded-[22px] p-5">
+                <div className="glass flex h-full flex-col gap-2 rounded-[22px] p-5">
                   <span className="text-2xl">{s.emoji}</span>
                   <h3 className="font-display text-lg font-bold">{s.title}</h3>
                   <p className="text-sm leading-relaxed text-ink/70">{s.description}</p>
@@ -121,6 +122,32 @@ export default function WorkPage() {
               <WorkCard key={item.name} item={item} delay={T.recent + 0.12 + i * 0.07} />
             ))}
           </div>
+        </section>
+
+        {/* Toolbox - the tech behind the work above */}
+        <section id="toolbox" className="mt-14 flex w-full flex-col items-center gap-2">
+          <SectionHeader title="Toolbox" subtitle="What I build with." delay={T.toolbox} />
+          <Pop delay={T.toolbox + 0.12} className="mt-5 w-full">
+            <dl className="glass grid gap-4 rounded-[22px] p-6 sm:grid-cols-[8rem_1fr] sm:gap-x-6">
+              {work.toolbox.map((group) => (
+                <div key={group.label} className="contents">
+                  <dt className="text-xs font-semibold uppercase tracking-wide text-ink/70 sm:pt-1">
+                    {group.label}
+                  </dt>
+                  <dd className="-mt-2 flex flex-wrap gap-1.5 sm:mt-0">
+                    {group.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-ink/10 bg-white/60 px-2.5 py-0.5 text-xs font-medium text-ink/60"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Pop>
         </section>
 
         {/* Process */}

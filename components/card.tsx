@@ -2,39 +2,30 @@ import type { ReactNode } from "react";
 import { externalProps } from "@/lib/link";
 import { Pop } from "./animate";
 
-/** The one card shape. Glass panel, springs in, lifts on hover.
-    Pass `index` to join a floating row - cards offset by even thirds so the
-    row reads as one wave. `ring` marks live/active status, not decoration.
-    `href` makes the whole card the link (renders <a> instead of <article>);
-    without it, put an IconButton in the header. */
+/** The one card shape: a glass panel that springs in and sits still.
+    Corners are concentric - 22px outside, 8px padding, so media inside takes
+    14px. `href` makes the whole card the link (<a> instead of <article>) and
+    gives it the hover lift; a card that goes nowhere doesn't pretend to. */
 export function Card({
   children,
   delay = 0,
-  index,
-  ring = false,
   href,
   className = "",
 }: {
   children: ReactNode;
   delay?: number;
-  index?: number;
-  ring?: boolean;
   href?: string;
   className?: string;
 }) {
-  const floating = index !== undefined;
-  const props = {
-    className: `${ring ? "neon-border " : ""}glass ${floating ? "float " : ""}hover-glow flex h-full flex-col gap-3 rounded-[22px] p-4 shadow-lg transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-xl ${className}`,
-    style: floating ? { animationDelay: `${-index * 2}s`, animationDuration: "6s" } : undefined,
-  };
+  const cls = `glass group/card flex h-full flex-col gap-3 rounded-[22px] p-2 ${href ? "lift" : ""} ${className}`;
   return (
     <Pop delay={delay} className="h-full">
       {href ? (
-        <a href={href} {...externalProps(href)} {...props}>
+        <a href={href} {...externalProps(href)} className={cls}>
           {children}
         </a>
       ) : (
-        <article {...props}>{children}</article>
+        <article className={cls}>{children}</article>
       )}
     </Pop>
   );

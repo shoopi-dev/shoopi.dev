@@ -2,8 +2,9 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { site } from "@/data/site";
+import { fmtMoney } from "@/lib/format";
 
-export const alt = "Itay Blokh (sho0pi) - $1M from apps before 30";
+export const alt = "Itay Blokh (sho0pi) - $13k a month from apps before 30";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -34,16 +35,17 @@ export default async function OpengraphImage() {
           <img src={markSrc} width={96} height={96} style={{ borderRadius: 26 }} alt="" />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontSize: 34, fontWeight: 700 }}>{site.fullName}</span>
-            <span style={{ fontSize: 26, color: "#5A6472" }}>@{site.handle} · shoopi.dev</span>
+            {/* the person's handle (X, GitHub); site.handle is the brand name */}
+            <span style={{ fontSize: 26, color: "#5A6472" }}>@sho0pi · shoopi.dev</span>
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           <span style={{ fontSize: 92, fontWeight: 800, letterSpacing: -3, lineHeight: 1.05 }}>
-            $1,000,000 before 30.
+            {`${fmtMoney(site.goal)} a month.`}
           </span>
           <span style={{ fontSize: 32, color: "#5A6472" }}>
-            Building apps in public - every dollar, every failure.
+            While I sleep, before 30. Every dollar in public.
           </span>
         </div>
 

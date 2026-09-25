@@ -63,7 +63,7 @@ export function StampFooter({ delay, plain = false }: { delay?: number; plain?: 
     </span>
   ));
   const className =
-    "mt-12 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-ink/10 pt-6 pb-16 text-xs text-ink/50";
+    "mt-12 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-ink/10 pt-6 pb-16 text-xs text-ink/60";
 
   if (plain) {
     return (
@@ -111,7 +111,7 @@ export function DocPage({
           ← {stampstory.name}
         </Link>
         <h1 className="mt-6 font-display text-3xl font-bold tracking-tight">{title}</h1>
-        {updated && <p className="mt-1.5 text-xs text-ink/50">Last updated {date}</p>}
+        {updated && <p className="mt-1.5 text-xs text-ink/60">Last updated {date}</p>}
         {intro && <div className="mt-4 text-[15px] leading-7 text-ink/80">{intro}</div>}
       </header>
       <main className="rounded-2xl border border-ink/10 bg-white p-6 sm:p-9">{children}</main>
@@ -124,7 +124,7 @@ export function DocPage({
 export function DocContents({ sections }: { sections: LegalSection[] }) {
   return (
     <nav aria-label="Contents" className="mb-8 border-b border-ink/10 pb-6">
-      <h2 className="text-xs font-semibold uppercase tracking-wide text-ink/50">Contents</h2>
+      <h2 className="text-xs font-semibold uppercase tracking-wide text-ink/60">Contents</h2>
       <ol className="mt-3 grid gap-x-6 gap-y-1.5 text-[15px] sm:grid-cols-2">
         {sections.map((s, i) => (
           <li key={s.id} className="flex gap-2">
@@ -179,7 +179,7 @@ export function LegalBody({ sections }: { sections: LegalSection[] }) {
                     {s.table.head.map((h) => (
                       <th
                         key={h}
-                        className="border-b border-ink/20 px-0 py-2 pr-4 text-xs font-semibold uppercase tracking-wide text-ink/50"
+                        className="border-b border-ink/20 px-0 py-2 pr-4 text-xs font-semibold uppercase tracking-wide text-ink/60"
                       >
                         {h}
                       </th>
