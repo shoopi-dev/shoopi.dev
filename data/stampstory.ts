@@ -51,7 +51,7 @@ export const stampstory = {
   },
   store: {
     // flip to the real link the moment review clears
-    ios: { status: "soon" as "soon" | "live", url: "" },
+    ios: { status: "live" as "soon" | "live", url: "https://apps.apple.com/app/id6809707590" },
     android: { status: "soon" as "soon" | "live", url: "" },
   },
 
