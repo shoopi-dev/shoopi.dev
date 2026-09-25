@@ -128,7 +128,7 @@ export const site = {
       icon: "/stampstory/icon.png",
       description:
         "Scratch map for your travels: mark every country you have visited and share the passport it makes.",
-      status: "building",
+      status: "live",
       revenue: 0,
       link: "https://stampstory.shoopi.dev",
     },
