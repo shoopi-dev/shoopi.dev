@@ -6,11 +6,11 @@ export const fmtMoney = (n: number, cents = false) =>
     minimumFractionDigits: cents ? 2 : 0,
   });
 
-export const fmtDate = (iso: string) =>
+export const fmtDate = (iso: string, year = true) =>
   new Date(iso).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
-    year: "numeric",
+    year: year ? "numeric" : undefined,
   });
 
 /** 1-based day of the challenge, counting from startDate */

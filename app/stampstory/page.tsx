@@ -86,13 +86,13 @@ export default function StampStoryPage() {
               delay={T.hero + 0.38}
             />
           </div>
-          <Rise as="p" delay={T.hero + 0.44} className="text-xs text-ink/50">
+          <Rise as="p" delay={T.hero + 0.44} className="text-xs text-ink/60">
             iOS first. Android follows.
           </Rise>
           <Rise
             as="p"
             delay={T.hero + 0.5}
-            className="mt-2 flex items-center gap-2 font-display text-base font-semibold text-ink/45"
+            className="mt-2 flex items-center gap-2 font-display text-base font-semibold text-ink/60"
           >
             made by
             <a
@@ -167,7 +167,7 @@ export default function StampStoryPage() {
               </div>
               <div className="flex flex-col gap-3">
                 <p className="font-display text-3xl font-bold tracking-tight">
-                  {s.gold.price} <span className="text-base font-semibold text-ink/50">once</span>
+                  {s.gold.price} <span className="text-base font-semibold text-ink/60">once</span>
                 </p>
                 <ul className="flex flex-col gap-2 text-sm leading-relaxed text-ink/75">
                   {s.gold.perks.map((perk) => (
@@ -177,7 +177,7 @@ export default function StampStoryPage() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-xs text-ink/50">
+                <p className="text-xs text-ink/60">
                   One-time purchase. No subscription. Restore it any time on the same store account.
                 </p>
               </div>

@@ -16,7 +16,7 @@ export function Updates({ delay = 0 }: { delay?: number }) {
             <li key={u.date + u.title} className="flex flex-col gap-1">
               <time
                 dateTime={u.date}
-                className="text-xs font-medium uppercase tracking-wide tabular-nums text-ink/50"
+                className="text-xs font-medium uppercase tracking-wide tabular-nums text-ink/60"
               >
                 {fmtDate(u.date)}
               </time>

@@ -16,13 +16,15 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
+const title = "Itay Blokh (sho0pi) - $13k a month from apps before 30";
+
 const description =
-  "Itay Blokh (sho0pi) is a cybersecurity R&D engineer and agentic AI builder based in Singapore. Creator of Gaia, an open-source AI agent. Available for client work - websites, system architecture and hands-on R&D - while chasing $1,000,000 before turning 30, built in public.";
+  "Itay Blokh (sho0pi) is a cybersecurity R&D engineer and agentic AI builder based in Singapore. Creator of Gaia, an open-source AI agent. Available for client work - websites, system architecture and hands-on R&D - while chasing $13,000 a month in passive income before turning 30, built in public.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://shoopi.dev"),
   title: {
-    default: "Itay Blokh (sho0pi) - $1M from apps before 30",
+    default: title,
     template: "%s | shoopi.dev",
   },
   description,
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/brand/png/apple-touch-light-180.png", sizes: "180x180" }],
   },
   openGraph: {
-    title: "Itay Blokh (sho0pi) - $1M from apps before 30",
+    title,
     description,
     url: "https://shoopi.dev",
     siteName: "shoopi.dev",
@@ -54,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Itay Blokh (sho0pi) - $1M from apps before 30",
+    title,
     description,
     creator: "@sho0pi",
   },
@@ -130,15 +132,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="blob blob-c" aria-hidden />
         <div className="grain" aria-hidden />
         {children}
-        <GradualBlur
-          target="page"
-          position="bottom"
-          height="5rem"
-          strength={2}
-          divCount={3}
-          curve="bezier"
-          exponential
-        />
+        {/* not on phones: three more backdrop-filter layers dropped frames while
+            scrolling on a mid-range Android, and it blurred buttons at the edge */}
+        <div className="max-sm:hidden">
+          <GradualBlur
+            target="page"
+            position="bottom"
+            height="5rem"
+            strength={2}
+            divCount={3}
+            curve="bezier"
+            exponential
+          />
+        </div>
         <Analytics />
         <SpeedInsights />
       </body>

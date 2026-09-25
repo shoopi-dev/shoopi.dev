@@ -1,6 +1,7 @@
 # shoopi.dev
 
-My public bet: **$1,000,000 before I turn 30** - from the apps I build and the companies I build for.
+My public bet: **$13,000 a month in passive income before I turn 30** - earned while I sleep, from the apps I build.
+Client work pays the bills, but it never counts toward the goal.
 
 This is the site that tracks it - every project, every dollar, every failure, in the open.
 Live at **[shoopi.dev](https://shoopi.dev)**.
@@ -30,14 +31,14 @@ bun run lint
 ## Editing content
 
 Everything on the page comes from [`data/site.ts`](data/site.ts) - the goal, the deadline,
-current revenue, projects, apps, updates, and links. Change a value there and the whole page
+last month's income, projects, apps, updates, and links. Change a value there and the whole page
 follows; no component edits needed to ship an update.
 
 ```ts
-revenue: 0,        // the number that fills the grid
+monthly: 0,        // last month's passive income - fills the grid
 deadline: "2031-07-07T00:00:00Z",
 projects: [ ... ], // cards under "Current Projects"
-updates: [ ... ],  // the dated journey log
+updates: [ ... ],  // weekly log, only when something moved
 ```
 
 ## Structure
