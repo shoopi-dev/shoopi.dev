@@ -42,7 +42,7 @@ export const stampstory = {
   bundleId: "dev.shoopi.stampstory",
   price,
   support,
-  updated: "2026-09-10",
+  updated: "2026-09-29",
   url: "https://stampstory.shoopi.dev",
   developer: {
     name: site.fullName,
@@ -122,7 +122,7 @@ export const stampstory = {
       title: "The short version",
       body: [
         "StampStory has no accounts, no server, and no analytics. The countries you mark, your name, your avatar and your theme live on your phone and nowhere else.",
-        "The only thing that ever leaves your device is a purchase receipt, and only if you buy Gold. If you never buy anything, the app sends nothing at all.",
+        "What does leave your device is about Gold alone: when the app starts, and when you open the Gold screen, it asks RevenueCat whether Gold is active and what it costs, under an anonymous identifier made for that install. If you buy or restore Gold, the store receipt goes along. None of it carries your name, your countries or anything you made.",
       ],
     },
     {
@@ -155,7 +155,7 @@ export const stampstory = {
       title: "What leaves your device",
       body: ["Two things, and no more."],
       list: [
-        "Purchases. Buying or restoring Gold goes through Apple or Google, and through RevenueCat, which validates the receipt on my behalf. RevenueCat receives an anonymous identifier it generates for that install, the store receipt, and basic device and app version information. It does not receive your name, your countries, or anything else from the app. RevenueCat's own privacy policy applies to that data.",
+        "Gold. When the app starts, and when you open the Gold screen, it asks RevenueCat whether Gold is active on your store account and what it costs, so a refund or an ended subscription switches Gold off and the prices shown are your store's. Buying or restoring Gold goes through Apple or Google, and RevenueCat validates the receipt on my behalf. RevenueCat receives an anonymous identifier it generates for that install, the store receipt when there is one, and basic device and app version information. It does not receive your name, your countries, or anything else from the app. RevenueCat's own privacy policy applies to that data.",
         "The image you share. When you tap Share, the passport image is handed to your phone's share sheet and goes wherever you send it. That is your action and your choice of destination; it does not pass through me.",
       ],
     },
@@ -181,7 +181,7 @@ export const stampstory = {
       id: "legal",
       title: "Legal bases",
       body: [
-        "If you are in the EEA or the UK: processing a purchase is necessary to perform the contract you enter when you buy Gold (Article 6(1)(b) GDPR). Validating receipts to stop fraudulent unlocks rests on legitimate interests (Article 6(1)(f)). Everything else never reaches me, so there is nothing to have a basis for.",
+        "If you are in the EEA or the UK: processing a purchase is necessary to perform the contract you enter when you buy Gold (Article 6(1)(b) GDPR). Validating receipts to stop fraudulent unlocks, and checking at launch whether Gold is still active, rest on legitimate interests (Article 6(1)(f)). Everything else never reaches me, so there is nothing to have a basis for.",
       ],
     },
     {
@@ -276,8 +276,12 @@ export const stampstory = {
       id: "gold",
       title: "StampStory Gold",
       body: [
-        "Gold is a one-time purchase at the price shown in the app before you buy, in your store's currency. It is not a subscription, it does not renew, and it does not expire.",
-        "Gold unlocks the full set of themes and avatars and the gold styling on shared cards. What is included may grow over time; I will not remove something you already paid for.",
+        "Gold comes as a one-time lifetime purchase and, from version 1.0.2 of the app, as a yearly or a monthly subscription. Each is sold at the price shown in the app before you buy, in your store's currency.",
+        "A subscription renews automatically at the end of each period until you cancel it. Your store charges you when you confirm the purchase, and again for each renewal within the 24 hours before the period ends.",
+        "Cancel any time in your store account's subscription settings (on an iPhone: Settings, your name, Subscriptions), at least 24 hours before the period ends to avoid the next charge. Gold stays on until the end of the period you paid for.",
+        "If a subscription's price goes up, your store tells you before the change applies, and asks for your consent where the law or the store requires it.",
+        "The lifetime purchase is one payment: it does not renew and does not expire.",
+        "Gold unlocks the full set of themes and avatars and the Gold card styles. What is included may grow over time; I will not take away something that was part of Gold when you bought it.",
         "The purchase is tied to the store account you bought it with. Apple and Google run separate systems, so a purchase on one does not carry to the other. Restore purchase brings it back on any device signed in to the same store account.",
       ],
     },
@@ -330,7 +334,7 @@ export const stampstory = {
       id: "liability",
       title: "Limitation of liability",
       body: [
-        "To the fullest extent the law allows, I am not liable for indirect or consequential loss arising from your use of the app, including lost data. Where liability cannot be excluded, it is limited to the amount you paid for the app, which is at most the price of Gold. Nothing here removes rights your local consumer law gives you.",
+        "To the fullest extent the law allows, I am not liable for indirect or consequential loss arising from your use of the app, including lost data. Where liability cannot be excluded, it is limited to what you paid for Gold in the twelve months before the claim. Nothing here removes rights your local consumer law gives you.",
       ],
     },
     {

@@ -5,7 +5,7 @@ import { DocContents, DocPage, LegalBody } from "@/components/stampstory";
 export const metadata: Metadata = {
   title: "Terms of use",
   description:
-    "The terms for using StampStory: what the app does, how the one-time Gold purchase works, refunds, and the usual disclaimers.",
+    "The terms for using StampStory: what the app does, how Gold's purchase and subscriptions work, refunds, and the usual disclaimers.",
   alternates: { canonical: `${s.url}/terms` },
   openGraph: { title: "StampStory terms of use", url: `${s.url}/terms` },
 };
