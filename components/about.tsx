@@ -10,7 +10,7 @@ const TILT = ["-rotate-6", "rotate-3", "-rotate-2"];
 export function About({ delay = 0 }: { delay?: number }) {
   return (
     <section id="about" className="mt-14 flex flex-col items-center gap-4">
-      <SectionHeader title="About me" delay={delay} />
+      <SectionHeader title={`About ${site.fullName}`} subtitle={site.summary} delay={delay} />
       <Pop delay={delay + 0.06} className="w-full">
         {/* two columns on wide screens: keeps the bio at a readable measure
             instead of one very long line */}

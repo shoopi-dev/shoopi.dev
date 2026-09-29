@@ -12,6 +12,8 @@ import { Updates } from "@/components/updates";
 import { Footer } from "@/components/footer";
 import { Countdown } from "@/components/countdown";
 import { Activity } from "@/components/activity";
+import { JsonLd } from "@/components/json-ld";
+import { homeGraph } from "@/lib/schema";
 
 /* one entrance timeline for the whole page (seconds) */
 const T = {
@@ -35,6 +37,7 @@ export default function Home() {
 
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-4xl flex-col">
+      <JsonLd data={homeGraph} />
       <main className="flex flex-1 flex-col gap-4 px-4 pb-40 pt-6">
         {/* Hero: staggered headline, inline avatar, social pills. A size smaller
             and tighter on phones, so the grid still makes the first screen */}
@@ -61,6 +64,7 @@ export default function Home() {
                 <span
                   id="say-itay"
                   aria-hidden
+                  data-nosnippet
                   className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-max max-w-[15rem] -translate-x-1/2 translate-y-1 rounded-2xl max-sm:bottom-auto max-sm:top-full max-sm:mb-0 max-sm:mt-2 sm:max-w-none border border-white/70 bg-white/92 px-3 py-2 text-left font-sans text-xs font-medium leading-relaxed tracking-normal text-ink/80 opacity-0 shadow-lg backdrop-blur-md transition duration-200 group-hover/name:translate-y-0 group-hover/name:opacity-100 group-focus/name:translate-y-0 group-focus/name:opacity-100 motion-reduce:transition-none"
                 >
                   {site.say}

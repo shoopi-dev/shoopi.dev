@@ -44,6 +44,7 @@ export const stampstory = {
   support,
   updated: "2026-09-29",
   url: "https://stampstory.shoopi.dev",
+  ogImage: "https://stampstory.shoopi.dev/stampstory/og.jpg", // 1200x630, public/stampstory/og.jpg
   developer: {
     name: site.fullName,
     handle: site.handle,

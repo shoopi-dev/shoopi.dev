@@ -4,19 +4,28 @@ import { stampstory as s } from "@/data/stampstory";
 import { Rise, Pop } from "@/components/animate";
 import { SectionHeader } from "@/components/section-header";
 import { BackLink, HOME_URL, StampFooter, StoreBadge } from "@/components/stampstory";
+import { JsonLd } from "@/components/json-ld";
+import { stampstoryGraph } from "@/lib/schema";
+import { social } from "@/lib/seo";
 
-const description = `${s.subtitle} No account, no server, no analytics - your travel map stays on your phone.`;
+// names what the app is, next to the App Store title: several other things are called StampStory
+const title = "StampStory: Travel Passport - where have you been?";
+// iOS first, Android follows: say "iPhone" until the Play link is live
+const description =
+  "Scratch map and travel passport for iPhone: mark every country you have visited and share the passport it makes. No account, no server, no analytics.";
 
 export const metadata: Metadata = {
-  title: { absolute: "StampStory - where have you been?" },
+  title: { absolute: title },
   description,
   alternates: { canonical: s.url },
-  openGraph: {
-    title: "StampStory - where have you been?",
+  ...social({
+    title,
     description,
     url: s.url,
-    type: "website",
-  },
+    image: s.ogImage,
+    imageAlt: "StampStory: a travel passport with a stamp for every country you have visited",
+    siteName: s.name,
+  }),
 };
 
 /* one entrance timeline for the page (seconds) */
@@ -36,21 +45,9 @@ const screens = [
 ];
 
 export default function StampStoryPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: s.name,
-    url: s.url,
-    applicationCategory: "TravelApplication",
-    operatingSystem: "iOS, Android",
-    description,
-    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    author: { "@type": "Person", name: s.developer.name, url: "https://shoopi.dev" },
-  };
-
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-4xl flex-col">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={stampstoryGraph} />
       <BackLink href={HOME_URL} label="shoopi.dev" delay={T.hero} />
 
       <main className="flex flex-1 flex-col gap-4 px-4 pb-40 pt-6">

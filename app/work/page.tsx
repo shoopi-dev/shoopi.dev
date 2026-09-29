@@ -6,18 +6,25 @@ import { SectionHeader } from "@/components/section-header";
 import { Pill } from "@/components/pill";
 import { WorkCard } from "@/components/work-card";
 import { Footer } from "@/components/footer";
+import { social } from "@/lib/seo";
 
 const { work } = site;
 
+const title = "Work with Itay Blokh: web, systems & AI agents";
+const description =
+  "Freelance web development, system architecture and AI-agent R&D from Itay Blokh (sho0pi), a cybersecurity R&D engineer in Singapore working worldwide.";
+
 export const metadata: Metadata = {
-  title: "Work with me",
-  description: `${work.tagline} Freelance web development, system architecture and AI-agent R&D by Itay Blokh (sho0pi), based in Singapore, working worldwide.`,
+  title, // the layout's template adds " | shoopi.dev"
+  description,
   alternates: { canonical: "https://shoopi.dev/work" },
-  openGraph: {
-    title: "Work with me | shoopi.dev",
-    description: work.tagline,
+  ...social({
+    title: `${title} | shoopi.dev`,
+    description,
     url: "https://shoopi.dev/work",
-  },
+    image: "/opengraph-image",
+    imageAlt: "Itay Blokh (sho0pi) - shoopi.dev",
+  }),
 };
 
 /* entrance timeline, same feel as the home page */

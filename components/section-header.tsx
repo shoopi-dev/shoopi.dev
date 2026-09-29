@@ -18,7 +18,7 @@ export function SectionHeader({ title, subtitle, delay = 0, small = false }: Pro
         {title}
       </Rise>
       {subtitle && (
-        <Rise as="p" delay={delay + 0.07} className="text-sm text-ink/60">
+        <Rise as="p" delay={delay + 0.07} className="text-balance text-center text-sm text-ink/60">
           {subtitle}
         </Rise>
       )}
