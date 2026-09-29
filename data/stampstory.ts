@@ -14,7 +14,7 @@ export type LegalSection = {
 // forwarded by Porkbun to the personal inbox; create the forward before this goes live
 const support = "stampstory-support@shoopi.dev";
 // marketing copy only; the app and the terms always defer to the price the store shows
-const price = "$1.99";
+const plans = { yearly: "$4.99", monthly: "$0.99", lifetime: "$12.99" };
 
 /** One tap from the support page: subject and a body skeleton, so every mail arrives sortable and complete. */
 export const supportMail = (() => {
@@ -40,7 +40,6 @@ export const stampstory = {
   subtitle:
     "Mark every country you have ever visited and turn it into a passport. Share it with friends and see where they have been.",
   bundleId: "dev.shoopi.stampstory",
-  price,
   support,
   updated: "2026-09-10",
   url: "https://stampstory.shoopi.dev",
@@ -63,13 +62,13 @@ export const stampstory = {
 
   gold: {
     title: "StampStory Gold",
-    price,
-    line: "One payment. Yours forever. No subscription.",
+    plans,
+    line: "By the year, by the month, or once for life.",
     perks: [
       "Every theme, not just the two free ones",
       "All twelve traveler avatars",
-      "A golden passport on every card you share",
-      "Future Gold styles as they land",
+      "A golden passport and Gold milestone cards",
+      "New themes and styles every season",
     ],
   },
 
@@ -92,11 +91,15 @@ export const stampstory = {
     },
     {
       q: "What does StampStory Gold include?",
-      a: "A one-time purchase that unlocks every theme, all twelve avatars, and gold paper on every card you share. There is no subscription and nothing expires.",
+      a: "Every theme, all twelve avatars, gold paper on your passport and a Gold style for every milestone card, with new themes and styles every season. Take it by the year, by the month, or once for life; the app shows the price in your currency before you pay.",
+    },
+    {
+      q: "How do I cancel Gold?",
+      a: "Yearly and monthly renew until you cancel. On an iPhone, open Settings, tap your name, then Subscriptions, or tap Manage subscription in the app's Profile. On Android, open the Play Store, your profile, then Payments and subscriptions. Gold stays on until the end of the period you paid for. Lifetime never renews, so there is nothing to cancel.",
     },
     {
       q: "I bought Gold and it is gone after reinstalling. What now?",
-      a: "Tap Restore purchase. It sits on the Gold screen and at the bottom of the Passport tab. Your purchase lives on your App Store or Google Play account, so it comes back on any device signed in to the same account.",
+      a: "Tap Restore on the Gold screen, at the bottom of the Passport tab, or in your Profile. Your purchase lives on your App Store or Google Play account, so it comes back on any device signed in to the same account.",
     },
     {
       q: "Can I move Gold from my iPhone to an Android phone?",

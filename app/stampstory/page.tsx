@@ -166,9 +166,14 @@ export default function StampStoryPage() {
                 ))}
               </div>
               <div className="flex flex-col gap-3">
-                <p className="font-display text-3xl font-bold tracking-tight">
-                  {s.gold.price} <span className="text-base font-semibold text-ink/60">once</span>
-                </p>
+                <div className="flex flex-col gap-0.5">
+                  <p className="font-display text-3xl font-bold tracking-tight">
+                    {s.gold.plans.yearly} <span className="text-base font-semibold text-ink/60">a year</span>
+                  </p>
+                  <p className="text-sm font-semibold text-ink/60">
+                    or {s.gold.plans.monthly} a month, or {s.gold.plans.lifetime} once for life
+                  </p>
+                </div>
                 <ul className="flex flex-col gap-2 text-sm leading-relaxed text-ink/75">
                   {s.gold.perks.map((perk) => (
                     <li key={perk} className="flex gap-2.5">
@@ -178,7 +183,7 @@ export default function StampStoryPage() {
                   ))}
                 </ul>
                 <p className="text-xs text-ink/60">
-                  One-time purchase. No subscription. Restore it any time on the same store account.
+                  Yearly and monthly renew until you cancel, any time in your store&apos;s settings. Lifetime is one payment. Restore Gold any time on the same store account.
                 </p>
               </div>
             </div>
