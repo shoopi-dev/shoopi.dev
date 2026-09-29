@@ -46,6 +46,10 @@ export const site = {
   jobTitle: "Cybersecurity R&D Engineer",
   location: "Singapore",
   bio: "I'm from Israel, living in Singapore, and spent over two years traveling the world, collecting people and cultures along the way. These days I'm a cybersecurity R&D engineer who builds tools that make everyday life better. Right now that means two things: shipping the apps I actually want to use, and helping companies and founders build theirs - websites, system architecture, hands-on R&D. Gaia, my open-source AI agent, is the biggest of them. This site tracks the bet: $13,000 a month in passive income before I turn 30, in public. Only what my own products earn counts; client work pays the bills.",
+  // third person on purpose: search results and AI answers quote a sentence like this, and
+  // "I" means nothing once it is lifted out of the page. Shown under the About heading and
+  // reused as the start of the structured-data description (lib/schema.ts)
+  summary: "Itay Blokh (sho0pi) is a cybersecurity R&D engineer from Israel, based in Singapore.",
   // About: who I am as icon capsules, then "Tech I Love" from the GitHub README
   // as logo-only capsules in each brand's colour (the README badge colours;
   // Kotlin's official gradient). Logos are Simple Icons (CC0)
@@ -82,6 +86,7 @@ export const site = {
     github: "https://github.com/sho0pi",
     x: "https://x.com/sho0pi",
     instagram: "https://instagram.com/shoopi.dev",
+    linkedin: "https://www.linkedin.com/in/blokhi", // structured data only, no button for it (yet)
     email: "hi@shoopi.dev",
   },
   // the travel blog, written with my girlfriend. It moves to babees.biz when that

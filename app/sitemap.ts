@@ -1,42 +1,17 @@
 import type { MetadataRoute } from "next";
 
+/* No lastModified, changeFrequency or priority. Google ignores the last two, and a lastmod that is
+   `new Date()` on every deploy teaches it to distrust the first as well. Add lastModified back for a
+   page only when it is the real date that page's content changed. */
+const urls = [
+  "https://shoopi.dev",
+  "https://shoopi.dev/work",
+  "https://stampstory.shoopi.dev",
+  "https://stampstory.shoopi.dev/support",
+  "https://stampstory.shoopi.dev/privacy",
+  "https://stampstory.shoopi.dev/terms",
+];
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: "https://shoopi.dev",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
-    },
-    {
-      url: "https://stampstory.shoopi.dev",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: "https://stampstory.shoopi.dev/support",
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.5,
-    },
-    {
-      url: "https://stampstory.shoopi.dev/privacy",
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.4,
-    },
-    {
-      url: "https://stampstory.shoopi.dev/terms",
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.4,
-    },
-    {
-      url: "https://shoopi.dev/work",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-  ];
+  return urls.map((url) => ({ url }));
 }

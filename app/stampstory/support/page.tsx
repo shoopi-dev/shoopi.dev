@@ -1,13 +1,24 @@
 import type { Metadata } from "next";
 import { stampstory as s, supportMail } from "@/data/stampstory";
 import { DocPage } from "@/components/stampstory";
+import { social } from "@/lib/seo";
+import { JsonLd } from "@/components/json-ld";
+
+const description =
+  "Help with StampStory: how to mark countries, restoring a Gold purchase, where your data lives, refunds, and how to reach a human.";
 
 export const metadata: Metadata = {
   title: "Support",
-  description:
-    "Help with StampStory: how to mark countries, restoring a Gold purchase, where your data lives, refunds, and how to reach a human.",
+  description,
   alternates: { canonical: `${s.url}/support` },
-  openGraph: { title: "StampStory support", url: `${s.url}/support` },
+  ...social({
+    title: "StampStory support",
+    description,
+    url: `${s.url}/support`,
+    image: s.ogImage,
+    imageAlt: "StampStory: a travel passport with a stamp for every country you have visited",
+    siteName: s.name,
+  }),
 };
 
 // the one action on the page; plain ink, no glass, like the rest of the documents
@@ -27,7 +38,7 @@ export default function SupportPage() {
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <DocPage
         title="Support"
         updated={false}

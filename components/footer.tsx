@@ -10,7 +10,9 @@ export function Footer({ delay = 0 }: { delay?: number }) {
       delay={delay}
       className="mt-16 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-ink/10 pt-6 text-xs text-ink/60"
     >
-      <span>© {new Date().getFullYear()}</span>
+      <span className="basis-full text-center">
+        © {new Date().getFullYear()} {site.fullName}
+      </span>
       <Link
         href="/"
         className="underline decoration-dotted underline-offset-4 transition-colors hover:text-ink"
