@@ -36,8 +36,10 @@ export async function FromTheRoad({ delay = 0 }: { delay?: number }) {
                 <span className="font-medium text-ink/80 transition-colors group-hover:text-ink">
                   {post.title}
                 </span>
+                {/* the year only when it isn't this one, so an old post never
+                    passes for new */}
                 <time dateTime={post.date} className="shrink-0 text-xs tabular-nums text-ink/60">
-                  {fmtDate(post.date, false)}
+                  {fmtDate(post.date, post.date.slice(0, 4) !== String(new Date().getFullYear()))}
                 </time>
               </a>
             </li>

@@ -89,11 +89,11 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/blokhi", // structured data only, no button for it (yet)
     email: "hi@shoopi.dev",
   },
-  // the travel blog, written with my girlfriend. It moves to babees.biz when that
-  // launches: swap both lines (the list hides itself if the feed is missing)
+  // Babees, the travel blog I write with my girlfriend (it replaced itay.world).
+  // The list under About reads the feed and hides itself if the feed is missing
   blog: {
-    url: "https://itay.world",
-    feed: "https://itay.world/index.xml",
+    url: "https://babees.biz",
+    feed: "https://babees.biz/feed.xml",
   },
   projects: ([
     {
