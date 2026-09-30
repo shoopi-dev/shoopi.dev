@@ -14,10 +14,15 @@ BRAND = os.path.join(ROOT, "public/brand")
 SOURCES = {"wordmark": "sho0pi-slashed-zero.png", "wordmark-plain": "sho0pi.png"}
 ZERO = 1        # o 0 p i - the zero is the second glyph left to right
 O = 0
+# every letter gap, h to o included, in source px. The drawn art had 14.5 / 23.5 /
+# 14.5 / 21.5 - the h crowded the o while the 0 floated - so the letters are
+# re-set to one even gap, the natural letter gap of the art
+GAP = 22
 
 traces = {}
 for name, png in SOURCES.items():
     t = traces[name] = Trace(os.path.join(ROOT, "logo", png))
+    t.respace(GAP)
     # the smile is the same ink as the letters, so only the letters flip on dark
     for suffix, ink in (("", None), ("-on-dark", PAPER)):
         open(f"{BRAND}/{name}{suffix}.svg", "w").write(svg(t.w, t.h, t.body(ink=ink), "sho0pi"))

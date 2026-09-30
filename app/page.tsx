@@ -6,7 +6,7 @@ import { Pill } from "@/components/pill";
 import { Widget } from "@/components/widget";
 import { ProjectCard } from "@/components/project-card";
 import { AppIcon } from "@/components/app-icon";
-import { Wordmark } from "@/components/wordmark";
+import { Lockup, MorphO } from "@/components/lockup";
 import { About } from "@/components/about";
 import { Updates } from "@/components/updates";
 import { Footer } from "@/components/footer";
@@ -85,12 +85,12 @@ export default function Home() {
               className="inline-block whitespace-nowrap text-ink/55"
             >
               (
-              {/* the handle is set in the mark's own lettering rather than the body
-                  face. The wordmark's cap is 86.6% of its height, so 0.88em lands the
-                  cap just above the surrounding text's; its p descends 13.2% of that,
-                  and the negative margin drops it by exactly that much so the
-                  wordmark's own baseline sits on the text baseline. */}
-              <Wordmark className="inline -mb-[0.116em] h-[0.88em] w-auto align-baseline" />
+              {/* the handle as the X banner sets it: the Sh mark, then the rest of
+                  the word in the headline's own face, the o turning 0 on hover */}
+              <Lockup label="sho0pi" className="text-ink">
+                o<MorphO />
+                pi
+              </Lockup>
               ),
             </Rise>{" "}
             <Rise as="span" delay={T.word(4)} className="text-ink/55">
