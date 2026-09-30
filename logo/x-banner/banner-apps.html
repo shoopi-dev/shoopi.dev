@@ -1,0 +1,68 @@
+<!doctype html>
+<!--
+  The X (Twitter) header with the app card, 1500x500. Source of x-banner-apps.png.
+  Same banner as banner.html, plus the site's app row as a 2x2 glass card top right.
+
+  Re-render at 2x (3000x1000) from the repo root:
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+      --force-device-scale-factor=2 --window-size=1500,500 --virtual-time-budget=4000 \
+      --screenshot=logo/x-banner/x-banner-apps.png "file://$PWD/logo/x-banner/banner-apps.html"
+
+  Layout: the card's right edge is the signature's (52px in), and it sits 48px from the
+  top as the signature sits 48px from the bottom, so the two frame the right side.
+  The card's radius is the tile radius plus its padding, so the corners are concentric.
+-->
+<html lang="en"><head><meta charset="utf-8">
+<title>sho0pi X banner apps</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}
+html,body{width:1500px;height:500px;overflow:hidden;background:#000}
+.b{position:relative;width:1500px;height:500px;overflow:hidden}
+.photo{position:absolute;inset:-160px;background:url(turtles-banner.jpg) 50% 50%/112% auto no-repeat;filter:blur(2px) saturate(1.2) contrast(1.25) brightness(.55)}
+.shade{position:absolute;right:-200px;bottom:-250px;width:1000px;height:600px;border-radius:50%;background:radial-gradient(closest-side,rgb(2 3 8/.8),transparent);z-index:1}
+canvas{position:absolute;inset:0;width:1500px;height:500px;z-index:1;mix-blend-mode:overlay;opacity:.6;image-rendering:pixelated}
+.sig{position:absolute;right:52px;bottom:48px;z-index:3;display:flex;align-items:baseline;font:800 72px/1 'Bricolage Grotesque';letter-spacing:-.03em;color:#fff}
+.sig img{height:.98em;margin-right:-.005em;filter:drop-shadow(0 8px 20px rgb(0 0 0/.35))}
+/* the card: 20px padding, 112px tiles 16px apart, radius 112*.23 + 20.
+   No caption: at X's real size (600px desktop, 390px phone) text under ~40px here is
+   unreadable, and one icon + three "?" already says 1 shipped, 3 on the way */
+.card{position:absolute;right:52px;top:48px;z-index:3;padding:20px;border-radius:46px;background:rgb(255 255 255/.1);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);border:1px solid rgb(255 255 255/.22);box-shadow:inset 0 1px 1px rgb(255 255 255/.35),0 30px 60px -20px rgb(0 0 0/.8)}
+.grid{display:grid;gap:16px}
+/* the site's liquid glass app tile */
+.tile{position:relative;width:112px;height:112px;border-radius:26px;overflow:hidden;display:flex;align-items:center;justify-content:center;
+ background:linear-gradient(160deg,rgb(255 255 255/.16),rgb(255 255 255/.04) 44%,rgb(255 255 255/.11));
+ backdrop-filter:blur(14px) saturate(180%);-webkit-backdrop-filter:blur(14px) saturate(180%);
+ box-shadow:inset 0 1px 1px rgb(255 255 255/.5),inset 0 -2px 3px rgb(255 255 255/.14),0 0 0 .5px rgb(255 255 255/.24),0 18px 40px -14px rgb(0 0 0/.85)}
+.tile img{width:100%;height:100%;object-fit:cover}
+.tile span{font:500 45px 'JetBrains Mono';color:rgb(255 255 255/.62)}
+.tile:after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(130% 70% at 28% -12%,rgb(255 255 255/.5),rgb(255 255 255/.06) 46%,transparent 62%)}
+</style></head>
+<body><div class="b">
+ <div class="photo"></div><div class="shade"></div><canvas id="c"></canvas>
+ <div class="card">
+  <div class="grid" id="grid"></div>
+ </div>
+ <div class="sig"><img src="../../public/brand/mark.svg" alt="Sh"><span>oopi.dev</span></div>
+</div>
+<script>
+// Shipped apps, oldest first: [name, icon path from this folder]. Adding an app is one line here.
+const APPS = [
+  ["StampStory", "../../public/stampstory/icon.jpg"],
+];
+// Like the site: empty slots show "?" so the grid is always full. 2x2 up to 4 apps,
+// then 3 across (the card grows left, its right edge stays on the signature's).
+// Two rows is the height budget: the card has to end 24px above the signature.
+const cols = APPS.length > 4 ? 3 : 2, slots = Math.max(4, Math.ceil(APPS.length / cols) * cols);
+const grid = document.getElementById("grid");
+grid.style.gridTemplateColumns = `repeat(${cols},112px)`;
+grid.innerHTML = Array.from({ length: slots }, (_, i) =>
+  APPS[i] ? `<div class="tile"><img src="${APPS[i][1]}" alt="${APPS[i][0]}"></div>` : '<div class="tile"><span>?</span></div>'
+).join("");
+
+// coarse grain: one noise dot per banner pixel, so 2px grains in the 2x export
+const c=document.getElementById('c');c.width=1500;c.height=500;
+const x=c.getContext('2d'),im=x.createImageData(1500,500),p=im.data;
+for(let i=0;i<p.length;i+=4){p[i]=p[i+1]=p[i+2]=128+(Math.random()+Math.random()-1)*170;p[i+3]=255}
+x.putImageData(im,0,0);
+</script></body></html>
