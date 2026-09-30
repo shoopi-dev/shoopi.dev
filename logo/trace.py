@@ -135,6 +135,38 @@ class Trace:
             out.append((xs.min(), m))
         return [m for _, m in sorted(out, key=lambda p: p[0])]
 
+    def respace(self, gap):
+        """Even out the lettering: slide each o0pi letter so every gap - h to o,
+        and letter to letter - is `gap` px. Gaps are measured across the middle
+        of the x-height, where the letters' round bodies sit, so the slash tips
+        of the 0 don't count. The i's dot rides with its stem. Same rule as the
+        X banner's [Sh]oopi.dev lockup: the mark's h sits one letter gap from the o."""
+        S = self.S
+        base = (self.baseline() + self.y0)*S
+        band = slice(int(base - 150*S), int(base - 70*S))
+        # letters as groups: a component overlapping the previous one in x (the
+        # i's dot over its stem) joins it
+        groups = []
+        for m in self.glyphs():
+            xs = np.nonzero(m)[1]
+            if groups and xs.min() <= groups[-1][1]:
+                groups[-1] = (groups[-1][0] | m, max(groups[-1][1], xs.max()))
+            else:
+                groups.append((m, xs.max()))
+        pad = 200*S  # room for the letters to move right
+        lab = np.pad(self.lab, ((0, 0), (0, pad)), constant_values=BG)
+        for m, _ in groups:
+            lab[np.pad(m, ((0, 0), (0, pad)))] = BG
+        edge = np.nonzero((self.lab == CORAL)[band])[1].max()
+        for m, _ in groups:
+            xs = np.nonzero(m[band])[1]
+            dx = int(round(edge + gap*S - xs.min()))
+            lab[np.roll(np.pad(m, ((0, 0), (0, pad))), dx, axis=1)] = INK
+            edge = xs.max() + dx
+        self.lab = lab
+        xs = np.nonzero(lab != BG)[1]
+        self.w = round(xs.max()/S - self.x0)
+
     def bbox(self, mask):
         """mask extent in mark coordinates"""
         ys, xs = np.nonzero(mask)

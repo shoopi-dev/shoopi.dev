@@ -3,6 +3,7 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { Rise, Pop } from "@/components/animate";
 import { SectionHeader } from "@/components/section-header";
+import { Lockup } from "@/components/lockup";
 import { Pill } from "@/components/pill";
 import { WorkCard } from "@/components/work-card";
 import { Footer } from "@/components/footer";
@@ -58,7 +59,7 @@ export default function WorkPage() {
           >
             <path d="M15 5 8 12l7 7" />
           </svg>
-          shoopi.dev
+          <Lockup className="text-base" />
         </Link>
       </Rise>
 

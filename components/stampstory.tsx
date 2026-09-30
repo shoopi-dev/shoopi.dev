@@ -11,7 +11,7 @@ export function BackLink({
   delay = 0,
 }: {
   href?: string;
-  label?: string;
+  label?: ReactNode;
   delay?: number;
 }) {
   return (

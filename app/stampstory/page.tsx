@@ -3,6 +3,7 @@ import Link from "next/link";
 import { stampstory as s } from "@/data/stampstory";
 import { Rise, Pop } from "@/components/animate";
 import { SectionHeader } from "@/components/section-header";
+import { Lockup } from "@/components/lockup";
 import { BackLink, HOME_URL, StampFooter, StoreBadge } from "@/components/stampstory";
 import { JsonLd } from "@/components/json-ld";
 import { stampstoryGraph } from "@/lib/schema";
@@ -48,7 +49,7 @@ export default function StampStoryPage() {
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-4xl flex-col">
       <JsonLd data={stampstoryGraph} />
-      <BackLink href={HOME_URL} label="shoopi.dev" delay={T.hero} />
+      <BackLink href={HOME_URL} label={<Lockup className="text-base" />} delay={T.hero} />
 
       <main className="flex flex-1 flex-col gap-4 px-4 pb-40 pt-6">
         {/* Hero */}
@@ -89,17 +90,14 @@ export default function StampStoryPage() {
           <Rise
             as="p"
             delay={T.hero + 0.5}
-            className="mt-2 flex items-center gap-2 font-display text-base font-semibold text-ink/60"
+            className="mt-2 flex items-baseline gap-2 font-display text-base font-semibold text-ink/60"
           >
             made by
             <a
               href={HOME_URL}
-              aria-label="shoopi.dev"
               className="inline-flex transition-transform hover:scale-110 active:scale-95"
             >
-              {/* the mark with its paper face dropped, so the ground shows between the S and the h */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/brand/mark-open.svg" alt="sho0pi" className="h-7 w-auto" />
+              <Lockup className="text-xl text-ink" />
             </a>
           </Rise>
         </section>

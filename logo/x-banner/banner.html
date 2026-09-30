@@ -1,0 +1,42 @@
+<!doctype html>
+<!--
+  The X (Twitter) header, 1500x500. Source of x-banner.png.
+
+  Re-render at 2x (3000x1000) from the repo root:
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+      --force-device-scale-factor=2 --window-size=1500,500 --virtual-time-budget=4000 \
+      --screenshot=logo/x-banner/x-banner.png "file://$PWD/logo/x-banner/banner.html"
+
+  Recipe, after @jurree's header: the old turtle banner, barely blurred and pushed in
+  contrast, coarse film grain over it, one signature bottom-right on a dark pool.
+  The signature is the [Sh]oopi.dev lockup - components/lockup.tsx uses the same numbers.
+  The grain is random, so every render differs slightly in the noise and nowhere else.
+-->
+<html lang="en"><head><meta charset="utf-8">
+<title>sho0pi X banner</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}
+html,body{width:1500px;height:500px;overflow:hidden;background:#000}
+.b{position:relative;width:1500px;height:500px;overflow:hidden}
+/* the old banner, zoomed a touch so the blur never shows an edge */
+.photo{position:absolute;inset:-160px;background:url(turtles-banner.jpg) 50% 50%/112% auto no-repeat;filter:blur(2px) saturate(1.2) contrast(1.25) brightness(.55)}
+/* dark pool behind the signature so it reads on busy art */
+.shade{position:absolute;right:-200px;bottom:-250px;width:1000px;height:600px;border-radius:50%;background:radial-gradient(closest-side,rgb(2 3 8/.8),transparent);z-index:1}
+/* grain sits under the signature, so the logo stays clean */
+canvas{position:absolute;inset:0;width:1500px;height:500px;z-index:1;mix-blend-mode:overlay;opacity:.6;image-rendering:pixelated}
+/* the lockup: mark 0.98em on the baseline, -0.005em to the o = one letter gap */
+.sig{position:absolute;right:52px;bottom:48px;z-index:2;display:flex;align-items:baseline;font:800 72px/1 'Bricolage Grotesque';letter-spacing:-.03em;color:#fff}
+.sig img{height:.98em;margin-right:-.005em;filter:drop-shadow(0 8px 20px rgb(0 0 0/.35))}
+</style></head>
+<body><div class="b">
+ <div class="photo"></div><div class="shade"></div><canvas id="c"></canvas>
+ <div class="sig"><img src="../../public/brand/mark.svg" alt="Sh"><span>oopi.dev</span></div>
+</div>
+<script>
+// coarse grain: one noise dot per banner pixel, so 2px grains in the 2x export
+const c=document.getElementById('c');c.width=1500;c.height=500;
+const x=c.getContext('2d'),im=x.createImageData(1500,500),p=im.data;
+for(let i=0;i<p.length;i+=4){p[i]=p[i+1]=p[i+2]=128+(Math.random()+Math.random()-1)*170;p[i+3]=255}
+x.putImageData(im,0,0);
+</script></body></html>
