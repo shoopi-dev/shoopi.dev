@@ -45,6 +45,10 @@ assert.equal(campaignOf(get, IPHONE_INSTAGRAM, "https://l.instagram.com/"), "ins
 assert.equal(campaignOf(get, IPHONE_FACEBOOK, null), "facebook");
 assert.equal(campaignOf(get, IPHONE_SAFARI, "https://www.reddit.com/r/travel/comments/abc/"), "reddit");
 assert.equal(campaignOf(get, IPHONE_SAFARI, "https://notreddit.com/"), "web");
+assert.equal(campaignOf(get, IPHONE_SAFARI, "https://t.co/AbC123"), "x");
+assert.equal(campaignOf(get, IPHONE_SAFARI, "https://x.com/shoopi_dev/status/1"), "x");
+assert.equal(campaignOf(get, IPHONE_SAFARI, "https://mobile.twitter.com/"), "x");
+assert.equal(campaignOf(get, IPHONE_SAFARI, "https://box.com/"), "web");
 assert.equal(campaignOf(get, IPHONE_SAFARI, "not a url"), "web");
 assert.equal(campaignOf(get, null, null), "web");
 

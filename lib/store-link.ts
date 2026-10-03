@@ -31,9 +31,9 @@ export function storeLink(
 
 /**
  * Where this visit came from, as an App Store campaign name: `?c=` when the link says so (`/get?c=reddit`), else the
- * in-app browser it opened in (Instagram and Facebook name themselves in the user agent), else a Reddit referrer,
- * else "web". Reddit's iOS app opens links in a plain Safari view that sends no referrer, so Reddit posts should carry
- * `?c=reddit`.
+ * in-app browser it opened in (Instagram and Facebook name themselves in the user agent), else a Reddit or X referrer
+ * (X sends every link through t.co), else "web". Reddit's iOS app opens links in a plain Safari view that sends no
+ * referrer, so Reddit posts should carry `?c=reddit`.
  */
 export function campaignOf(url: string, userAgent: string | null, referer: string | null) {
   const asked = (new URL(url).searchParams.get("c") ?? "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
@@ -41,7 +41,9 @@ export function campaignOf(url: string, userAgent: string | null, referer: strin
   const ua = userAgent ?? "";
   if (/Instagram/.test(ua)) return "instagram";
   if (/FBAN|FBAV|FB_IAB/.test(ua)) return "facebook";
-  if (/(^|\.)reddit\.com$/.test(hostOf(referer))) return "reddit";
+  const from = hostOf(referer);
+  if (/(^|\.)reddit\.com$/.test(from)) return "reddit";
+  if (/^(t\.co|(.+\.)?x\.com|(.+\.)?twitter\.com)$/.test(from)) return "x";
   return "web";
 }
 
