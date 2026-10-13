@@ -41,7 +41,7 @@ export const stampstory = {
     "Mark every country you have ever visited and turn it into a passport. Share it with friends and see where they have been.",
   bundleId: "dev.shoopi.stampstory",
   support,
-  updated: "2026-09-29",
+  updated: "2026-10-13",
   url: "https://stampstory.shoopi.dev",
   ogImage: "https://stampstory.shoopi.dev/stampstory/og.jpg", // 1200x630, public/stampstory/og.jpg
   developer: {
@@ -126,6 +126,7 @@ export const stampstory = {
       title: "The short version",
       body: [
         "StampStory has no accounts, no server, and no analytics. The countries you mark, your name, your avatar and your theme live on your phone and nowhere else.",
+        "If you turn on welcomes, or tap the location button, the app uses your phone's location on the phone itself, to tell which country you are in and to show you on your globe. Your location never leaves your phone.",
         "What does leave your device is about Gold alone: when the app starts, and when you open the Gold screen, it asks RevenueCat whether Gold is active and what it costs, under an anonymous identifier made for that install. If you buy or restore Gold, the store receipt goes along. None of it carries your name, your countries or anything you made.",
       ],
     },
@@ -151,8 +152,27 @@ export const stampstory = {
           ["Your avatar and theme", "How your passport looks"],
           ["Whether Gold is active", "An offline copy of your purchase status, so the app works without a connection"],
           ["Whether you finished onboarding", "So it is not shown twice"],
+          ["Whether welcomes are on, and whether you were offered them", "So the offer is shown once and your choice is kept"],
+          ["The country the app last saw you in, and the day it welcomed you to each country", "So a welcome comes once a stay, and not again within a month. Only the two-letter country code is kept, never a position"],
         ] as [string, string][],
       },
+    },
+    {
+      id: "location",
+      title: "Location and notifications",
+      body: [
+        "Both are optional and off until you turn them on. The app asks for them only when you turn on welcomes (from the sheet on the globe, or the switch in Profile) or tap the location button, and you can turn either off at any time in your phone's settings.",
+        "Welcomes. When your phone arrives in a country that is not on your map yet, StampStory shows a notification inviting you to stamp it. There is no server, so your phone itself has to notice the arrival:",
+      ],
+      list: [
+        "On iPhone, with location set to Always, iOS wakes the app when you move a significant distance (a new cell tower, a landing). The app looks up which country that position is in, on the phone, against the map it ships with. With location set to While Using, or off, it checks again when you open the app, and in the background now and then using your phone's time zone.",
+        "On Android, welcomes use no location at all: the app reads the country code of the mobile network your phone is on, and your time zone, both of which Android shares with apps without a permission.",
+        "Notifications are created by the app on your phone. No push service is involved, and nothing is sent to learn when to show one.",
+      ],
+      after: [
+        "The location button and the \"You\" bubble on the globe use your approximate position, while the app is open, to show where you are. That position is kept in memory only, never written to storage, and forgotten when you close the app or turn location off.",
+        "Your position is never sent to me or to anyone else, never logged, and never put on a share image.",
+      ],
     },
     {
       id: "leaves",
@@ -168,7 +188,7 @@ export const stampstory = {
       title: "What the app never collects",
       list: [
         "No account, email address, phone number or password",
-        "No location. The app never asks for it and cannot read it",
+        "No location history. Location is used on your phone only, as described above, and never leaves it",
         "No contacts, camera, microphone or photo library reads. If you choose Save Image in the share sheet, iOS asks your permission and the app writes that one image; it never reads your library",
         "No advertising identifier and no tracking across apps, so no App Tracking Transparency prompt",
         "No usage analytics, crash SDK or heat maps",
