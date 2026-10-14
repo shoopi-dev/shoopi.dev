@@ -18,10 +18,10 @@ const LINK_PREVIEW = "facebookexternalhit/1.1 (+http://www.facebook.com/external
 const appStore = (campaign: string) => `${stampstory.store.ios.url}?pt=129420621&ct=${campaign}&mt=8`;
 const home = stampstory.url;
 
-// today: iOS is live, Android is not yet
+// today: iOS is live, Android is a closed test, so Android phones land on the beta sign-up
 assert.equal(storeLink(IPHONE_INSTAGRAM, "instagram"), appStore("instagram"));
 assert.equal(storeLink(IPAD), appStore("web"));
-assert.equal(storeLink(ANDROID_INSTAGRAM), home);
+assert.equal(storeLink(ANDROID_INSTAGRAM), `${home}/android`);
 assert.equal(storeLink(MAC), home);
 assert.equal(storeLink(LINK_PREVIEW), home);
 assert.equal(storeLink(null), home);
@@ -34,7 +34,7 @@ assert.equal(storeLink(ANDROID_INSTAGRAM, "web", both), play);
 assert.equal(storeLink(IPHONE_INSTAGRAM, "web", both), appStore("web"));
 
 // a store marked live without a url never becomes an empty redirect
-assert.equal(storeLink(ANDROID_INSTAGRAM, "web", { ...both, android: { status: "live", url: "" } }), home);
+assert.equal(storeLink(ANDROID_INSTAGRAM, "web", { ...both, android: { status: "live", url: "" } }), `${home}/android`);
 
 // the campaign: what the link says, else the in-app browser, else the referrer
 const get = "https://stampstory.shoopi.dev/get";

@@ -7,7 +7,7 @@ const APPLE_PROVIDER_TOKEN = "129420621";
 
 /**
  * Where "get StampStory" sends this device: an iPhone or iPad to the App Store, an Android phone to Google Play once
- * the app is live there, and everything else (and Android until then) to the landing page, which has the buttons.
+ * the app is live there (until then to /android, the beta sign-up), and everything else to the landing page, which has the buttons.
  * An iPad asking for the desktop site reads as a Mac and gets the landing page: the user agent cannot tell them apart.
  * The App Store link carries the campaign, so App Analytics (Acquisition > Campaigns) counts downloads per source.
  */
@@ -25,7 +25,7 @@ export function storeLink(
     url.searchParams.set("mt", "8");
     return url.toString();
   }
-  if (/Android/i.test(ua) && store.android.status === "live" && store.android.url) return store.android.url;
+  if (/Android/i.test(ua)) return store.android.status === "live" && store.android.url ? store.android.url : `${home}/android`;
   return home;
 }
 
