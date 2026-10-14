@@ -7,6 +7,7 @@ const urls = [
   "https://shoopi.dev",
   "https://shoopi.dev/work",
   "https://stampstory.shoopi.dev",
+  "https://stampstory.shoopi.dev/android",
   "https://stampstory.shoopi.dev/support",
   "https://stampstory.shoopi.dev/privacy",
   "https://stampstory.shoopi.dev/terms",

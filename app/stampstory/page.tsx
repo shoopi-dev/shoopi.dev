@@ -85,7 +85,13 @@ export default function StampStoryPage() {
             />
           </div>
           <Rise as="p" delay={T.hero + 0.44} className="text-xs text-ink/60">
-            iOS first. Android follows.
+            On Android?{" "}
+            <Link
+              href="/stampstory/android"
+              className="font-semibold text-ink underline decoration-dotted underline-offset-4"
+            >
+              Join the beta
+            </Link>
           </Rise>
           <Rise
             as="p"

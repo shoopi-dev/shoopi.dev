@@ -54,6 +54,12 @@ export const stampstory = {
     ios: { status: "live" as "soon" | "live", url: "https://apps.apple.com/app/id6809707590" },
     android: { status: "soon" as "soon" | "live", url: "" },
   },
+  // until Google Play opens the app to everyone: a closed test needs 12 testers for 14 days (/android)
+  beta: {
+    group: "https://groups.google.com/g/stampstory-testers",
+    optIn: "https://play.google.com/apps/testing/dev.shoopi.stampstory",
+    install: "https://play.google.com/store/apps/details?id=dev.shoopi.stampstory",
+  },
 
   steps: [
     { n: "01", title: "Mark where you've been", body: "Tap countries on the globe, or tick them off the list in one go." },
