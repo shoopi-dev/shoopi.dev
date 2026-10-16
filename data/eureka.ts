@@ -479,6 +479,7 @@ export const eurekaDoc: DocApp = {
     { href: "/eureka/privacy", label: "privacy" },
     { href: "/eureka/terms", label: "terms" },
     { href: "/eureka/support", label: "support" },
+    { href: "/eureka/delete-account", label: "delete account" },
     { href: "https://shoopi.dev", label: "shoopi.dev" },
   ],
 };
