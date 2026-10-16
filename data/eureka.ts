@@ -34,6 +34,7 @@ export const eureka = {
   store: {
     // flip to the real link the moment review clears
     ios: { status: "soon" as "soon" | "live", url: "" },
+    android: { status: "soon" as "soon" | "live", url: "" },
   },
 
   steps: [
@@ -413,7 +414,7 @@ export const eureka = {
     },
     {
       q: "How do I get my ideas out, or delete them?",
-      a: "Export all ideas in Settings gives you every idea as Markdown. Delete account in Settings deletes your account and your ideas from the server.",
+      a: "Export all ideas in Settings gives you every idea as Markdown. Delete account in Settings deletes your account and your ideas from the server, and eureka.shoopi.dev/delete-account says how to ask for it by email if you no longer have the app.",
     },
     {
       q: "Recording does not work.",
@@ -424,6 +425,48 @@ export const eureka = {
       a: "Refunds are handled by Apple and Google. On iOS use reportaproblem.apple.com; on Android use the Play Store order history.",
     },
   ],
+
+  // the page Google Play asks for: how to delete an account, with the app or without it
+  deletion: [
+    {
+      id: "in-the-app",
+      title: "In the app",
+      list: [
+        "Open Eureka and tap the gear on Home.",
+        "Tap your account at the top of Settings, then Delete account.",
+        "Tap the red button. If you signed in with Apple, Apple asks once more that it is you.",
+      ],
+      after: ["Your account is deleted there and then, and your phone is emptied of its ideas, pictures and settings."],
+    },
+    {
+      id: "by-email",
+      title: "Without the app",
+      body: [
+        `Email ${support} with the subject "Delete my account", from the address your account uses (with Hide My Email, the one Apple made for Eureka), or say which Apple or Google account you sign in with. We may ask you to confirm it is you.`,
+        "Your account is deleted within 30 days, usually within a few days, and you get a reply when it is done.",
+      ],
+    },
+    {
+      id: "deleted",
+      title: "What is deleted",
+      list: [
+        "Your account and the way you signed in",
+        "Your ideas, their pages and everything you said into them",
+        "The record of your AI requests",
+        "Your usage counts",
+        "Eureka's link with your Apple ID, when you delete in the app after signing in with Apple. After an email, you can end it yourself in your Apple ID settings, under Sign in with Apple.",
+      ],
+    },
+    {
+      id: "kept",
+      title: "What is kept",
+      body: [
+        "Purchase records stay with Apple or Google, and with RevenueCat, which checks purchases for Eureka, under an ID that no longer leads to you.",
+        "Thoughts already sent to the AI service are deleted by Anthropic within 30 days under its commercial terms, unless one was flagged for breaking its usage policy.",
+        "Deleting your account does not cancel a Pro subscription. Cancel it in your App Store or Google Play subscriptions, or it goes on renewing.",
+      ],
+    },
+  ] satisfies LegalSection[],
 };
 
 /** What Eureka's documents need to know of it. */
@@ -436,6 +479,7 @@ export const eurekaDoc: DocApp = {
     { href: "/eureka/privacy", label: "privacy" },
     { href: "/eureka/terms", label: "terms" },
     { href: "/eureka/support", label: "support" },
+    { href: "/eureka/delete-account", label: "delete account" },
     { href: "https://shoopi.dev", label: "shoopi.dev" },
   ],
 };
