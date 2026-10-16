@@ -31,11 +31,15 @@ bun run lint
 ## Editing content
 
 Everything on the page comes from [`data/site.ts`](data/site.ts) - the goal, the deadline,
-last month's income, projects, apps, updates, and links. Change a value there and the whole page
-follows; no component edits needed to ship an update.
+projects, apps, updates, and links. Change a value there and the whole page follows; no component
+edits needed to ship an update.
+
+The one exception is the money: each app's MRR (monthly recurring revenue) comes live from the private
+dashboard (business.shoopi.dev) through [`lib/earnings.ts`](lib/earnings.ts), refreshed hourly.
+It needs `BUSINESS_BYPASS`, that Vercel project's protection bypass key; without it the grid
+falls back to each app's `revenue` in `data/site.ts`.
 
 ```ts
-monthly: 0,        // last month's passive income - fills the grid
 deadline: "2031-07-07T00:00:00Z",
 projects: [ ... ], // cards under "Current Projects"
 updates: [ ... ],  // weekly log, only when something moved
