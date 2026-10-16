@@ -15,6 +15,7 @@ const urls = [
   "https://eureka.shoopi.dev/support",
   "https://eureka.shoopi.dev/privacy",
   "https://eureka.shoopi.dev/terms",
+  "https://eureka.shoopi.dev/delete-account",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
