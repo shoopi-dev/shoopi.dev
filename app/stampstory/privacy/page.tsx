@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { stampstory as s } from "@/data/stampstory";
-import { DocContents, DocPage, LegalBody } from "@/components/stampstory";
+import { DocContents, DocPage, LegalBody } from "@/components/doc";
+import { stampstoryDoc } from "@/components/stampstory";
 import { social } from "@/lib/seo";
 
 const description =
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <DocPage title="Privacy policy">
+    <DocPage app={stampstoryDoc} title="Privacy policy">
       <DocContents sections={s.privacy} />
       <LegalBody sections={s.privacy} />
     </DocPage>

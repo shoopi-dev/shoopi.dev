@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { stampstory as s } from "@/data/stampstory";
-import { DocContents, DocPage, LegalBody } from "@/components/stampstory";
+import { DocContents, DocPage, LegalBody } from "@/components/doc";
+import { stampstoryDoc } from "@/components/stampstory";
 import { social } from "@/lib/seo";
 
 const description =
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <DocPage title="Terms of use">
+    <DocPage app={stampstoryDoc} title="Terms of use">
       <DocContents sections={s.terms} />
       <LegalBody sections={s.terms} />
     </DocPage>

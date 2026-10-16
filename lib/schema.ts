@@ -1,5 +1,6 @@
 import { site } from "@/data/site";
 import { stampstory as s } from "@/data/stampstory";
+import { eureka as e } from "@/data/eureka";
 
 /* Structured data for the two pages that are about these entities: the home page and the StampStory
    landing page. One @id per entity, so every mention points at the same Person and Organization
@@ -126,5 +127,20 @@ export const stampstoryGraph = {
       publisher: orgRef,
     },
     stampstoryApp,
+  ],
+};
+
+/** eureka.shoopi.dev is its own site to Google too, so it names itself "Eureka" */
+export const eurekaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${e.url}/#website`,
+      name: e.name,
+      url: e.url,
+      inLanguage: "en",
+      publisher: orgRef,
+    },
   ],
 };
