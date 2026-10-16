@@ -14,6 +14,8 @@ import { Countdown } from "@/components/countdown";
 import { Activity } from "@/components/activity";
 import { JsonLd } from "@/components/json-ld";
 import { homeGraph } from "@/lib/schema";
+import { getEarnings } from "@/lib/earnings";
+import { GoalGrid } from "@/components/goal-grid";
 
 /* one entrance timeline for the whole page (seconds) */
 const T = {
@@ -26,12 +28,10 @@ const T = {
   updates: 1.1,
   contact: 1.18,
 };
-export default function Home() {
+export default async function Home() {
   const square = site.goal / 100; // the grid is 100 squares
-  const pct = (site.monthly / site.goal) * 100;
-  // a square lights only once its full share is earned. Divide by the square
-  // rather than floor(pct): pct can land a hair under a whole number
-  const filled = Math.floor(site.monthly / square);
+  const earnings = await getEarnings();
+  const pct = (earnings.total / site.goal) * 100;
   const day = dayOfChallenge(site.startDate);
   const latest = site.updates[0]; // newest weekly update, if there is one
 
@@ -157,20 +157,11 @@ export default function Home() {
         {/* Goal - progress grid */}
         <section id="goal" className="flex flex-col gap-4">
           <Widget label={`goal · each square = ${fmtMoney(square)}/mo`} delay={T.widgets}>
-            <div className="grid grid-cols-20 gap-1">
-              {Array.from({ length: 100 }, (_, i) => (
-                <div
-                  key={i}
-                  className={`aspect-square rounded-[3px] ${
-                    i < filled ? "bg-accent" : i === filled ? "next-square bg-ink/10" : "bg-ink/10"
-                  }`}
-                />
-              ))}
-            </div>
+            <GoalGrid apps={earnings.apps} square={square} month={earnings.month} />
             <p className="mt-3 flex flex-wrap items-baseline gap-x-2 text-sm text-ink/60">
               <span>
                 <span className="font-mono text-lg font-bold text-ink">
-                  {fmtMoney(site.monthly)}
+                  {fmtMoney(earnings.total)}
                 </span>
                 /mo
               </span>

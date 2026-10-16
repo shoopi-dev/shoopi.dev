@@ -8,7 +8,7 @@ export type Project = {
   icon?: string;
   cover?: string;
   revenueLabel?: string; // overrides the revenue amount in the pill
-  revenue?: number; // US$ last full month, net - same basis as site.monthly
+  revenue?: number; // US$ last full month, net of store fees. Apps: only a fallback, lib/earnings.ts reads the real figure
   link?: string;
 };
 
@@ -80,7 +80,6 @@ export const site = {
   goal: 13_000, // US$ a month, passive
   startDate: "2026-08-05", // day 1 of the challenge
   deadline: "2031-07-07T00:00:00Z", // 30th birthday (born 2001-07-07)
-  monthly: 0, // US$ last full month, net of store fees. Own products only, never client work
   repo: "https://github.com/shoopi-dev/shoopi.dev",
   socials: {
     github: "https://github.com/sho0pi",
