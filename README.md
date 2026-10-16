@@ -34,7 +34,7 @@ Everything on the page comes from [`data/site.ts`](data/site.ts) - the goal, the
 projects, apps, updates, and links. Change a value there and the whole page follows; no component
 edits needed to ship an update.
 
-The one exception is the money: each app's earnings over the last 30 days come live from the private
+The one exception is the money: each app's MRR (monthly recurring revenue) comes live from the private
 dashboard (business.shoopi.dev) through [`lib/earnings.ts`](lib/earnings.ts), refreshed hourly.
 It needs `BUSINESS_BYPASS`, that Vercel project's protection bypass key; without it the grid
 falls back to each app's `revenue` in `data/site.ts`.

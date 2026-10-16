@@ -13,7 +13,7 @@ const SQUARES = 100;
     on a phone, arrows from the keyboard) and a card floats above it with what
     it holds and which apps made it; squares with nothing in them stay still */
 export function GoalGrid({ apps, square }: { apps: Share[]; square: number }) {
-  const total = apps.reduce((sum, a) => sum + a.proceeds, 0);
+  const total = apps.reduce((sum, a) => sum + a.mrr, 0);
   // divide by the square rather than floor(pct): pct can land a hair under a whole number
   const full = Math.min(SQUARES, Math.floor(total / square));
   const held = Math.min(SQUARES, Math.ceil(total / square)); // full squares plus the one being earned
@@ -24,7 +24,7 @@ export function GoalGrid({ apps, square }: { apps: Share[]; square: number }) {
     return apps
       .map((a) => {
         const from = start;
-        start += a.proceeds;
+        start += a.mrr;
         return { ...a, amount: Math.max(0, Math.min(start, (i + 1) * square) - Math.max(from, i * square)) };
       })
       .filter((p) => p.amount >= 0.005);
@@ -79,7 +79,7 @@ export function GoalGrid({ apps, square }: { apps: Share[]; square: number }) {
       {...(held && {
         tabIndex: 0,
         role: "group",
-        "aria-label": `${fmtMoney(total, true)} a month: ${apps.map((a) => `${a.name} ${fmtMoney(a.proceeds, true)}`).join(", ")}`,
+        "aria-label": `${fmtMoney(total, true)} a month: ${apps.map((a) => `${a.name} ${fmtMoney(a.mrr, true)}`).join(", ")}`,
         onPointerOver: onHover,
         onPointerLeave: () => !pinned && setAt(null),
         onPointerUp: onTap,

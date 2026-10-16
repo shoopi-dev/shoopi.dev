@@ -165,7 +165,7 @@ export default async function Home() {
                 </span>
                 /mo
               </span>
-              <span>· {pct.toFixed(2)}% of {fmtMoney(site.goal)}</span>
+              <span>· {pct.toFixed(pct && pct < 0.01 ? 4 : 2)}% of {fmtMoney(site.goal)}</span>
               <span aria-hidden>·</span>
               <span className="tabular-nums">day {day}</span>
             </p>

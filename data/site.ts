@@ -8,7 +8,7 @@ export type Project = {
   icon?: string;
   cover?: string;
   revenueLabel?: string; // overrides the revenue amount in the pill
-  revenue?: number; // US$ over the last 30 days, net of store fees. Apps: only a fallback, lib/earnings.ts reads the real figure
+  revenue?: number; // US$ a month. Apps: MRR, only a fallback - lib/earnings.ts reads the real figure
   link?: string;
 };
 
