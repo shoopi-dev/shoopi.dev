@@ -157,11 +157,11 @@ export default async function Home() {
         {/* Goal - progress grid */}
         <section id="goal" className="flex flex-col gap-4">
           <Widget label={`goal · each square = ${fmtMoney(square)}/mo`} delay={T.widgets}>
-            <GoalGrid apps={earnings.apps} square={square} month={earnings.month} />
+            <GoalGrid apps={earnings.apps} square={square} />
             <p className="mt-3 flex flex-wrap items-baseline gap-x-2 text-sm text-ink/60">
               <span>
                 <span className="font-mono text-lg font-bold text-ink">
-                  {fmtMoney(earnings.total)}
+                  {fmtMoney(earnings.total, earnings.total < 100)}
                 </span>
                 /mo
               </span>
