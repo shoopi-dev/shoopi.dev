@@ -11,6 +11,10 @@ const urls = [
   "https://stampstory.shoopi.dev/support",
   "https://stampstory.shoopi.dev/privacy",
   "https://stampstory.shoopi.dev/terms",
+  "https://eureka.shoopi.dev",
+  "https://eureka.shoopi.dev/support",
+  "https://eureka.shoopi.dev/privacy",
+  "https://eureka.shoopi.dev/terms",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

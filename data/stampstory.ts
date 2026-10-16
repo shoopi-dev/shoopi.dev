@@ -1,15 +1,5 @@
+import type { LegalSection } from "./legal";
 import { site } from "./site";
-
-/** One block of a legal page: a heading, paragraphs, and optionally a list or a table. */
-export type LegalSection = {
-  id: string;
-  title: string;
-  body?: string[];
-  list?: string[];
-  table?: { head: [string, string]; rows: [string, string][] };
-  /** Paragraphs rendered after the list or table. */
-  after?: string[];
-};
 
 // forwarded by Porkbun to the personal inbox; create the forward before this goes live
 const support = "stampstory-support@shoopi.dev";

@@ -137,6 +137,15 @@ export const site = {
       revenue: 0,
       link: "https://stampstory.shoopi.dev",
     },
+    {
+      name: "Eureka",
+      emoji: "💡",
+      icon: "/eureka/icon.png",
+      description:
+        "Voice-first idea notes: say a thought out loud, and AI files it into the right idea and keeps its page up to date.",
+      status: "building", // "soon" would hide it behind a "?" tile
+      link: "https://eureka.shoopi.dev",
+    },
   ] satisfies Project[]) as Project[],
   work: {
     tagline: "Websites, systems, and R&D for people building something real.",

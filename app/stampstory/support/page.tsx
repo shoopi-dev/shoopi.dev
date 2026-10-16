@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { stampstory as s, supportMail } from "@/data/stampstory";
-import { DocPage } from "@/components/stampstory";
+import { DocPage } from "@/components/doc";
+import { stampstoryDoc } from "@/components/stampstory";
 import { social } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
 
@@ -40,6 +41,7 @@ export default function SupportPage() {
     <>
       <JsonLd data={jsonLd} />
       <DocPage
+        app={stampstoryDoc}
         title="Support"
         updated={false}
         intro={
