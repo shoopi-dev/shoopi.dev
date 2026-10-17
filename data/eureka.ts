@@ -36,6 +36,13 @@ export const eureka = {
     ios: { status: "soon" as "soon" | "live", url: "" },
     android: { status: "soon" as "soon" | "live", url: "" },
   },
+  // until Google Play opens the app to everyone: a closed test needs 12 testers for 14 days (/android).
+  // shoopi-testers is the one group for all the apps; StampStory's group is on Eureka's closed track too
+  beta: {
+    group: "https://groups.google.com/g/shoopi-testers",
+    optIn: "https://play.google.com/apps/testing/dev.shoopi.eureka",
+    install: "https://play.google.com/store/apps/details?id=dev.shoopi.eureka",
+  },
 
   steps: [
     { n: "01", title: "Say it", body: "Tap the mic and talk, or type. Your phone turns your voice into words, and no recording is kept." },

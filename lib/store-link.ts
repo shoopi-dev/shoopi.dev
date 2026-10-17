@@ -6,8 +6,29 @@ type Store = { status: "soon" | "live"; url: string };
 const APPLE_PROVIDER_TOKEN = "129420621";
 
 /**
- * Where "get StampStory" sends this device: an iPhone or iPad to the App Store, an Android phone to Google Play once
- * the app is live there (until then to /android, the beta sign-up), and everything else to the landing page, which has the buttons.
+ * An app's /get: the one link for bios, posts and QR codes. Each device lands in its own app store, or on the
+ * landing page when there is none for it yet (storeLink). The App Store link names where the visit came from, so
+ * App Store Connect counts downloads per source: `?c=<source>` (`/get?c=reddit`), else a guess from the in-app
+ * browser or the referrer.
+ */
+export function storeRedirect(request: Request, store: { ios: Store; android: Store }, home: string) {
+  const userAgent = request.headers.get("user-agent");
+  const campaign = campaignOf(request.url, userAgent, request.headers.get("referer"));
+  return new Response(null, {
+    status: 302,
+    headers: {
+      Location: storeLink(userAgent, campaign, store, home),
+      // one URL, a different answer per device and source: no browser or CDN may keep one answer for everybody
+      "Cache-Control": "no-store",
+      Vary: "User-Agent, Referer",
+    },
+  });
+}
+
+/**
+ * Where an app's /get sends this device: an iPhone or iPad to the App Store once the app is live there, an Android
+ * phone to Google Play once the app is live there (until then to /android, the beta sign-up), and everything else to
+ * the landing page, which has the buttons.
  * An iPad asking for the desktop site reads as a Mac and gets the landing page: the user agent cannot tell them apart.
  * The App Store link carries the campaign, so App Analytics (Acquisition > Campaigns) counts downloads per source.
  */

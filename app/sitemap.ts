@@ -12,6 +12,7 @@ const urls = [
   "https://stampstory.shoopi.dev/privacy",
   "https://stampstory.shoopi.dev/terms",
   "https://eureka.shoopi.dev",
+  "https://eureka.shoopi.dev/android",
   "https://eureka.shoopi.dev/support",
   "https://eureka.shoopi.dev/privacy",
   "https://eureka.shoopi.dev/terms",

@@ -83,9 +83,20 @@ export default function EurekaPage() {
               delay={T.hero + 0.38}
             />
           </div>
+          {e.store.android.status !== "live" && (
+            <Rise as="p" delay={T.hero + 0.44} className="text-xs text-ink/60">
+              On Android?{" "}
+              <Link
+                href="/eureka/android"
+                className="font-semibold text-ink underline decoration-dotted underline-offset-4"
+              >
+                Join the beta
+              </Link>
+            </Rise>
+          )}
           <Rise
             as="p"
-            delay={T.hero + 0.44}
+            delay={T.hero + 0.5}
             className="mt-2 flex items-baseline gap-2 font-display text-base font-semibold text-ink/60"
           >
             made by
