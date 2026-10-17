@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   }),
 };
 
-// the one action on the page; plain ink, no glass, like the rest of the documents
+// the one action on the page: the palette's primary blue, no glass, like the rest of the documents
 const mailButton =
-  "inline-flex items-center rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper transition-transform hover:-translate-y-0.5 active:scale-95";
+  "inline-flex items-center rounded-full bg-button px-5 py-2.5 text-sm font-semibold text-on-button transition-transform hover:-translate-y-0.5 active:scale-95";
 
 export default function SupportPage() {
   const jsonLd = {

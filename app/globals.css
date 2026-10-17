@@ -1,29 +1,173 @@
 @import "tailwindcss";
 
+/* dark: utilities follow the data-theme attribute the toggle sets on <html> */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 @theme {
   /* JetBrains Mono carries everything except the poster headline. Its default
      slashed zero is the same glyph the sho0pi wordmark carries. */
   --font-sans: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-display: var(--font-bricolage), -apple-system, BlinkMacSystemFont, sans-serif;
-
-  /* brand palette - matches the Sh mark in public/brand/: a blue S and a coral h
-     fused around a masked face. Blue leads in the mark, coral leads in the UI, so
-     the two never compete for the same job. */
-  --color-accent: #ec5968; /* coral - the h; shapes and display type */
-  --color-accent-text: #d13355; /* deepened coral - small text on light ground */
-  --color-sky-blue: #0094ff; /* the S - wallpaper aurora, building dot */
-  --color-violet: #ba32f2; /* the mask - mark only, not a UI colour */
-  --color-paper: #f4ffff;
-  --color-ink: #02050d;
-
-  /* iOS materials - light */
-  --color-glass: rgb(244 255 255 / 0.55);
-  --color-glass-strong: rgb(244 255 255 / 0.75);
-  --color-glass-border: rgb(244 255 255 / 0.7);
 }
 
-/* iOS-style wallpaper: light pastel purple/blue mesh gradient.
+/* the Shoopi palette (logo/palette): every colour comes from the Sh mark - a
+   blue S, a violet ninja mask, a red h - split 70 / 20 / 10 like the mark.
+   Blue carries the site (name, links, the primary button, focus, the work
+   heatmap); the mask marks the persona and the goal; red only ticks (the
+   countdown, live dots, errors). Neutrals lean slightly blue so greys never go
+   muddy next to it. Each name has a light and a dark value, so components use
+   the names and never change between themes. Light is the default. */
+@theme inline {
+  --color-paper: var(--paper);
+  --color-sunken: var(--sunken);
+  --color-raised: var(--raised);
+  --color-line: var(--line);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-blue: var(--blue);
+  --color-blue-text: var(--blue-text);
+  --color-button: var(--button);
+  --color-on-button: var(--on-button);
+  --color-blue-soft: var(--blue-soft);
+  --color-mask: var(--mask);
+  --color-mask-text: var(--mask-text);
+  --color-mask-soft: var(--mask-soft);
+  --color-red: var(--red);
+  --color-red-text: var(--red-text);
+  --color-red-soft: var(--red-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-highlight: var(--highlight);
+  --color-heat-0: var(--heat-0);
+  --color-heat-1: var(--heat-1);
+  --color-heat-2: var(--heat-2);
+  --color-heat-3: var(--heat-3);
+  --color-heat-4: var(--heat-4);
+}
+
+:root {
+  color-scheme: light;
+  --paper: #f8fafd;
+  --sunken: #f0f3f8;
+  --raised: #e8ecf2;
+  --line: #dde2e9;
+  --card: #ffffff;
+  --card-border: #e2e7ed;
+  --ink: #111b28;
+  --ink-2: #525c69;
+  --blue: #0094ff;
+  --blue-text: #005ea5;
+  --button: #0078d0;
+  --on-button: #ffffff;
+  --blue-soft: #e4f1ff;
+  --mask: #db40ff;
+  --mask-text: #8f01aa;
+  --mask-soft: #fae8ff;
+  --red: #ec5968;
+  --red-text: #c63f4f;
+  --red-soft: #fff5f5;
+  --success: #007031;
+  --success-soft: #e0f6e3;
+  --highlight: #f9dbad;
+  --focus: #0078d0;
+  --heat-0: #e8ecf2;
+  --heat-1: #c9e3ff;
+  --heat-2: #9fceff;
+  --heat-3: #0094ff;
+  --heat-4: #005ea5;
+
+  /* glass: a white lens over a blue-leaning aurora */
+  --glass-top: rgb(255 255 255 / 0.5);
+  --glass-bottom: rgb(255 255 255 / 0.28);
+  --glass-rim: rgb(255 255 255 / 0.6);
+  --spec: rgb(255 255 255 / 0.95);
+  --spec-side: rgb(255 255 255 / 0.35);
+  --drop: rgb(17 27 40 / 0.12);
+  --drop-deep: rgb(17 27 40 / 0.18);
+  --pill-top: rgb(255 255 255 / 0.62);
+  --pill-bottom: rgb(255 255 255 / 0.24);
+  --pill-hover: rgb(255 255 255 / 0.3);
+  --pill-in-glass-top: rgb(255 255 255 / 0.8);
+  --pill-in-glass-bottom: rgb(255 255 255 / 0.45);
+
+  /* wallpaper: paper washed with the three brand tints, blue the widest */
+  --wash-blue: #e4f1ff;
+  --wash-mask: #fae8ff;
+  --wash-red: #fff5f5;
+  --blob-blue: 0.34;
+  --blob-mask: 0.22;
+  --blob-red: 0.14;
+  --lit-top: rgb(255 255 255 / 0.9);
+  --lit-bottom: rgb(17 27 40 / 0.4);
+}
+
+/* deep blue-black rather than pure black, each surface one step lighter than
+   the one beneath it */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #111820;
+  --sunken: #0d121a;
+  --raised: #242c36;
+  --line: #2f3742;
+  --card: #19212a;
+  --card-border: #2b343e;
+  --ink: #ebeff4;
+  --ink-2: #aeb5bf;
+  --blue: #0094ff;
+  --blue-text: #6cb5ff;
+  --button: #0078d0;
+  --on-button: #ffffff;
+  --blue-soft: #092f52;
+  --mask: #db40ff;
+  --mask-text: #eeadff;
+  --mask-soft: #42194d;
+  --red: #ec5968;
+  --red-text: #ff858c;
+  --red-soft: #4d1b1f;
+  --success: #63c97d;
+  --success-soft: #15331c;
+  --highlight: #543a0b;
+  --focus: #6cb5ff;
+  --heat-0: #242c36;
+  --heat-1: #0f3f6a;
+  --heat-2: #005ea5;
+  --heat-3: #0094ff;
+  --heat-4: #9fceff;
+
+  /* the lens turns smoked: card-coloured fill, a faint rim and a dim highlight,
+     since a bright white rim on dark reads as a border, not light */
+  --glass-top: rgb(25 33 42 / 0.66);
+  --glass-bottom: rgb(25 33 42 / 0.44);
+  --glass-rim: rgb(235 239 244 / 0.1);
+  --spec: rgb(255 255 255 / 0.12);
+  --spec-side: rgb(255 255 255 / 0.04);
+  --drop: rgb(0 0 0 / 0.4);
+  --drop-deep: rgb(0 0 0 / 0.55);
+  --pill-top: rgb(46 56 68 / 0.72);
+  --pill-bottom: rgb(36 44 54 / 0.4);
+  --pill-hover: rgb(46 56 68 / 0.5);
+  --pill-in-glass-top: rgb(46 56 68 / 0.85);
+  --pill-in-glass-bottom: rgb(36 44 54 / 0.6);
+
+  --wash-blue: #092f52;
+  --wash-mask: #2a1033;
+  --wash-red: #2a1316;
+  --blob-blue: 0.26;
+  --blob-mask: 0.16;
+  --blob-red: 0.1;
+  --lit-top: rgb(255 255 255 / 0.12);
+  --lit-bottom: rgb(0 0 0 / 0.5);
+}
+
+/* the paper shows past the wallpaper on overscroll, so it is the page colour too */
+html {
+  background: var(--paper);
+}
+
+/* iOS-style wallpaper: paper washed with soft brand tints.
    Painted on a fixed layer, not background-attachment: fixed - that
    is janky/broken on iOS Safari. */
 .wallpaper::before {
@@ -32,10 +176,10 @@
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(120% 90% at 15% 10%, #f0d4ff 0%, transparent 55%),
-    radial-gradient(100% 80% at 85% 20%, #cfe9ff 0%, transparent 55%),
-    radial-gradient(120% 100% at 50% 100%, #ffe6ea 0%, transparent 45%),
-    linear-gradient(180deg, #f6f2ff 0%, #eef7ff 50%, #f8f3ff 100%);
+    radial-gradient(100% 80% at 85% 20%, var(--wash-blue) 0%, transparent 60%),
+    radial-gradient(110% 90% at 12% 8%, var(--wash-mask) 0%, transparent 50%),
+    radial-gradient(120% 100% at 50% 100%, var(--wash-red) 0%, transparent 45%),
+    var(--paper);
 }
 
 /* soft-light lighting pass over wallpaper + blobs (catchy.fan trick):
@@ -46,8 +190,8 @@
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(120% 70% at 50% 0%, rgb(255 255 255 / 0.9) 0%, transparent 60%),
-    radial-gradient(140% 90% at 50% 110%, rgb(2 5 13 / 0.5) 0%, transparent 55%);
+    radial-gradient(120% 70% at 50% 0%, var(--lit-top) 0%, transparent 60%),
+    radial-gradient(140% 90% at 50% 110%, var(--lit-bottom) 0%, transparent 55%);
   mix-blend-mode: soft-light;
   pointer-events: none;
 }
@@ -65,39 +209,41 @@
   background-size: 160px 160px;
 }
 
-/* aurora blobs: vivid color the glass frosts over */
+/* aurora blobs: the colour the glass frosts over, sized 70 / 20 / 10 like the
+   mark so blue leads, the mask supports and red is a glint */
 .blob {
   position: fixed;
   z-index: -1;
   border-radius: 50%;
   filter: blur(70px);
-  opacity: 0.4;
   pointer-events: none;
   will-change: transform;
 }
 .blob-a {
-  width: 420px;
-  height: 420px;
-  left: 28%;
-  top: 16%;
-  background: #db3fff;
+  width: 340px;
+  height: 340px;
+  left: 24%;
+  top: 14%;
+  opacity: var(--blob-mask);
+  background: var(--mask);
   animation: aurora-a 21s ease-in-out infinite alternate;
 }
 .blob-b {
-  width: 480px;
-  height: 480px;
-  right: 22%;
-  top: 42%;
-  background: #0094ff;
+  width: 560px;
+  height: 560px;
+  right: 16%;
+  top: 36%;
+  opacity: var(--blob-blue);
+  background: var(--blue);
   animation: aurora-b 26s ease-in-out infinite alternate;
 }
 .blob-c {
-  width: 260px;
-  height: 260px;
+  width: 220px;
+  height: 220px;
   left: 34%;
   bottom: 4%;
-  opacity: 0.22;
-  background: #ec5968;
+  opacity: var(--blob-red);
+  background: var(--red);
   animation: aurora-c 18s ease-in-out infinite alternate;
 }
 @keyframes aurora-a {
@@ -139,38 +285,34 @@ section[id] {
   }
 }
 
-/* keyboard focus: visible accent ring */
+/* keyboard focus: the palette's focus blue, lighter on dark */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--focus);
   outline-offset: 2px;
   border-radius: 8px;
 }
 
 /* liquid glass: thin fill so color bleeds through, heavy blur, specular rim */
 .glass {
-  background: linear-gradient(
-    180deg,
-    rgb(244 255 255 / 0.44) 0%,
-    rgb(244 255 255 / 0.24) 100%
-  );
-  border: 1px solid rgb(244 255 255 / 0.55);
+  background: linear-gradient(180deg, var(--glass-top) 0%, var(--glass-bottom) 100%);
+  border: 1px solid var(--glass-rim);
   box-shadow:
-    inset 0 1.5px 1px rgb(255 255 255 / 0.95),
-    inset 1px 0 1px rgb(255 255 255 / 0.35),
-    inset -1px 0 1px rgb(255 255 255 / 0.35),
-    inset 0 -1px 2px rgb(2 5 13 / 0.06),
-    0 12px 40px rgb(2 5 13 / 0.14);
+    inset 0 1.5px 1px var(--spec),
+    inset 1px 0 1px var(--spec-side),
+    inset -1px 0 1px var(--spec-side),
+    inset 0 -1px 2px rgb(17 27 40 / 0.06),
+    0 12px 40px var(--drop);
   backdrop-filter: blur(28px) saturate(1.9) brightness(1.06);
   -webkit-backdrop-filter: blur(28px) saturate(1.9) brightness(1.06);
 }
 
 /* glossy squircle tile: inner top highlight + soft drop, catchy.fan inspired */
 .tile-glossy {
-  background: linear-gradient(180deg, #ffffff 0%, #e8f1f7 100%);
+  background: linear-gradient(180deg, var(--card) 0%, var(--raised) 100%);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.95),
-    inset 0 -1px 2px rgb(2 5 13 / 0.06),
-    0 8px 20px rgb(2 5 13 / 0.18);
+    inset 0 1px 0 var(--spec),
+    inset 0 -1px 2px rgb(17 27 40 / 0.06),
+    0 8px 20px var(--drop-deep);
 }
 
 /* liquid glass button (Pill): a clear lens over the wallpaper - a specular
@@ -180,14 +322,14 @@ section[id] {
 .glass-pill {
   position: relative;
   isolation: isolate;
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.58) 0%, rgb(255 255 255 / 0.2) 100%);
-  border: 1px solid rgb(255 255 255 / 0.7);
+  background: linear-gradient(180deg, var(--pill-top) 0%, var(--pill-bottom) 100%);
+  border: 1px solid var(--glass-rim);
   box-shadow:
-    inset 0 1px 1px rgb(255 255 255 / 0.95),
-    inset 0 -2px 3px rgb(255 255 255 / 0.35),
-    inset 0 -1px 1px rgb(2 5 13 / 0.08),
-    0 1px 2px rgb(2 5 13 / 0.08),
-    0 10px 24px -10px rgb(2 5 13 / 0.35);
+    inset 0 1px 1px var(--spec),
+    inset 0 -2px 3px var(--spec-side),
+    inset 0 -1px 1px rgb(17 27 40 / 0.08),
+    0 1px 2px var(--drop),
+    0 10px 24px -10px var(--drop-deep);
   backdrop-filter: blur(10px) saturate(1.9) brightness(1.05);
   -webkit-backdrop-filter: blur(10px) saturate(1.9) brightness(1.05);
   transition:
@@ -201,33 +343,56 @@ section[id] {
   inset: 0;
   z-index: -1;
   border-radius: inherit;
-  background: radial-gradient(120% 70% at 30% 0%, rgb(255 255 255 / 0.55), transparent 60%);
+  background: radial-gradient(120% 70% at 30% 0%, var(--spec-side), transparent 60%);
   pointer-events: none;
 }
-/* only links spring: a glass-pill tag (an <li>, a <span>) keeps the lens but
+/* only links and buttons spring: a glass-pill tag (an <li>, a <span>) keeps the lens but
    stays still, so it never looks clickable */
 @media (hover: hover) {
-  a.glass-pill:hover {
+  :is(a, button).glass-pill:hover {
     scale: 1.07;
-    background-color: rgb(255 255 255 / 0.3);
+    background-color: var(--pill-hover);
     box-shadow:
-      inset 0 1px 1px rgb(255 255 255 / 1),
-      inset 0 -2px 3px rgb(255 255 255 / 0.45),
-      inset 0 -1px 1px rgb(2 5 13 / 0.08),
-      0 2px 4px rgb(2 5 13 / 0.08),
-      0 14px 30px -10px rgb(2 5 13 / 0.4);
+      inset 0 1px 1px var(--spec),
+      inset 0 -2px 3px var(--spec-side),
+      inset 0 -1px 1px rgb(17 27 40 / 0.08),
+      0 2px 4px var(--drop),
+      0 14px 30px -10px var(--drop-deep);
   }
 }
-a.glass-pill:active {
+:is(a, button).glass-pill:active {
   scale: 0.93;
   transition-duration: 0.15s;
 }
 /* inside a .glass panel: same lens, no second backdrop blur (glass on glass
    turns to mud), a little more fill to make up for it */
 .glass-pill.in-glass {
-  background: linear-gradient(180deg, rgb(255 255 255 / 0.78) 0%, rgb(255 255 255 / 0.42) 100%);
+  background: linear-gradient(180deg, var(--pill-in-glass-top) 0%, var(--pill-in-glass-bottom) 100%);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+}
+
+/* the one primary action per screen: the same lens, filled with the button
+   blue, white text and glyphs. The fill is solid so white text keeps 4.6:1 */
+.glass-pill.primary {
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.18) 0%, transparent 55%), var(--button);
+  border-color: rgb(255 255 255 / 0.28);
+  color: var(--on-button);
+  box-shadow:
+    inset 0 1px 1px rgb(255 255 255 / 0.5),
+    inset 0 -2px 3px rgb(0 0 0 / 0.12),
+    0 1px 2px var(--drop),
+    0 10px 24px -10px rgb(0 120 208 / 0.6);
+}
+@media (hover: hover) {
+  a.glass-pill.primary:hover {
+    background-color: var(--button);
+    box-shadow:
+      inset 0 1px 1px rgb(255 255 255 / 0.6),
+      inset 0 -2px 3px rgb(0 0 0 / 0.12),
+      0 2px 4px var(--drop),
+      0 14px 30px -10px rgb(0 120 208 / 0.7);
+  }
 }
 
 /* cards that go somewhere rise on hover. Plain CSS on purpose: .glass owns
@@ -241,11 +406,11 @@ a.glass-pill:active {
   .lift:hover {
     translate: 0 -4px;
     box-shadow:
-      inset 0 1.5px 1px rgb(255 255 255 / 0.95),
-      inset 1px 0 1px rgb(255 255 255 / 0.35),
-      inset -1px 0 1px rgb(255 255 255 / 0.35),
-      inset 0 -1px 2px rgb(2 5 13 / 0.06),
-      0 22px 50px rgb(2 5 13 / 0.2);
+      inset 0 1.5px 1px var(--spec),
+      inset 1px 0 1px var(--spec-side),
+      inset -1px 0 1px var(--spec-side),
+      inset 0 -1px 2px rgb(17 27 40 / 0.06),
+      0 22px 50px var(--drop-deep);
   }
 }
 
@@ -361,7 +526,7 @@ a.glass-pill:active {
   }
 }
 
-/* hover glow on interactive surfaces */
+/* blue halo on hover for small interactive surfaces */
 .hover-glow {
   transition:
     box-shadow 0.3s ease,
@@ -369,9 +534,9 @@ a.glass-pill:active {
 }
 .hover-glow:hover {
   box-shadow:
-    0 0 0 1px rgb(236 89 104 / 0.28),
-    0 0 24px rgb(236 89 104 / 0.38),
-    0 8px 32px rgb(2 5 13 / 0.12);
+    0 0 0 1px rgb(0 148 255 / 0.28),
+    0 0 24px rgb(0 148 255 / 0.38),
+    0 8px 32px var(--drop);
 }
 
 /* ambient premium motion (catchy.fan inspired) */
@@ -425,7 +590,7 @@ a.glass-pill:active {
   pointer-events: none;
 }
 
-/* the next square to earn breathes coral, so the grid reads as live even at
+/* the next square to earn breathes in the mask violet, so the grid reads as live even at
    $0. Opacity only, which keeps it on the compositor */
 .next-square {
   position: relative;
@@ -435,13 +600,29 @@ a.glass-pill:active {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: var(--color-accent);
+  background: var(--mask);
   opacity: 0;
   animation: next-square 6s ease-in-out infinite;
 }
 @keyframes next-square {
   50% {
     opacity: 0.5;
+  }
+}
+
+/* red is the clock: a dot that pulses beside anything counting down or live */
+.live-dot {
+  animation: live-dot 1.6s ease-in-out infinite;
+}
+@keyframes live-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--red);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 5px transparent;
+    opacity: 0.6;
   }
 }
 
@@ -482,7 +663,8 @@ a.glass-pill:active {
   }
   .float,
   .sheen::after,
-  .blob {
+  .blob,
+  .live-dot {
     animation: none;
   }
   /* a still hint instead of the breath */
@@ -527,15 +709,15 @@ a.glass-pill:active {
 /* frosted surfaces go near-solid when the user asks for less transparency */
 @media (prefers-reduced-transparency: reduce) {
   .glass {
-    background: rgb(244 255 255 / 0.96);
+    background: var(--card);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
   .tile-soon {
-    background: rgb(244 255 255 / 0.88);
+    background: var(--raised);
   }
-  .glass-pill {
-    background: rgb(255 255 255 / 0.94);
+  .glass-pill:not(.primary) {
+    background: var(--card);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
@@ -544,12 +726,12 @@ a.glass-pill:active {
 /* defined borders when the user asks for more contrast */
 @media (prefers-contrast: more) {
   .glass,
-  .glass-pill,
+  .glass-pill:not(.primary),
   .tile-soon,
   .tile-glossy,
   .tile-liquid {
-    background: #fff;
-    border: 1.5px solid var(--color-ink);
+    background: var(--card);
+    border: 1.5px solid var(--ink);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
@@ -559,9 +741,9 @@ a.glass-pill:active {
   }
 }
 
-/* dark glass "coming soon" tile */
+/* smoked glass "coming soon" tile */
 .tile-soon {
-  background: linear-gradient(180deg, rgb(2 5 13 / 0.16) 0%, rgb(2 5 13 / 0.08) 100%);
-  border: 1px solid rgb(255 255 255 / 0.4);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3);
+  background: linear-gradient(180deg, rgb(17 27 40 / 0.16) 0%, rgb(17 27 40 / 0.08) 100%);
+  border: 1px solid var(--glass-rim);
+  box-shadow: inset 0 1px 0 var(--spec-side);
 }

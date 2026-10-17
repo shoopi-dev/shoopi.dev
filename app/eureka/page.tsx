@@ -133,7 +133,7 @@ export default function EurekaPage() {
             <ol className="glass grid gap-5 rounded-[22px] p-6 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-6">
               {e.steps.map((step) => (
                 <li key={step.n} className="flex flex-col gap-1.5">
-                  <span className="font-mono text-xs font-semibold tabular-nums text-accent-text">
+                  <span className="font-mono text-xs font-semibold tabular-nums text-blue-text">
                     {step.n}
                   </span>
                   <h3 className="font-display text-base font-bold">{step.title}</h3>
@@ -162,7 +162,7 @@ export default function EurekaPage() {
               </div>
               <Link
                 href="/eureka/privacy"
-                className="shrink-0 rounded-full border border-ink/15 bg-white px-4 py-2 text-xs font-semibold transition-transform hover:-translate-y-0.5 active:scale-95"
+                className="shrink-0 rounded-full border border-ink/15 bg-card px-4 py-2 text-xs font-semibold transition-transform hover:-translate-y-0.5 active:scale-95"
               >
                 Read the policy
               </Link>

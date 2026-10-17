@@ -45,7 +45,7 @@ export function Countdown({ deadline }: { deadline: string }) {
   return (
     <div className="flex items-baseline justify-center gap-3 sm:gap-6">
       <div className="flex items-baseline gap-2">
-        <span className="font-mono text-4xl font-bold tracking-[-0.03em] sm:text-5xl">
+        <span className="font-mono text-4xl font-bold tracking-[-0.03em] text-red-text sm:text-5xl">
           {t?.days ?? "–"}
         </span>
         <span className="text-sm font-medium text-ink/60">days</span>
@@ -58,7 +58,7 @@ export function Countdown({ deadline }: { deadline: string }) {
         ] as const
       ).map(([label, value]) => (
         <div key={label} className="flex items-baseline gap-1.5">
-          <span className="w-[2ch] font-mono text-xl font-semibold tracking-[-0.02em] sm:text-2xl">
+          <span className="w-[2ch] font-mono text-xl font-semibold tracking-[-0.02em] text-red-text sm:text-2xl">
             {value ?? "–"}
           </span>
           <span className="text-xs font-medium text-ink/60">{label}</span>

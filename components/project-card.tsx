@@ -34,7 +34,7 @@ export function ProjectCard({ p, delay = 0 }: { p: Project; delay?: number }) {
           )}
         </div>
         <p className="flex-1 text-sm leading-relaxed text-ink/70">{p.description}</p>
-        <span className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full bg-white/65 px-2.5 py-1 text-xs font-medium text-ink/70">
+        <span className="mt-1 inline-flex w-fit items-center gap-1.5 rounded-full bg-card/65 px-2.5 py-1 text-xs font-medium text-ink/70">
           <span className={`h-1.5 w-1.5 rounded-full ${statusDot[p.status]}`} />
           {label}
         </span>
