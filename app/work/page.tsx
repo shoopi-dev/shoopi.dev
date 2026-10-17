@@ -77,7 +77,7 @@ export default function WorkPage() {
             {work.intro}
           </Rise>
           <div className="mt-2 flex flex-wrap justify-center gap-3">
-            <Pill href={`mailto:${site.socials.email}`} icon="/icons/mail.svg" delay={T.hero + 0.24}>
+            <Pill href={`mailto:${site.socials.email}`} icon="/icons/mail.svg" primary delay={T.hero + 0.24}>
               Start a project
             </Pill>
             <Pill href="#process" delay={T.hero + 0.3}>
@@ -91,7 +91,7 @@ export default function WorkPage() {
           <ul className="glass flex flex-col gap-2 rounded-[22px] p-6 text-sm text-ink/75">
             {work.forWho.map((line) => (
               <li key={line} className="flex gap-2.5">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue" />
                 {line}
               </li>
             ))}
@@ -146,7 +146,7 @@ export default function WorkPage() {
                     {group.items.map((item) => (
                       <span
                         key={item}
-                        className="rounded-full border border-ink/10 bg-white/60 px-2.5 py-0.5 text-xs font-medium text-ink/60"
+                        className="rounded-full border border-ink/10 bg-card/60 px-2.5 py-0.5 text-xs font-medium text-ink/60"
                       >
                         {item}
                       </span>
@@ -169,7 +169,7 @@ export default function WorkPage() {
             {work.process.map((step, i) => (
               <Pop key={step.title} delay={T.process + 0.12 + i * 0.07} className="h-full">
                 <div className="glass flex h-full flex-col gap-2 rounded-[22px] p-5">
-                  <span className="font-mono text-2xl font-bold text-accent">
+                  <span className="font-mono text-2xl font-bold text-blue-text">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="font-display font-bold">{step.title}</h3>
@@ -187,7 +187,7 @@ export default function WorkPage() {
             subtitle="Tell me what it is and what it needs to do. I'll tell you honestly if I'm the right person."
             delay={T.contact}
           />
-          <Pill href={`mailto:${site.socials.email}`} icon="/icons/mail.svg" delay={T.contact + 0.08}>
+          <Pill href={`mailto:${site.socials.email}`} icon="/icons/mail.svg" primary delay={T.contact + 0.08}>
             {site.socials.email}
           </Pill>
         </section>

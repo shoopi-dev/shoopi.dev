@@ -65,7 +65,8 @@ export const site = {
     { name: "Kotlin", icon: "/icons/tech/kotlin.svg", size: "h-3 w-3" },
     { name: "Android", icon: "/icons/tech/android.svg" },
     { name: "Vim", icon: "/icons/tech/vim.svg", size: "h-[17px] w-[17px]" },
-    { name: "Functional programming", icon: "/icons/tech/lambda.svg" },
+    // its deep purple sinks into dark glass, so it brightens there
+    { name: "Functional programming", icon: "/icons/tech/lambda.svg", size: "h-4 w-4 dark:brightness-[2.2]" },
   ] as { name: string; icon: string; size?: string }[],
   // ponytail: the About row is sized for exactly 3 (see about.tsx). A 4th spills
   // out of the column on phones - more photos means a swipeable strip or a gallery

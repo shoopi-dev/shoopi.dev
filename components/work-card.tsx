@@ -34,7 +34,7 @@ export function WorkCard({ item, delay = 0 }: { item: WorkItem; delay?: number }
           {item.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-ink/10 bg-white/60 px-2.5 py-0.5 text-xs font-medium text-ink/60"
+              className="rounded-full border border-ink/10 bg-card/60 px-2.5 py-0.5 text-xs font-medium text-ink/60"
             >
               {tag}
             </span>

@@ -4,6 +4,7 @@ import { useCallback, useRef } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import type { Project } from "@/data/site";
 import { externalProps } from "@/lib/link";
+import { statusBadge } from "@/lib/status";
 import { Pop } from "./animate";
 
 const statusLabel: Record<Project["status"], string> = {
@@ -64,7 +65,9 @@ export function AppIcon({ p, delay = 0 }: { p: Project; delay?: number }) {
       <span className={`max-w-24 truncate text-sm font-medium ${soon ? "text-ink/45" : ""}`}>
         {soon ? "???" : p.name}
       </span>
-      <span className="text-[13px] text-ink/60">{statusLabel[p.status]}</span>
+      <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${statusBadge[p.status]}`}>
+        {statusLabel[p.status]}
+      </span>
     </Pop>
   );
 

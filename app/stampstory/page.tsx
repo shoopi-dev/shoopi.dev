@@ -130,7 +130,7 @@ export default function StampStoryPage() {
             <ol className="glass flex flex-col gap-5 rounded-[22px] p-6 sm:flex-row sm:gap-6">
               {s.steps.map((step) => (
                 <li key={step.n} className="flex flex-1 flex-col gap-1.5">
-                  <span className="font-mono text-xs font-semibold tabular-nums text-accent-text">
+                  <span className="font-mono text-xs font-semibold tabular-nums text-blue-text">
                     {step.n}
                   </span>
                   <h3 className="font-display text-base font-bold">{step.title}</h3>
@@ -178,7 +178,7 @@ export default function StampStoryPage() {
                 <ul className="flex flex-col gap-2 text-sm leading-relaxed text-ink/75">
                   {s.gold.perks.map((perk) => (
                     <li key={perk} className="flex gap-2.5">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-blue" />
                       {perk}
                     </li>
                   ))}
@@ -206,7 +206,7 @@ export default function StampStoryPage() {
               </div>
               <Link
                 href="/stampstory/privacy"
-                className="shrink-0 rounded-full border border-ink/15 bg-white px-4 py-2 text-xs font-semibold transition-transform hover:-translate-y-0.5 active:scale-95"
+                className="shrink-0 rounded-full border border-ink/15 bg-card px-4 py-2 text-xs font-semibold transition-transform hover:-translate-y-0.5 active:scale-95"
               >
                 Read the policy
               </Link>

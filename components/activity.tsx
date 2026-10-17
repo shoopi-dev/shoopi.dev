@@ -3,9 +3,9 @@ import { getContributions, type Day } from "@/lib/github";
 import { externalProps } from "@/lib/link";
 import { Widget } from "./widget";
 
-/* squares in the "building" blue, so they never read as money: coral is the
-   goal grid's alone */
-const LEVEL = ["bg-ink/10", "bg-sky-blue/30", "bg-sky-blue/55", "bg-sky-blue/80", "bg-sky-blue"];
+/* the palette's heatmap blues, so work never reads as money: the mask violet
+   is the goal grid's alone */
+const LEVEL = ["bg-heat-0", "bg-heat-1", "bg-heat-2", "bg-heat-3", "bg-heat-4"];
 const PHONE_WEEKS = 26; // a full year of squares is too fine on a phone
 
 const tally = (days: Day[]) => ({
@@ -52,7 +52,7 @@ export async function Activity({ delay = 0 }: { delay?: number }) {
           <a
             href={site.socials.github}
             {...externalProps(site.socials.github)}
-            className={`tabular-nums transition-colors hover:text-ink ${v.phone ? "basis-full" : ""}`}
+            className={`tabular-nums text-blue-text underline-offset-4 hover:underline ${v.phone ? "basis-full" : ""}`}
           >
             {v.total.toLocaleString("en-US")} contributions on GitHub ↗
           </a>

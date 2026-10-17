@@ -48,7 +48,7 @@ export default async function Home() {
             <Rise as="span" delay={T.word(0)} className="text-ink/55">
               I&apos;m{" "}
             </Rise>
-            <Rise as="span" delay={T.word(1)}>
+            <Rise as="span" delay={T.word(1)} className="text-blue">
               {/* how to say it (from the GitHub README): shows on hover, or on
                   tap on a phone since the tap focuses it. One line above the
                   name on wide screens; below it on phones, where the headline
@@ -65,7 +65,7 @@ export default async function Home() {
                   id="say-itay"
                   aria-hidden
                   data-nosnippet
-                  className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-max max-w-[15rem] -translate-x-1/2 translate-y-1 rounded-2xl max-sm:bottom-auto max-sm:top-full max-sm:mb-0 max-sm:mt-2 sm:max-w-none border border-white/70 bg-white/92 px-3 py-2 text-left font-sans text-xs font-medium leading-relaxed tracking-normal text-ink/80 opacity-0 shadow-lg backdrop-blur-md transition duration-200 group-hover/name:translate-y-0 group-hover/name:opacity-100 group-focus/name:translate-y-0 group-focus/name:opacity-100 motion-reduce:transition-none"
+                  className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-max max-w-[15rem] -translate-x-1/2 translate-y-1 rounded-2xl max-sm:bottom-auto max-sm:top-full max-sm:mb-0 max-sm:mt-2 sm:max-w-none border border-card-border bg-card/92 px-3 py-2 text-left font-sans text-xs font-medium leading-relaxed tracking-normal text-ink/80 opacity-0 shadow-lg backdrop-blur-md transition duration-200 group-hover/name:translate-y-0 group-hover/name:opacity-100 group-focus/name:translate-y-0 group-focus/name:opacity-100 motion-reduce:transition-none"
                 >
                   {site.say}
                 </span>
@@ -104,9 +104,10 @@ export default async function Home() {
             <Rise as="span" delay={T.word(6)} className="text-ink/55">
               of&nbsp;making{" "}
             </Rise>
-            {/* nowrap: browsers may break a line right after the slash */}
+            {/* nowrap: browsers may break a line right after the slash. The goal
+                is the one highlighted phrase on the page */}
             <Rise as="span" delay={T.word(7)} className="whitespace-nowrap">
-              {fmtMoney(site.goal)}/mo
+              <mark className="rounded-sm bg-transparent bg-[linear-gradient(transparent_52%,var(--color-highlight)_52%)] px-1 text-ink [box-decoration-break:clone]">{fmtMoney(site.goal)}/mo</mark>
             </Rise>{" "}
             <Rise as="span" delay={T.word(8)}>
               while&nbsp;I&nbsp;sleep,{" "}
@@ -167,7 +168,7 @@ export default async function Home() {
               </span>
               <span>· {pct.toFixed(pct && pct < 0.01 ? 4 : 2)}% of {fmtMoney(site.goal)}</span>
               <span aria-hidden>·</span>
-              <span className="tabular-nums">day {day}</span>
+              <span className="font-semibold tabular-nums text-mask-text">day {day}</span>
             </p>
             {latest && (
               // inline flow, not flex: a long title wraps like a sentence
@@ -176,7 +177,7 @@ export default async function Home() {
                 className="mt-2 block w-fit text-xs text-ink/60 transition-colors hover:text-ink"
               >
                 <span
-                  className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle"
+                  className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-mask align-middle"
                   aria-hidden
                 />
                 <time dateTime={latest.date} className="tabular-nums">
@@ -192,7 +193,7 @@ export default async function Home() {
               the $0 it answers */}
           <Activity delay={T.widgets + 0.06} />
 
-          <Widget label="time left" delay={T.widgets + 0.12}>
+          <Widget label="time left" live delay={T.widgets + 0.12}>
             <Countdown deadline={site.deadline} />
           </Widget>
         </section>
@@ -250,6 +251,7 @@ export default async function Home() {
           <Pill
             href={`mailto:${site.socials.email}`}
             icon="/icons/mail.svg"
+            primary
             delay={T.contact + 0.06}
           >
             Shoot me an email!

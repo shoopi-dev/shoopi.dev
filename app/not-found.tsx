@@ -20,7 +20,7 @@ export default function NotFound() {
       <Rise as="p" delay={0.3} className="max-w-sm text-balance text-ink/70">
         This page is one of the things I haven&apos;t built yet.
       </Rise>
-      <Pill href="/" delay={0.4}>
+      <Pill href="/" primary delay={0.4}>
         Back to the journey
       </Pill>
     </main>
