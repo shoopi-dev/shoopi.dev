@@ -97,9 +97,10 @@ export function StoreBadge({
   const live = Boolean(href);
   const label = store === "ios" ? "App Store" : "Google Play";
   const top = live ? (store === "ios" ? "Download on the" : "Get it on") : "Coming soon to";
-  // no background in the base: the two states set their own, so neither can win by class order
+  // no background in the base: the two states set their own, so neither can win by class order.
+  // Black in both themes, as the stores draw their badges, with a faint rim to lift it off dark paper
   const base =
-    "inline-flex items-center gap-2.5 rounded-xl border border-ink/10 px-4 py-2.5 text-left text-paper shadow-lg";
+    "inline-flex items-center gap-2.5 rounded-xl border border-ink/10 px-4 py-2.5 text-left text-white shadow-lg dark:border-white/15";
   const glyph =
     store === "ios" ? (
       <svg viewBox="0 0 24 24" className="h-6 w-6 fill-current" aria-hidden>
@@ -112,7 +113,7 @@ export function StoreBadge({
     <>
       {glyph}
       <span className="flex flex-col leading-none">
-        <span className="text-[10px] tracking-wide text-paper/70">{top}</span>
+        <span className="text-[10px] tracking-wide text-white/70">{top}</span>
         <span className="mt-0.5 font-display text-[17px] font-bold leading-none">{label}</span>
       </span>
     </>
@@ -125,7 +126,7 @@ export function StoreBadge({
         <span
           aria-disabled="true"
           title={`${label} - coming soon`}
-          className={`${base} cursor-not-allowed bg-ink/45 grayscale`}
+          className={`${base} cursor-not-allowed bg-black/45 grayscale`}
         >
           {inner}
         </span>
@@ -140,7 +141,7 @@ export function StoreBadge({
       target="_blank"
       rel="noopener noreferrer"
       delay={delay}
-      className={`${base} bg-ink hover-glow transition-transform hover:-translate-y-0.5 hover:scale-105 active:scale-95`}
+      className={`${base} bg-black hover-glow transition-transform hover:-translate-y-0.5 hover:scale-105 active:scale-95`}
     >
       {inner}
     </Pop>

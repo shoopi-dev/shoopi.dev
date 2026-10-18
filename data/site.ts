@@ -65,7 +65,8 @@ export const site = {
     { name: "Kotlin", icon: "/icons/tech/kotlin.svg", size: "h-3 w-3" },
     { name: "Android", icon: "/icons/tech/android.svg" },
     { name: "Vim", icon: "/icons/tech/vim.svg", size: "h-[17px] w-[17px]" },
-    { name: "Functional programming", icon: "/icons/tech/lambda.svg" },
+    // its deep purple sinks into dark glass, so it brightens there
+    { name: "Functional programming", icon: "/icons/tech/lambda.svg", size: "h-4 w-4 dark:brightness-[2.2]" },
   ] as { name: string; icon: string; size?: string }[],
   // ponytail: the About row is sized for exactly 3 (see about.tsx). A 4th spills
   // out of the column on phones - more photos means a swipeable strip or a gallery
@@ -78,14 +79,14 @@ export const site = {
   // ponytail: fixed figure, no FX. HKD is pegged at 7.75-7.85, so $13k is at
   // least HK$100k (the real target) anywhere in the band
   goal: 13_000, // US$ a month, passive
-  startDate: "2026-08-05", // day 1 of the challenge
+  startDate: "2026-09-01", // day 1 of the challenge
   deadline: "2031-07-07T00:00:00Z", // 30th birthday (born 2001-07-07)
   repo: "https://github.com/shoopi-dev/shoopi.dev",
   socials: {
     github: "https://github.com/sho0pi",
     x: "https://x.com/sho0pi",
     instagram: "https://instagram.com/shoopi.dev",
-    linkedin: "https://www.linkedin.com/in/blokhi", // structured data only, no button for it (yet)
+    linkedin: "https://www.linkedin.com/in/blokhi",
     email: "hi@shoopi.dev",
   },
   // Babees, the travel blog I write with my girlfriend (it replaced itay.world).

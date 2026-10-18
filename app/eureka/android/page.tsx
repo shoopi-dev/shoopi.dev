@@ -101,7 +101,7 @@ export default function AndroidBetaPage() {
             <ol className="glass flex flex-col gap-6 rounded-[22px] p-6 sm:flex-row sm:gap-6">
               {steps.map((step) => (
                 <li key={step.n} className="flex flex-1 flex-col gap-1.5">
-                  <span className="font-mono text-xs font-semibold tabular-nums text-accent-text">{step.n}</span>
+                  <span className="font-mono text-xs font-semibold tabular-nums text-blue-text">{step.n}</span>
                   <h2 className="font-display text-lg font-bold">{step.title}</h2>
                   <p className="flex-1 text-sm leading-relaxed text-ink/70">{step.body}</p>
                   <a href={step.href} {...externalProps(step.href)} className={`mt-2 ${stepButton}`}>

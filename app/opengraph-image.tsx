@@ -26,8 +26,8 @@ export default async function OpengraphImage() {
           gap: 28,
           padding: 80,
           background:
-            "linear-gradient(135deg, #F4FFFF 0%, #DCF0FF 40%, #F3DEFF 100%)",
-          color: "#02050D",
+            "linear-gradient(135deg, #F8FAFD 0%, #E4F1FF 45%, #FAE8FF 100%)",
+          color: "#111B28",
           fontFamily: "sans-serif",
         }}
       >
@@ -36,7 +36,7 @@ export default async function OpengraphImage() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontSize: 34, fontWeight: 700 }}>{site.fullName}</span>
             {/* the person's handle (X, GitHub); site.handle is the brand name */}
-            <span style={{ fontSize: 26, color: "#5A6472" }}>@sho0pi · shoopi.dev</span>
+            <span style={{ fontSize: 26, color: "#525C69" }}>@sho0pi · shoopi.dev</span>
           </div>
         </div>
 
@@ -44,7 +44,7 @@ export default async function OpengraphImage() {
           <span style={{ fontSize: 92, fontWeight: 800, letterSpacing: -3, lineHeight: 1.05 }}>
             {`${fmtMoney(site.goal)} a month.`}
           </span>
-          <span style={{ fontSize: 32, color: "#5A6472" }}>
+          <span style={{ fontSize: 32, color: "#525C69" }}>
             While I sleep, before 30. Every dollar in public.
           </span>
         </div>
@@ -58,7 +58,7 @@ export default async function OpengraphImage() {
                 width: 34,
                 height: 12,
                 borderRadius: 4,
-                background: i === 0 ? "#EC5968" : "rgba(2,5,13,0.12)",
+                background: i === 0 ? "#DB40FF" : "rgba(17,27,40,0.10)",
               }}
             />
           ))}

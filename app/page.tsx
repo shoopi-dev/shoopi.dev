@@ -65,7 +65,7 @@ export default async function Home() {
                   id="say-itay"
                   aria-hidden
                   data-nosnippet
-                  className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-max max-w-[15rem] -translate-x-1/2 translate-y-1 rounded-2xl max-sm:bottom-auto max-sm:top-full max-sm:mb-0 max-sm:mt-2 sm:max-w-none border border-white/70 bg-white/92 px-3 py-2 text-left font-sans text-xs font-medium leading-relaxed tracking-normal text-ink/80 opacity-0 shadow-lg backdrop-blur-md transition duration-200 group-hover/name:translate-y-0 group-hover/name:opacity-100 group-focus/name:translate-y-0 group-focus/name:opacity-100 motion-reduce:transition-none"
+                  className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-max max-w-[15rem] -translate-x-1/2 translate-y-1 rounded-2xl max-sm:bottom-auto max-sm:top-full max-sm:mb-0 max-sm:mt-2 sm:max-w-none border border-card-border bg-card/92 px-3 py-2 text-left font-sans text-xs font-medium leading-relaxed tracking-normal text-ink/80 opacity-0 shadow-lg backdrop-blur-md transition duration-200 group-hover/name:translate-y-0 group-hover/name:opacity-100 group-focus/name:translate-y-0 group-focus/name:opacity-100 motion-reduce:transition-none"
                 >
                   {site.say}
                 </span>
@@ -104,9 +104,10 @@ export default async function Home() {
             <Rise as="span" delay={T.word(6)} className="text-ink/55">
               of&nbsp;making{" "}
             </Rise>
-            {/* nowrap: browsers may break a line right after the slash */}
+            {/* nowrap: browsers may break a line right after the slash. The goal
+                is the one highlighted phrase on the page */}
             <Rise as="span" delay={T.word(7)} className="whitespace-nowrap">
-              {fmtMoney(site.goal)}/mo
+              <mark className="rounded-sm bg-transparent bg-[linear-gradient(transparent_52%,var(--color-highlight)_52%)] px-1 text-ink [box-decoration-break:clone]">{fmtMoney(site.goal)}/mo</mark>
             </Rise>{" "}
             <Rise as="span" delay={T.word(8)}>
               while&nbsp;I&nbsp;sleep,{" "}
@@ -119,8 +120,9 @@ export default async function Home() {
             </Rise>
           </h1>
 
-          {/* icon-only: the handle is already in the headline */}
-          <div className="mt-8 flex justify-center gap-3">
+          {/* icon-only: the handle is already in the headline. The blog is the
+              one capsule, its own bee and a name, since no glyph says "travel blog" */}
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Pill
               href={site.socials.github}
               icon="/icons/github.svg"
@@ -134,15 +136,15 @@ export default async function Home() {
               delay={T.pills + 0.05}
             />
             <Pill
-              href={site.socials.instagram}
-              icon="/icons/instagram.svg"
-              label="Instagram, @shoopi.dev"
+              href={site.socials.linkedin}
+              icon="/icons/linkedin.svg"
+              label="LinkedIn, Itay Blokh"
               delay={T.pills + 0.1}
             />
             <Pill
-              href={site.blog.url}
-              icon="/icons/globe.svg"
-              label={`Travel blog, ${new URL(site.blog.url).host}`}
+              href={site.socials.instagram}
+              icon="/icons/instagram.svg"
+              label="Instagram, @shoopi.dev"
               delay={T.pills + 0.15}
             />
             <Pill
@@ -151,6 +153,11 @@ export default async function Home() {
               label={`Email ${site.socials.email}`}
               delay={T.pills + 0.2}
             />
+            <Pill href={site.blog.url} delay={T.pills + 0.25} className="h-12 pl-3 text-sm">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/icons/babees.png" alt="" className="h-7 w-7" />
+              Travel blog
+            </Pill>
           </div>
         </section>
 
@@ -176,7 +183,7 @@ export default async function Home() {
                 className="mt-2 block w-fit text-xs text-ink/60 transition-colors hover:text-ink"
               >
                 <span
-                  className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle"
+                  className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-mask align-middle"
                   aria-hidden
                 />
                 <time dateTime={latest.date} className="tabular-nums">
@@ -192,7 +199,7 @@ export default async function Home() {
               the $0 it answers */}
           <Activity delay={T.widgets + 0.06} />
 
-          <Widget label="time left" delay={T.widgets + 0.12}>
+          <Widget label="time left" live delay={T.widgets + 0.12}>
             <Countdown deadline={site.deadline} />
           </Widget>
         </section>
@@ -250,6 +257,7 @@ export default async function Home() {
           <Pill
             href={`mailto:${site.socials.email}`}
             icon="/icons/mail.svg"
+            primary
             delay={T.contact + 0.06}
           >
             Shoot me an email!

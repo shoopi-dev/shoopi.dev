@@ -95,7 +95,7 @@ export function GoalGrid({ apps, square }: { apps: Share[]; square: number }) {
             key={i}
             data-i={i < held ? i : undefined}
             className={`aspect-square rounded-[3px] ${
-              i < full ? "bg-accent" : i < held ? "next-square bg-accent/35" : i === held && held === full ? "next-square bg-ink/10" : "bg-ink/10"
+              i < full ? "bg-mask" : i < held ? "next-square bg-mask-soft" : i === held && held === full ? "next-square bg-heat-0" : "bg-heat-0"
             } ${i === at ? "outline-2 outline-offset-1 outline-ink/70" : ""}`}
           />
         ))}
@@ -105,7 +105,7 @@ export function GoalGrid({ apps, square }: { apps: Share[]; square: number }) {
         <div
           aria-hidden
           style={{ left: `${((col + 0.5) / COLS) * 100}%`, top: `${Math.floor(at / COLS) * 20}%` }}
-          className={`pointer-events-none absolute z-20 mt-[-8px] w-max min-w-48 -translate-y-full rounded-2xl border border-white/70 bg-white/92 p-2.5 text-left text-xs text-ink/70 shadow-lg backdrop-blur-md ${
+          className={`pointer-events-none absolute z-20 mt-[-8px] w-max min-w-48 -translate-y-full rounded-2xl border border-card-border bg-card/92 p-2.5 text-left text-xs text-ink/70 shadow-lg backdrop-blur-md ${
             col < 6 ? "-translate-x-6" : col > 13 ? "-translate-x-[calc(100%-1.5rem)]" : "-translate-x-1/2"
           }`}
         >

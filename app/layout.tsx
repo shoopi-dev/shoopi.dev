@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, JetBrains_Mono } from "next/font/google";
 import { GradualBlur } from "@/components/gradual-blur";
+import { ThemeToggle, themeScript } from "@/components/theme-toggle";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -64,12 +65,22 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${jetbrains.variable} h-full antialiased`}>
+    // light by default; the head script swaps in a saved dark choice before paint
+    <html
+      lang="en"
+      data-theme="light"
+      suppressHydrationWarning
+      className={`${bricolage.variable} ${jetbrains.variable} h-full antialiased`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="wallpaper min-h-full font-sans text-ink">
         <div className="blob blob-a" aria-hidden />
         <div className="blob blob-b" aria-hidden />
         <div className="blob blob-c" aria-hidden />
         <div className="grain" aria-hidden />
+        <ThemeToggle />
         {children}
         {/* not on phones: three more backdrop-filter layers dropped frames while
             scrolling on a mid-range Android, and it blurred buttons at the edge */}

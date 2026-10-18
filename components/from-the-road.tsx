@@ -19,7 +19,7 @@ export async function FromTheRoad({ delay = 0 }: { delay?: number }) {
           <a
             href={site.blog.url}
             {...externalProps(site.blog.url)}
-            className="text-xs text-ink/60 transition-colors hover:text-ink"
+            className="text-xs text-blue-text underline-offset-4 hover:underline"
           >
             {new URL(site.blog.url).host} ↗
           </a>

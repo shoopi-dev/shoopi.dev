@@ -48,7 +48,7 @@ export function IconButton({
       href={href}
       {...externalProps(href)}
       aria-label={label}
-      className={`flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-white transition-transform hover:scale-110 active:scale-95 ${className}`}
+      className={`flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-paper transition-transform hover:scale-110 active:scale-95 ${className}`}
     >
       {children}
     </a>

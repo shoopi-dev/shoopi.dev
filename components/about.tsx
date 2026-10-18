@@ -28,7 +28,7 @@ export function About({ delay = 0 }: { delay?: number }) {
                   className="glass-pill in-glass inline-flex h-[30px] items-center gap-1.5 rounded-full px-3 text-xs font-medium text-ink/70"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={chip.icon} alt="" className="h-3.5 w-3.5 opacity-80" />
+                  <img src={chip.icon} alt="" className="h-3.5 w-3.5 opacity-80 dark:invert" />
                   {chip.label}
                 </li>
               ))}
@@ -60,7 +60,7 @@ export function About({ delay = 0 }: { delay?: number }) {
               {site.photos.map((photo, i) => (
                 <div
                   key={photo.src}
-                  className={`aspect-square w-[36%] max-w-24 shrink-0 rounded-2xl bg-white p-1.5 shadow-lg transition-transform duration-300 hover:z-10 hover:rotate-0 hover:scale-105 ${TILT[i % TILT.length]} ${i ? "-ml-[4%]" : ""}`}
+                  className={`aspect-square w-[36%] max-w-24 shrink-0 rounded-2xl bg-card p-1.5 shadow-lg transition-transform duration-300 hover:z-10 hover:rotate-0 hover:scale-105 ${TILT[i % TILT.length]} ${i ? "-ml-[4%]" : ""}`}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img

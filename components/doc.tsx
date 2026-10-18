@@ -60,7 +60,7 @@ export function DocPage({
         {updated && <p className="mt-1.5 text-xs text-ink/60">Last updated {date}</p>}
         {intro && <div className="mt-4 text-[15px] leading-7 text-ink/80">{intro}</div>}
       </header>
-      <main className="rounded-2xl border border-ink/10 bg-white p-6 sm:p-9">{children}</main>
+      <main className="rounded-2xl border border-ink/10 bg-card p-6 sm:p-9">{children}</main>
       <footer className={footerClass}>
         <FooterLinks links={app.links} />
       </footer>
@@ -76,7 +76,7 @@ export function DocContents({ sections }: { sections: LegalSection[] }) {
       <ol className="mt-3 grid gap-x-6 gap-y-1.5 text-[15px] sm:grid-cols-2">
         {sections.map((s, i) => (
           <li key={s.id} className="flex gap-2">
-            <span className="tabular-nums text-ink/35">{i + 1}.</span>
+            <span className="tabular-nums text-ink/60">{i + 1}.</span>
             <a
               href={`#${s.id}`}
               className="text-ink/75 underline decoration-dotted underline-offset-4 transition-colors hover:text-ink"
@@ -97,7 +97,7 @@ export function LegalBody({ sections }: { sections: LegalSection[] }) {
       {sections.map((s, i) => (
         <section key={s.id} id={s.id} className={i === 0 ? "" : "mt-9"}>
           <h2 className="font-display text-lg font-bold tracking-tight">
-            <span className="mr-2 font-sans text-sm font-semibold tabular-nums text-ink/35">
+            <span className="mr-2 font-sans text-sm font-semibold tabular-nums text-ink/60">
               {i + 1}
             </span>
             {s.title}
