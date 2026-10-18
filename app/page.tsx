@@ -32,6 +32,12 @@ export default async function Home() {
   const square = site.goal / 100; // the grid is 100 squares
   const earnings = await getEarnings();
   const pct = (earnings.total / site.goal) * 100;
+  // what the square being earned still needs, in cents so $129.59 never prints as $129.58
+  const totalCents = Math.round(earnings.total * 100);
+  const squareCents = Math.round(square * 100);
+  const left = totalCents >= site.goal * 100 ? 0 : (squareCents - (totalCents % squareCents)) / 100;
+  // one rule for both figures: cents under $100, or whenever they are not whole dollars
+  const withCents = (n: number) => n < 100 || Math.round(n * 100) % 100 !== 0;
   const day = dayOfChallenge(site.startDate);
   const latest = site.updates[0]; // newest weekly update, if there is one
 
@@ -168,11 +174,17 @@ export default async function Home() {
             <p className="mt-3 flex flex-wrap items-baseline gap-x-2 text-sm text-ink/60">
               <span>
                 <span className="font-mono text-lg font-bold text-ink">
-                  {fmtMoney(earnings.total, earnings.total < 100)}
+                  {fmtMoney(earnings.total, withCents(earnings.total))}
                 </span>
                 /mo
               </span>
               <span>· {pct.toFixed(pct && pct < 0.01 ? 4 : 2)}% of {fmtMoney(site.goal)}</span>
+              {left > 0 && (
+                <span>
+                  · <span className="font-semibold text-ink">{fmtMoney(left, withCents(left))}</span> to the{" "}
+                  {totalCents < squareCents ? "first" : "next"} square
+                </span>
+              )}
               <span aria-hidden>·</span>
               <span className="tabular-nums">day {day}</span>
             </p>
