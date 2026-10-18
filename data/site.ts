@@ -86,7 +86,7 @@ export const site = {
     github: "https://github.com/sho0pi",
     x: "https://x.com/sho0pi",
     instagram: "https://instagram.com/shoopi.dev",
-    linkedin: "https://www.linkedin.com/in/blokhi", // structured data only, no button for it (yet)
+    linkedin: "https://www.linkedin.com/in/blokhi",
     email: "hi@shoopi.dev",
   },
   // Babees, the travel blog I write with my girlfriend (it replaced itay.world).

@@ -9,13 +9,14 @@ type Props = {
   label?: string;
   /** the one main action on a screen: filled with the button blue */
   primary?: boolean;
+  className?: string;
   children?: React.ReactNode;
 };
 
 /** liquid glass link: icon + text, or a round icon button when there is no
     text. Pop springs in the wrapper, not the link: a finished pop holds
     `scale: 1` and would swallow the hover and press scale. */
-export function Pill({ href, delay = 0, icon, label, primary = false, children }: Props) {
+export function Pill({ href, delay = 0, icon, label, primary = false, className = "", children }: Props) {
   const round = !children;
   return (
     <Pop as="span" delay={delay} className="inline-flex">
@@ -23,9 +24,11 @@ export function Pill({ href, delay = 0, icon, label, primary = false, children }
         href={href}
         {...externalProps(href)}
         aria-label={label}
+        // an icon alone can be ambiguous, so the mouse gets its name too
+        title={round ? label : undefined}
         className={`glass-pill ${primary ? "primary" : ""} inline-flex items-center justify-center gap-2 rounded-full font-semibold ${
           round ? "h-12 w-12" : "px-5 py-2.5 text-base"
-        }`}
+        } ${className}`}
       >
         {icon && (
           // eslint-disable-next-line @next/next/no-img-element

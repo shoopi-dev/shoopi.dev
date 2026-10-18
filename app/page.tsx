@@ -120,8 +120,9 @@ export default async function Home() {
             </Rise>
           </h1>
 
-          {/* icon-only: the handle is already in the headline */}
-          <div className="mt-8 flex justify-center gap-3">
+          {/* icon-only: the handle is already in the headline. The blog is the
+              one capsule, its own bee and a name, since no glyph says "travel blog" */}
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Pill
               href={site.socials.github}
               icon="/icons/github.svg"
@@ -135,15 +136,15 @@ export default async function Home() {
               delay={T.pills + 0.05}
             />
             <Pill
-              href={site.socials.instagram}
-              icon="/icons/instagram.svg"
-              label="Instagram, @shoopi.dev"
+              href={site.socials.linkedin}
+              icon="/icons/linkedin.svg"
+              label="LinkedIn, Itay Blokh"
               delay={T.pills + 0.1}
             />
             <Pill
-              href={site.blog.url}
-              icon="/icons/globe.svg"
-              label={`Travel blog, ${new URL(site.blog.url).host}`}
+              href={site.socials.instagram}
+              icon="/icons/instagram.svg"
+              label="Instagram, @shoopi.dev"
               delay={T.pills + 0.15}
             />
             <Pill
@@ -152,6 +153,11 @@ export default async function Home() {
               label={`Email ${site.socials.email}`}
               delay={T.pills + 0.2}
             />
+            <Pill href={site.blog.url} delay={T.pills + 0.25} className="h-12 pl-3 text-sm">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/icons/babees.png" alt="" className="h-7 w-7" />
+              Travel blog
+            </Pill>
           </div>
         </section>
 
