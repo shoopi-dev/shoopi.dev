@@ -48,7 +48,7 @@ export default async function Home() {
             <Rise as="span" delay={T.word(0)} className="text-ink/55">
               I&apos;m{" "}
             </Rise>
-            <Rise as="span" delay={T.word(1)} className="text-blue">
+            <Rise as="span" delay={T.word(1)}>
               {/* how to say it (from the GitHub README): shows on hover, or on
                   tap on a phone since the tap focuses it. One line above the
                   name on wide screens; below it on phones, where the headline

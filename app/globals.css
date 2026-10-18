@@ -129,7 +129,8 @@
   --red-soft: #4d1b1f;
   --success: #63c97d;
   --success-soft: #15331c;
-  --highlight: #543a0b;
+  /* amber 700: gold on charcoal, where the sheet's #543a0b read as brown */
+  --highlight: #7a5400;
   --focus: #6cb5ff;
   --heat-0: #242c36;
   --heat-1: #0f3f6a;
@@ -594,6 +595,7 @@ section[id] {
    $0. Opacity only, which keeps it on the compositor */
 .next-square {
   position: relative;
+  box-shadow: inset 0 0 0 1.5px var(--mask);
 }
 .next-square::after {
   content: "";
@@ -606,7 +608,7 @@ section[id] {
 }
 @keyframes next-square {
   50% {
-    opacity: 0.5;
+    opacity: 0.6;
   }
 }
 
@@ -670,7 +672,7 @@ section[id] {
   /* a still hint instead of the breath */
   .next-square::after {
     animation: none;
-    opacity: 0.3;
+    opacity: 0.4;
   }
   /* hover and press still brighten, they just don't move */
   .glass-pill,
