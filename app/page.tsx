@@ -168,7 +168,7 @@ export default async function Home() {
               </span>
               <span>· {pct.toFixed(pct && pct < 0.01 ? 4 : 2)}% of {fmtMoney(site.goal)}</span>
               <span aria-hidden>·</span>
-              <span className="font-semibold tabular-nums text-mask-text">day {day}</span>
+              <span className="tabular-nums">day {day}</span>
             </p>
             {latest && (
               // inline flow, not flex: a long title wraps like a sentence

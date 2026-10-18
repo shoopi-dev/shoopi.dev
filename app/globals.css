@@ -476,9 +476,11 @@ section[id] {
 }
 
 /* glow that tracks the cursor */
+/* z-index: above the content, or a full-bleed app icon hides it */
 .tile-cursor-glow {
   position: absolute;
   inset: 0;
+  z-index: 1;
   border-radius: inherit;
   pointer-events: none;
   opacity: 0;

@@ -79,7 +79,7 @@ export const site = {
   // ponytail: fixed figure, no FX. HKD is pegged at 7.75-7.85, so $13k is at
   // least HK$100k (the real target) anywhere in the band
   goal: 13_000, // US$ a month, passive
-  startDate: "2026-08-05", // day 1 of the challenge
+  startDate: "2026-09-01", // day 1 of the challenge
   deadline: "2031-07-07T00:00:00Z", // 30th birthday (born 2001-07-07)
   repo: "https://github.com/shoopi-dev/shoopi.dev",
   socials: {
