@@ -593,25 +593,27 @@ section[id] {
   pointer-events: none;
 }
 
-/* the next square to earn breathes in the mask violet, so the grid reads as live even at
-   $0. Opacity only, which keeps it on the compositor */
-.next-square {
+/* the square being earned: a mask ring, drawn above the fill so the fill never
+   covers its lower edge, and a fill rising from the bottom (height and colour set
+   inline from what it holds) with a solid water line so a pale fill still reads */
+.earning {
   position: relative;
-  box-shadow: inset 0 0 0 1.5px var(--mask);
+  overflow: hidden;
 }
-.next-square::after {
+.earning::after {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   border-radius: inherit;
-  background: var(--mask);
-  opacity: 0;
-  animation: next-square 6s ease-in-out infinite;
+  box-shadow: inset 0 0 0 1.5px var(--mask);
+  pointer-events: none;
 }
-@keyframes next-square {
-  50% {
-    opacity: 0.6;
-  }
+.earning-fill {
+  position: absolute;
+  inset: auto 0 0;
+  box-shadow: inset 0 2px 0 var(--mask);
+  pointer-events: none; /* hover reads data-i off the square itself */
 }
 
 /* red is the clock: a dot that pulses beside anything counting down or live */
@@ -670,11 +672,6 @@ section[id] {
   .blob,
   .live-dot {
     animation: none;
-  }
-  /* a still hint instead of the breath */
-  .next-square::after {
-    animation: none;
-    opacity: 0.4;
   }
   /* hover and press still brighten, they just don't move */
   .glass-pill,

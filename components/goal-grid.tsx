@@ -9,7 +9,7 @@ const COLS = 20;
 const SQUARES = 100;
 
 /** the goal grid: a square lights once its full share of the goal is earned,
-    and the one being earned glows faintly. Hover a square with money in it (tap
+    and the one being earned is ringed and fills with what it holds. Hover a square with money in it (tap
     on a phone, arrows from the keyboard) and a card floats above it with what
     it holds and which apps made it; squares with nothing in them stay still */
 export function GoalGrid({ apps, square }: { apps: Share[]; square: number }) {
@@ -17,6 +17,7 @@ export function GoalGrid({ apps, square }: { apps: Share[]; square: number }) {
   // divide by the square rather than floor(pct): pct can land a hair under a whole number
   const full = Math.min(SQUARES, Math.floor(total / square));
   const held = Math.min(SQUARES, Math.ceil(total / square)); // full squares plus the one being earned
+  const part = full < SQUARES ? total / square - full : 0; // how much of the square being earned is in, 0 to 1
 
   // what one square holds: each app's slice of the total that falls inside it, biggest app first
   const pieces = (i: number) => {
@@ -95,9 +96,20 @@ export function GoalGrid({ apps, square }: { apps: Share[]; square: number }) {
             key={i}
             data-i={i < held ? i : undefined}
             className={`aspect-square rounded-[3px] ${
-              i < full ? "bg-mask" : i < held ? "next-square bg-mask-soft" : i === held && held === full ? "next-square bg-heat-0" : "bg-heat-0"
+              i < full ? "bg-mask" : i === full ? "earning bg-heat-0" : "bg-heat-0"
             } ${i === at ? "outline-2 outline-offset-1 outline-ink/70" : ""}`}
-          />
+          >
+            {i === full && part > 0 && (
+              <div
+                className="earning-fill"
+                // any money shows at least 15%, and the colour deepens toward the full-square violet
+                style={{
+                  height: `${15 + 85 * part}%`,
+                  background: `color-mix(in oklch, var(--mask-soft), var(--mask) ${50 + 50 * part}%)`,
+                }}
+              />
+            )}
+          </div>
         ))}
       </div>
 
