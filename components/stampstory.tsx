@@ -54,7 +54,20 @@ export function StampFooter({ delay }: { delay?: number }) {
   return (
     <Rise as="footer" delay={delay} className={footerClass}>
       <FooterLinks links={footerLinks} />
+      <StoreTrademarks />
     </Rise>
+  );
+}
+
+/** The credit Apple and Google ask for on any page that shows their store badges, on its own line under the links. */
+export function StoreTrademarks() {
+  return (
+    <p className="basis-full pt-2 text-center text-balance">
+      <span className="block">
+        Apple and the Apple logo are trademarks of Apple&nbsp;Inc., registered in the U.S. and other countries.
+      </span>
+      <span className="block">Google Play and the Google Play logo are trademarks of Google LLC.</span>
+    </p>
   );
 }
 
