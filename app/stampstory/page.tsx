@@ -84,15 +84,17 @@ export default function StampStoryPage() {
               delay={T.hero + 0.38}
             />
           </div>
-          <Rise as="p" delay={T.hero + 0.44} className="text-xs text-ink/60">
-            On Android?{" "}
-            <Link
-              href="/stampstory/android"
-              className="font-semibold text-ink underline decoration-dotted underline-offset-4"
-            >
-              Join the beta
-            </Link>
-          </Rise>
+          {s.store.android.status !== "live" && (
+            <Rise as="p" delay={T.hero + 0.44} className="text-xs text-ink/60">
+              On Android?{" "}
+              <Link
+                href="/stampstory/android"
+                className="font-semibold text-ink underline decoration-dotted underline-offset-4"
+              >
+                Join the waitlist
+              </Link>
+            </Rise>
+          )}
           <Rise
             as="p"
             delay={T.hero + 0.5}
