@@ -90,7 +90,7 @@ export default function EurekaPage() {
                 href="/eureka/android"
                 className="font-semibold text-ink underline decoration-dotted underline-offset-4"
               >
-                Join the beta
+                Join the waitlist
               </Link>
             </Rise>
           )}

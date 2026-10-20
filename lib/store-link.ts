@@ -27,7 +27,7 @@ export function storeRedirect(request: Request, store: { ios: Store; android: St
 
 /**
  * Where an app's /get sends this device: an iPhone or iPad to the App Store once the app is live there, an Android
- * phone to Google Play once the app is live there (until then to /android, the beta sign-up), and everything else to
+ * phone to Google Play once the app is live there (until then to /android, its beta sign-up or waitlist), and everything else to
  * the landing page, which has the buttons.
  * An iPad asking for the desktop site reads as a Mac and gets the landing page: the user agent cannot tell them apart.
  * The App Store link carries the campaign, so App Analytics (Acquisition > Campaigns) counts downloads per source.

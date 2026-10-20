@@ -34,9 +34,10 @@ export const eureka = {
   store: {
     // released 2026-10-21; Google Play's flips the same way once the app leaves its closed test
     ios: { status: "live" as "soon" | "live", url: "https://apps.apple.com/app/eureka-ai-idea-notes/id6822832627" },
-    android: { status: "soon" as "soon" | "live", url: "" },
+    // date: the day it lands on Google Play, as /android says it ("November 12"); empty until Google says
+    android: { status: "soon" as "soon" | "live", url: "", date: "" },
   },
-  // until Google Play opens the app to everyone: a closed test needs 12 testers for 14 days (/android).
+  // until Google Play opens the app to everyone: a closed test needs 12 testers for 14 days (/beta, unlisted).
   // shoopi-testers is the one group for all the apps; StampStory's group is on Eureka's closed track too
   beta: {
     group: "https://groups.google.com/g/shoopi-testers",
