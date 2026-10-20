@@ -5,7 +5,7 @@ import { Rise, Pop } from "@/components/animate";
 import { Lockup } from "@/components/lockup";
 import { FooterLinks, footerClass } from "@/components/doc";
 import { SectionHeader } from "@/components/section-header";
-import { BackLink, HOME_URL, StoreBadge } from "@/components/stampstory";
+import { BackLink, HOME_URL, StoreBadge, StoreTrademarks } from "@/components/stampstory";
 import { social } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
 import { eurekaGraph } from "@/lib/schema";
@@ -172,6 +172,7 @@ export default function EurekaPage() {
 
         <Rise as="footer" delay={T.footer} className={footerClass}>
           <FooterLinks links={eurekaDoc.links} />
+          <StoreTrademarks />
         </Rise>
       </main>
     </div>
