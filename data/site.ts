@@ -143,7 +143,8 @@ export const site = {
       icon: "/eureka/icon.png",
       description:
         "Voice-first idea notes: say a thought out loud, and AI files it into the right idea and keeps its page up to date.",
-      status: "building", // "soon" would hide it behind a "?" tile
+      status: "live",
+      revenue: 0,
       link: "https://eureka.shoopi.dev",
     },
   ] satisfies Project[]) as Project[],
