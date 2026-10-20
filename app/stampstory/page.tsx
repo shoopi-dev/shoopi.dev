@@ -13,7 +13,7 @@ import { social } from "@/lib/seo";
 const title = "StampStory: Travel Passport - where have you been?";
 // iOS first, Android follows: say "iPhone" until the Play link is live
 const description =
-  "Scratch map and travel passport for iPhone: mark every country you have visited and share the passport it makes. No account, no server, no analytics.";
+  "Scratch map and travel passport for iPhone: mark every country you have visited and share the passport it makes. No account, no server, and your countries never leave your phone.";
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -197,11 +197,11 @@ export default function StampStoryPage() {
             <div className="glass flex flex-col items-start gap-3 rounded-[22px] p-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex flex-col gap-1">
                 <h2 className="font-display text-xl font-bold tracking-tight">
-                  No account. No server. No analytics.
+                  No account. No server. Your map stays yours.
                 </h2>
                 <p className="text-sm leading-relaxed text-ink/70">
-                  Your countries live on your phone and nowhere else. The only thing you ever
-                  send anywhere is the image, and only when you tap Share.
+                  Your countries live on your phone and nowhere else. The app counts how it is
+                  used, never where you have been, and the image goes only where you send it.
                 </p>
               </div>
               <Link

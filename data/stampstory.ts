@@ -31,7 +31,7 @@ export const stampstory = {
     "Mark every country you have ever visited and turn it into a passport. Share it with friends and see where they have been.",
   bundleId: "dev.shoopi.stampstory",
   support,
-  updated: "2026-10-13",
+  updated: "2026-10-20",
   url: "https://stampstory.shoopi.dev",
   ogImage: "https://stampstory.shoopi.dev/stampstory/og.jpg", // 1200x630, public/stampstory/og.jpg
   developer: {
@@ -121,9 +121,9 @@ export const stampstory = {
       id: "short",
       title: "The short version",
       body: [
-        "StampStory has no accounts, no server, and no analytics. The countries you mark, your name, your avatar and your theme live on your phone and nowhere else.",
+        "StampStory has no accounts and no server. The countries you mark, your name and your avatar live on your phone and nowhere else.",
         "If you turn on welcomes, or tap the location button, the app uses your phone's location on the phone itself, to tell which country you are in and to show you on your globe. Your location never leaves your phone.",
-        "What does leave your device is about Gold alone: when the app starts, and when you open the Gold screen, it asks RevenueCat whether Gold is active and what it costs, under an anonymous identifier made for that install. If you buy or restore Gold, the store receipt goes along. None of it carries your name, your countries or anything you made.",
+        "Two things leave your device. For Gold, the app asks RevenueCat whether Gold is active and what it costs, under an anonymous identifier made for that install, and a purchase sends the store receipt along. And the app counts how it is used, such as when it is opened, which share button is tapped and when the Gold screen shows, under a random identifier made for that install. Neither carries your name, your countries, how many you have marked or anything you made.",
       ],
     },
     {
@@ -137,7 +137,7 @@ export const stampstory = {
       id: "device",
       title: "What stays on your device",
       body: [
-        "All of this is written to your phone's local app storage. It is never transmitted, and I have no way to read it.",
+        "All of this is written to your phone's local app storage. It is never transmitted, and I have no way to read it. The one exception is the random identifier for usage counts, described below, which goes with each count.",
       ],
       table: {
         head: ["What", "Why it exists"] as [string, string],
@@ -150,6 +150,7 @@ export const stampstory = {
           ["Whether you finished onboarding", "So it is not shown twice"],
           ["Whether welcomes are on, and whether you were offered them", "So the offer is shown once and your choice is kept"],
           ["The country the app last saw you in, and the day it welcomed you to each country", "So a welcome comes once a stay, and not again within a month. Only the two-letter country code is kept, never a position"],
+          ["A random identifier for this install", "So usage counts can tell one install from another. It is made by the app, linked to nothing about you, and gone when you delete the app"],
         ] as [string, string][],
       },
     },
@@ -173,9 +174,10 @@ export const stampstory = {
     {
       id: "leaves",
       title: "What leaves your device",
-      body: ["Two things, and no more."],
+      body: ["Three things, and no more."],
       list: [
         "Gold. When the app starts, and when you open the Gold screen, it asks RevenueCat whether Gold is active on your store account and what it costs, so a refund or an ended subscription switches Gold off and the prices shown are your store's. Buying or restoring Gold goes through Apple or Google, and RevenueCat validates the receipt on my behalf. RevenueCat receives an anonymous identifier it generates for that install, the store receipt when there is one, and basic device and app version information. It does not receive your name, your countries, or anything else from the app. RevenueCat's own privacy policy applies to that data.",
+        "Usage counts. The app counts what is done in it, to learn what to make better: when it is opened and put away, when onboarding is finished, when a share sheet opens and which share button sends a card (with the kind of card and its style, never what is on it), which theme is picked, when the Gold screen shows and what opened it, when Gold is bought or restored and which plan, when welcomes are turned on or a welcome is tapped, and when the rating page shows. Each count carries the random identifier made for that install, whether Gold is on, your theme, your phone's system and model, the app version, your language and your time zone. Counts never carry your countries, how many you have marked, your name or your position. They go from your phone to PostHog, in its EU cloud. PostHog works out roughly where a count came from, its country, city and area, from the internet address it came from, and then discards the address without storing it.",
         "The image you share. When you tap Share, the passport image is handed to your phone's share sheet and goes wherever you send it. That is your action and your choice of destination; it does not pass through me.",
       ],
     },
@@ -187,7 +189,7 @@ export const stampstory = {
         "No location history. Location is used on your phone only, as described above, and never leaves it",
         "No contacts, camera, microphone or photo library reads. If you choose Save Image in the share sheet, iOS asks your permission and the app writes that one image; it never reads your library",
         "No advertising identifier and no tracking across apps, so no App Tracking Transparency prompt",
-        "No usage analytics, crash SDK or heat maps",
+        "No crash SDK, session recording or heat maps. Usage counts never include your countries, as described above",
       ],
     },
     {
@@ -201,7 +203,7 @@ export const stampstory = {
       id: "legal",
       title: "Legal bases",
       body: [
-        "If you are in the EEA or the UK: processing a purchase is necessary to perform the contract you enter when you buy Gold (Article 6(1)(b) GDPR). Validating receipts to stop fraudulent unlocks, and checking at launch whether Gold is still active, rest on legitimate interests (Article 6(1)(f)). Everything else never reaches me, so there is nothing to have a basis for.",
+        "If you are in the EEA or the UK: processing a purchase is necessary to perform the contract you enter when you buy Gold (Article 6(1)(b) GDPR). Validating receipts to stop fraudulent unlocks, and checking at launch whether Gold is still active, rest on legitimate interests (Article 6(1)(f)), and so does counting how the app is used, to learn what to make better. Everything else never reaches me, so there is nothing to have a basis for.",
       ],
     },
     {
@@ -210,11 +212,12 @@ export const stampstory = {
       list: [
         "Apple and Google process the payment and hold the purchase record. Their terms and privacy policies apply.",
         "RevenueCat validates receipts and stores the purchase status against an anonymous install identifier.",
+        "PostHog keeps the usage counts, in its EU cloud.",
         "Vercel hosts this website.",
       ],
       after: [
         "Each of these providers is bound by its own agreement with me to protect the data at least as well as this policy does, and to use it only to provide the service described here.",
-        "RevenueCat and Vercel process data in the United States. Where that data comes from the EEA or the UK, the transfer relies on the European Commission's standard contractual clauses.",
+        "RevenueCat, PostHog and Vercel are companies in the United States, and some of the data may be processed there. Where it comes from the EEA or the UK, the transfer relies on the European Commission's standard contractual clauses.",
         "Nobody else. Your data is not sold, rented, or shared for advertising, ever.",
       ],
     },
@@ -224,13 +227,15 @@ export const stampstory = {
       list: [
         "On-device data: until you delete it in the app or delete the app itself.",
         "Purchase records: kept by RevenueCat, Apple and Google for as long as they need to honour a restore and to meet their own tax and accounting obligations.",
+        "Usage counts: kept by PostHog for as long as the plan StampStory is on keeps them.",
       ],
     },
     {
       id: "rights",
       title: "Your rights and your choices",
       body: [
-        "Deleting the app removes everything StampStory stored on your phone. There is no server-side copy to request, correct, or export, because there is no server.",
+        "Deleting the app removes everything StampStory stored on your phone. There is no server-side copy of your map to request, correct, or export, because there is no server.",
+        "Usage counts are filed under a random install identifier, not under you, so I cannot find yours from your name or email. Deleting the app ends them: a new install gets a new identifier.",
         `For the purchase record held on my behalf, you can ask me to access or delete it. Email ${support} from the address you use with your store account and tell me what you need. If you delete the purchase record, restoring Gold may no longer work.`,
         "If you are in the EEA or the UK you also have the right to complain to your local data protection authority.",
       ],
@@ -246,7 +251,7 @@ export const stampstory = {
       id: "security",
       title: "Security",
       body: [
-        "Your travel data never travels, which removes most of the risk. Purchase traffic to the stores and to RevenueCat is encrypted in transit. No system is perfect, and I will not pretend otherwise.",
+        "Your travel data never travels, which removes most of the risk. Traffic to the stores, RevenueCat and PostHog is encrypted in transit. No system is perfect, and I will not pretend otherwise.",
       ],
     },
     {

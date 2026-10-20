@@ -5,7 +5,7 @@ import { stampstoryDoc } from "@/components/stampstory";
 import { social } from "@/lib/seo";
 
 const description =
-  "StampStory has no accounts, no server and no analytics. What the app stores on your device, the little that leaves it, and what it never collects.";
+  "StampStory has no accounts and no server, and its usage counts never include your countries. What the app stores on your device, the little that leaves it, and what it never collects.";
 
 export const metadata: Metadata = {
   title: "Privacy policy",
