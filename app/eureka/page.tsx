@@ -13,7 +13,7 @@ import { eurekaGraph } from "@/lib/schema";
 // names what the app is, next to the App Store title
 const title = `${e.title} - brainstorm out loud`;
 const description =
-  "Voice-first idea notes for iPhone: say a thought on your walk, and AI files it into the right idea and keeps that idea's page up to date. Coming soon to the App Store and Google Play.";
+  "Voice-first idea notes for iPhone: say a thought on your walk, and AI files it into the right idea and keeps that idea's page up to date. Now on the App Store, and coming soon to Google Play.";
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -90,7 +90,7 @@ export default function EurekaPage() {
                 href="/eureka/android"
                 className="font-semibold text-ink underline decoration-dotted underline-offset-4"
               >
-                Join the beta
+                Join the waitlist
               </Link>
             </Rise>
           )}
