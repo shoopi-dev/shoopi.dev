@@ -45,12 +45,59 @@ export const eureka = {
     install: "https://play.google.com/store/apps/details?id=dev.shoopi.eureka",
   },
 
-  steps: [
-    { n: "01", title: "Say it", body: "Tap the mic and talk, or type. Your phone turns your voice into words, and no recording is kept." },
-    { n: "02", title: "AI files it", body: "Allow AI filing, and AI puts each thought into the idea it is about and brings that page up to date, or starts a new idea. When it is not sure where, it asks." },
-    { n: "03", title: "Find a clean page", body: "Every idea is one page of what you have worked out, with everything you said into it below. Search finds any of it, typos and all." },
-    { n: "04", title: "Bring your old notes", body: "Paste your notes, or pick a text file or a WhatsApp chat you kept ideas in, and AI sorts them into ideas, each with its own page." },
-  ],
+  // the landing page's own words, in Itay's voice (his my-voice skill, 2026-10-24); the ideas drawn in
+  // its phones are illustration and live with the drawing, in components/eureka/story.tsx
+  landing: {
+    everywhere: { title: "Your ideas are everywhere.", line: "In chats, on napkins, in voice memos you never listen to again." },
+    getIt: "Get it on iPhone",
+    androidSoon: "Android soon",
+    onePlace: {
+      title: "Now they're all in",
+      mark: "one place.",
+      line: "Say a thought or type it. Eureka puts it in the idea it's about, and every idea stays one clean page.",
+    },
+    grows: {
+      eyebrow: "It grows",
+      title: "Your ideas grow up.",
+      line: "Keep talking about an idea and its page keeps up. Whatever AI wrote stays marked, and Undo puts the page back.",
+      beats: ["A new point, under Features", "Ticked off!", "A new open question"],
+    },
+    say: {
+      eyebrow: "Say it",
+      title: "Just say it.",
+      line: "Tap the mic and talk: on a walk, in the car, half asleep. Or just type it. Eureka files it where it belongs.",
+      facts: [
+        "Your phone turns your voice into words. No recording is kept.",
+        "It listens in your keyboard's language.",
+        "Two ideas in one breath? You get two.",
+      ],
+      note: ["say your first", "thought out loud"],
+    },
+    notes: {
+      eyebrow: "Old notes",
+      title: "Bring your old notes.",
+      line: "Paste them, or pick a text file or a WhatsApp chat. AI sorts years of notes into ideas, and each one gets its own page.",
+    },
+    // Google asks the homepage to say what sign-in is for, so the third point names what Eureka keeps from it
+    privacy: {
+      title: "AI only when you allow it.",
+      points: [
+        { title: "Off until you say yes", body: "Your thoughts go to an outside AI service only after you allow it. It never trains on them." },
+        { title: "No recording kept", body: "Your phone turns your voice into words. Only the words stay." },
+        {
+          title: "Yours, on every phone",
+          body: "Sign in with Apple or Google, and your ideas are on every phone you use. Eureka keeps your email and account ID from it, never your name or picture. No ads, no tracking, nothing sold.",
+        },
+      ],
+      link: "Read the privacy policy",
+    },
+    end: {
+      title: "Brainstorm out loud.",
+      line: "Talk an idea through on your walk. Find it later as a clean page.",
+      fine: "Free to start: 5 AI thoughts and 1 AI import, then Eureka Pro.",
+    },
+    bar: "AI idea notes · free to start",
+  },
 
   privacy: [
     {
