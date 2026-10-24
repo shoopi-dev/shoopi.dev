@@ -1,76 +1,8 @@
 /* Eureka's landing page: a scroll story on the app's own notebook paper (eureka/ui/theme/Color.kt).
-   Everything here is scoped to .eu, the page's root, so none of it reaches the rest of the site.
+   Everything here is scoped to .eu, the page's root, so none of it reaches the rest of the site; the
+   paper, the app's colours and its faces come from paper.css, as on every Eureka page.
    Each stage is a tall section with a sticky "pin" the size of the screen; its progress (0..1)
    through the scroll drives every motion in it (components/eureka/story.tsx). */
-.eu {
-  --display: var(--font-bricolage), -apple-system, BlinkMacSystemFont, sans-serif;
-  --mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
-  --serif: var(--font-young-serif), Georgia, serif;
-  --ui: var(--font-atkinson), -apple-system, BlinkMacSystemFont, sans-serif;
-  --hand-face: var(--font-caveat), "Bradley Hand", cursive;
-
-  --nb-paper: #fbf8f1;
-  --nb-card: #fffdf8;
-  --nb-raised: #efe7d6;
-  --nb-line: #e2d8c4;
-  --nb-ink: #1e2a45;
-  --nb-ink2: #6e6757;
-  --nb-ink3: #7a715e;
-  --nb-dot: rgb(30 42 69 / 0.13);
-  --filament: #fcad1a;
-  --on-filament: #272521;
-  --filament-text: #8a5a00;
-  --spark: #785de1;
-  --spark-text: #5e47b6;
-  --ai-hl: rgb(190 170 255 / 0.52);
-  --amber-hl: rgb(252 173 26 / 0.38);
-  --bulb: #f2a000;
-  --hand: #4c5e92;
-  --record: #d03a3b;
-  --nb-shadow: rgb(80 60 20 / 0.14);
-  --i-spark: #917aff;
-  --i-red: #f45553;
-  --i-orange: #fa7926;
-  --i-yellow: #e9cc2b;
-  --i-green: #40ad60;
-  --i-sky: #19a2d0;
-  --i-blue: #4e92f7;
-  --i-pink: #d962ab;
-}
-:root[data-theme="dark"] .eu {
-  --nb-paper: #1b1d22;
-  --nb-card: #24272e;
-  --nb-raised: #2a2d35;
-  --nb-line: #363942;
-  --nb-ink: #ece6d8;
-  --nb-ink2: #a8a294;
-  --nb-ink3: #8f897c;
-  --nb-dot: rgb(236 230 216 / 0.1);
-  --on-filament: #191610;
-  --filament-text: #ffbf5f;
-  --spark: #ada3ff;
-  --spark-text: #c7c2ff;
-  --ai-hl: rgb(150 128 255 / 0.38);
-  --amber-hl: rgb(252 173 26 / 0.3);
-  --bulb: #ffc14a;
-  --hand: #9fb2e6;
-  --record: #ff8a82;
-  --nb-shadow: rgb(0 0 0 / 0.45);
-  --i-spark: #ada3ff;
-  --i-red: #ff8a82;
-  --i-orange: #ff9c68;
-  --i-yellow: #f1d85b;
-  --i-green: #6ec883;
-  --i-sky: #5bbfe8;
-  --i-blue: #7fb3ff;
-  --i-pink: #f388c7;
-}
-/* the site's back pill, theme toggle and footer stay; its aurora gives way to the paper */
-body:has(.eu) .blob,
-body:has(.eu) .grain,
-body:has(.eu).wallpaper::after {
-  display: none !important;
-}
 /* an icon is an <i> holding Phosphor's svg, sized by the <i>'s font-size as the icon font was */
 .eu i.ph {
   display: inline-flex;
@@ -182,10 +114,7 @@ body:has(.eu).wallpaper::after {
   --soft: var(--nb-ink2);
   --faint: var(--nb-ink3);
   --rule: var(--nb-line);
-  /* option D's ground and the lamp's glow */
-  --ground-a: #fbf8f1;
-  --ground-mid: #f9f4e9;
-  --ground-b: #f4ebd8;
+  /* the lamp's glow */
   --glow-core: rgb(252 173 26 / 0.34);
   --glow-edge: rgb(243 136 199 / 0.16);
   --glow-room: rgb(252 173 26 / 0.07);
@@ -202,30 +131,12 @@ body:has(.eu).wallpaper::after {
   --memo: #2a2f38;
   --record-soft: #47211e;
   --frag-shadow: 0 18px 36px -16px rgb(0 0 0 / 0.6), 0 0 0 1px rgb(255 255 255 / 0.06);
-  --ground-a: #1b1d22;
-  --ground-mid: #141a33;
-  --ground-b: #0b1349;
   --glow-core: rgb(252 173 26 / 0.4);
   --glow-edge: rgb(173 163 255 / 0.17);
   --glow-room: rgb(252 173 26 / 0.09);
   --lift: var(--nb-raised);
 }
 
-/* ---------- the notebook's ground, as option D: ivory and dots by day, charcoal to navy by night ---------- */
-body:has(.eu) .grain,
-body:has(.eu) .blob,
-body:has(.eu).wallpaper::after {
-  display: none !important;
-}
-html:has(.eu) {
-  background-color: var(--ground-a);
-  background-image: linear-gradient(180deg, var(--ground-a) 0, var(--ground-a) 100vh, var(--ground-mid) 55%, var(--ground-b) 100%);
-}
-/* the dots stay where they are while the story scrolls */
-body:has(.eu).wallpaper::before {
-  z-index: -1;
-  background: radial-gradient(circle, var(--nb-dot) 1.1px, transparent 1.5px) 11px 11px / 22px 22px;
-}
 .eu {
   color: var(--nb-ink);
   font-family: var(--ui);
@@ -2293,10 +2204,6 @@ body:has(.eu).wallpaper::before {
 }
 
 /* ---------- on the site ---------- */
-/* the site's blur along the bottom of the screen would smudge the scattered notes */
-body:has(.eu) .page-blur {
-  display: none;
-}
 /* nothing drawn shows before the script has laid it out */
 .eu:not(.ready) .fit-in,
 .eu:not(.ready) .frag {

@@ -207,12 +207,12 @@ const goToEnd = (ev: React.MouseEvent) => {
   document.getElementById("get")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
 };
 
-export function EurekaStory({ fonts }: { fonts: string }) {
+export function EurekaStory() {
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => start(root.current!), []);
 
   return (
-    <div ref={root} className={`eu ${fonts}`}>
+    <div ref={root} className="eu">
       <main>
         {/* ============ 1. Everywhere, then one place ============ */}
         <section className="stage s1" data-s="1">

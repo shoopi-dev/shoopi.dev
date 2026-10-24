@@ -1,0 +1,120 @@
+/* Every Eureka page sits on the app's own notebook paper (eureka/ui/theme/Color.kt): ivory and faint
+   dots by day, charcoal to the icon's navy by night, Young Serif headings and Atkinson Hyperlegible
+   Next for text. EurekaPaper (paper.tsx) wraps them all from app/eureka/layout.tsx, so the shared
+   document and waitlist templates follow without knowing; nothing here reaches another app's pages. */
+
+/* the app's colours, on the root so the page's own ground can read them */
+:root:has(.eu-paper) {
+  --nb-paper: #fbf8f1;
+  --nb-card: #fffdf8;
+  --nb-raised: #efe7d6;
+  --nb-line: #e2d8c4;
+  --nb-ink: #1e2a45;
+  --nb-ink2: #6e6757;
+  --nb-ink3: #7a715e;
+  --nb-dot: rgb(30 42 69 / 0.13);
+  --filament: #fcad1a;
+  --on-filament: #272521;
+  --filament-text: #8a5a00;
+  --spark: #785de1;
+  --spark-text: #5e47b6;
+  --ai-hl: rgb(190 170 255 / 0.52);
+  --amber-hl: rgb(252 173 26 / 0.38);
+  --bulb: #f2a000;
+  --hand: #4c5e92;
+  --record: #d03a3b;
+  --nb-shadow: rgb(80 60 20 / 0.14);
+  --i-spark: #917aff;
+  --i-red: #f45553;
+  --i-orange: #fa7926;
+  --i-yellow: #e9cc2b;
+  --i-green: #40ad60;
+  --i-sky: #19a2d0;
+  --i-blue: #4e92f7;
+  --i-pink: #d962ab;
+  --ground-a: #fbf8f1;
+  --ground-mid: #f9f4e9;
+  --ground-b: #f4ebd8;
+}
+:root[data-theme="dark"]:has(.eu-paper) {
+  --nb-paper: #1b1d22;
+  --nb-card: #24272e;
+  --nb-raised: #2a2d35;
+  --nb-line: #363942;
+  --nb-ink: #ece6d8;
+  --nb-ink2: #a8a294;
+  --nb-ink3: #8f897c;
+  --nb-dot: rgb(236 230 216 / 0.1);
+  --on-filament: #191610;
+  --filament-text: #ffbf5f;
+  --spark: #ada3ff;
+  --spark-text: #c7c2ff;
+  --ai-hl: rgb(150 128 255 / 0.38);
+  --amber-hl: rgb(252 173 26 / 0.3);
+  --bulb: #ffc14a;
+  --hand: #9fb2e6;
+  --record: #ff8a82;
+  --nb-shadow: rgb(0 0 0 / 0.45);
+  --i-spark: #ada3ff;
+  --i-red: #ff8a82;
+  --i-orange: #ff9c68;
+  --i-yellow: #f1d85b;
+  --i-green: #6ec883;
+  --i-sky: #5bbfe8;
+  --i-blue: #7fb3ff;
+  --i-pink: #f388c7;
+  --ground-a: #1b1d22;
+  --ground-mid: #141a33;
+  --ground-b: #0b1349;
+}
+
+/* the faces, where next/font sets them; and the site's own colours turned to the notebook's, so the
+   shared templates (components/doc.tsx, waitlist.tsx) take them through their usual utilities */
+.eu-paper {
+  --display: var(--font-bricolage), -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --serif: var(--font-young-serif), Georgia, serif;
+  --ui: var(--font-atkinson), -apple-system, BlinkMacSystemFont, sans-serif;
+  --hand-face: var(--font-caveat), "Bradley Hand", cursive;
+  --font-display: var(--serif);
+  --ink: var(--nb-ink);
+  --ink-2: var(--nb-ink2);
+  --card: var(--nb-card);
+  --card-border: var(--nb-line);
+  --raised: var(--nb-raised);
+  --button: var(--filament);
+  --on-button: var(--on-filament);
+  --focus: var(--filament-text);
+  font-family: var(--ui);
+  color: var(--nb-ink);
+}
+/* Young Serif has one weight: a bold heading would be a smeared fake */
+.eu-paper .font-display {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+/* on paper, glass has nothing to frost: a form or a note is a card of the notebook */
+.eu-paper main .glass {
+  background: var(--nb-card);
+  border: 1px solid var(--nb-line);
+  box-shadow: 0 16px 40px -24px var(--nb-shadow);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* the ground: the site's aurora gives way to the paper, its dots fixed while the page scrolls */
+/* the site's blur along the bottom of the screen too: it smudged the scattered notes and the text */
+body:has(.eu-paper) .grain,
+body:has(.eu-paper) .blob,
+body:has(.eu-paper) .page-blur,
+body:has(.eu-paper).wallpaper::after {
+  display: none !important;
+}
+html:has(.eu-paper) {
+  background-color: var(--ground-a);
+  background-image: linear-gradient(180deg, var(--ground-a) 0, var(--ground-a) 100vh, var(--ground-mid) 55%, var(--ground-b) 100%);
+}
+body:has(.eu-paper).wallpaper::before {
+  z-index: -1;
+  background: radial-gradient(circle, var(--nb-dot) 1.1px, transparent 1.5px) 11px 11px / 22px 22px;
+}

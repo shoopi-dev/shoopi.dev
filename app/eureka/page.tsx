@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Atkinson_Hyperlegible_Next, Caveat, Young_Serif } from "next/font/google";
 import { eureka as e, eurekaDoc } from "@/data/eureka";
 import { Rise } from "@/components/animate";
 import { Lockup } from "@/components/lockup";
@@ -9,11 +8,6 @@ import { EurekaStory } from "@/components/eureka/story";
 import { social } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
 import { eurekaGraph } from "@/lib/schema";
-
-// the app's own faces: Young Serif for its headings, Atkinson Hyperlegible Next for its text, Caveat for handwriting
-const serif = Young_Serif({ subsets: ["latin"], weight: "400", variable: "--font-young-serif" });
-const atkinson = Atkinson_Hyperlegible_Next({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-atkinson" });
-const caveat = Caveat({ subsets: ["latin"], weight: "600", variable: "--font-caveat" });
 
 // names what the app is, next to the App Store title
 const title = `${e.title} - brainstorm out loud`;
@@ -39,7 +33,7 @@ export default function EurekaPage() {
     <>
       <JsonLd data={eurekaGraph} />
       <BackLink href={HOME_URL} label={<Lockup className="text-base" />} delay={0.05} />
-      <EurekaStory fonts={`${serif.variable} ${atkinson.variable} ${caveat.variable}`} />
+      <EurekaStory />
       <div className="mx-auto w-full max-w-4xl px-4">
         <Rise as="footer" delay={0.2} className={footerClass}>
           <FooterLinks links={eurekaDoc.links} />
