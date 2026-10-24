@@ -84,7 +84,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {children}
         {/* not on phones: three more backdrop-filter layers dropped frames while
             scrolling on a mid-range Android, and it blurred buttons at the edge */}
-        <div className="max-sm:hidden">
+        <div className="page-blur max-sm:hidden">
           <GradualBlur
             target="page"
             position="bottom"

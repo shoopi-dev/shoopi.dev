@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { EurekaPaper } from "@/components/eureka/paper";
 
 /**
  * Eureka pages carry the app's own icon in the tab and its own title suffix: they are the product's
@@ -16,6 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
+/** Every Eureka page is on the app's own notebook paper, in its faces and colours. */
 export default function EurekaLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return <EurekaPaper>{children}</EurekaPaper>;
 }
