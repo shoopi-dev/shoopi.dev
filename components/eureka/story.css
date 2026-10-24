@@ -1085,12 +1085,14 @@ body:has(.eu).wallpaper::before {
   align-items: center;
   gap: 8px;
 }
+/* a trip's idea, not a to-do: its lines start with a dash, not a box to tick */
 .eu .f-todo li::before {
   content: "";
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1.5px solid color-mix(in srgb, var(--ink) 35%, transparent);
+  flex: none;
+  width: 8px;
+  height: 1.6px;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--ink) 45%, transparent);
 }
 .eu .f-napkin .n {
   position: relative;

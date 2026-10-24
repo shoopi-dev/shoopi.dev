@@ -9,7 +9,6 @@ import {
   ArrowsSplit,
   Avocado,
   BatteryFull,
-  Bell,
   BookmarkSimple,
   Cake,
   CaretLeft,
@@ -17,20 +16,20 @@ import {
   CellSignalFull,
   ChatCircleDots,
   Clock,
-  CookingPot,
   Devices,
   Export,
   GearSix,
   GlobeSimple,
+  Headphones,
   Lightbulb,
   MagnifyingGlass,
   Microphone,
   MicrophoneSlash,
   MusicNotes,
   Package,
-  PaintRoller,
   Play,
   Plus,
+  ProjectorScreen,
   ShieldCheck,
   ShoppingCart,
   Stop,
@@ -163,10 +162,10 @@ const Spark = () => (
 const IDEAS = [
   { id: "nb", icon: MusicNotes, hue: "spark", title: "Neighbor drum song", ch: "Verse: he only knows one fill" },
   { id: "hb", icon: Avocado, hue: "green", title: "Is it ripe yet app" },
-  { id: "sc", icon: Cake, hue: "pink", title: "Dog birthday cakes", ch: "Added: ask Dana what's safe" },
+  { id: "sc", icon: Cake, hue: "pink", title: "Dog birthday cakes", ch: "Added: a candle and a paw-print stamp" },
   { id: "ky", icon: AirplaneTilt, hue: "sky", title: "Lisbon with mom" },
-  { id: "lh", icon: Clock, hue: "blue", title: "Town clock, four minutes late", ch: "Saved: how tower clocks get repaired" },
-  { id: "fo", icon: CookingPot, hue: "orange", title: "Grandma's soup, measured" },
+  { id: "lh", icon: Clock, hue: "blue", title: "Town clock, four minutes late", ch: "Added: the clock runs late when she lies" },
+  { id: "fo", icon: ProjectorScreen, hue: "red", title: "Rooftop movie night" },
 ];
 
 /** The voice memo's waveform, the same every time. */
@@ -187,7 +186,7 @@ const SPOKEN = "ok so the song about the neighbor, I think the bridge is where h
 const CHAT = [
   ["make a video of my cat judging my cooking", "9:14"],
   ["gift for dad: his old cassettes on a usb??", "22:40"],
-  ["paint the hallway that green from the cafe in porto", "23:02"],
+  ["silent disco in the backyard, headphones for all", "23:02"],
   ["app that shows which checkout line is faster", "8:17"],
   ["cake shaped like our building, w/ tiny balconies", "19:55"],
   ["newsletter of stuff overheard on the bus", "12:30"],
@@ -195,7 +194,7 @@ const CHAT = [
 const SORTED = [
   { icon: VideoCamera, hue: "red", title: "Cat judges my cooking" },
   { icon: CassetteTape, hue: "orange", title: "Dad's cassettes, digitized" },
-  { icon: PaintRoller, hue: "green", title: "Porto-green hallway" },
+  { icon: Headphones, hue: "green", title: "Backyard silent disco" },
   { icon: ShoppingCart, hue: "sky", title: "Fastest checkout line" },
   { icon: Cake, hue: "pink", title: "Cake of our building" },
   { icon: ChatCircleDots, hue: "spark", title: "Overheard on the bus" },
@@ -283,11 +282,10 @@ export function EurekaStory({ fonts }: { fonts: string }) {
                         <div className="chips later">
                           <span className="on">All</span>
                           <span>App</span>
+                          <span>Song</span>
+                          <span>Event</span>
                           <span>Business</span>
                           <span>Story</span>
-                          <span>Song</span>
-                          <span>Recipe</span>
-                          <span>Event</span>
                         </div>
                         <div className="sc label app-label later">Recent</div>
                         <div className="empty">Nothing here yet.</div>
@@ -357,8 +355,8 @@ export function EurekaStory({ fonts }: { fonts: string }) {
                 <div className="n card-frag">
                   <b>Lisbon</b>
                   <ul>
-                    <li>tram 28 (mom&apos;s wish)</li>
-                    <li>custard tarts x10</li>
+                    <li>mom&apos;s first trip abroad, just us</li>
+                    <li>a custard tart in every cafe</li>
                   </ul>
                 </div>
               </div>
@@ -378,19 +376,19 @@ export function EurekaStory({ fonts }: { fonts: string }) {
               <div className="frag f-remind desk-only" data-row="sc" data-o="6" data-x=".52" data-y=".11" data-r="-2" style={vars({ "--in": ".08s" })}>
                 <div className="n card-frag">
                   <span className="ic">
-                    <I icon={Bell} w="fill" />
+                    <I icon={Lightbulb} w="fill" />
                   </span>
                   <div>
                     <div className="h">
-                      <span>Reminder</span>
+                      <span>Note to self</span>
                       <span>now</span>
                     </div>
-                    <p>ask Dana (vet): peanut butter ok for dogs?</p>
+                    <p>dog cakes: tiny candle + a paw-print stamp</p>
                   </div>
                 </div>
               </div>
               <div className="frag f-napkin" data-row="fo" data-o="7" data-mo="6" data-x=".115" data-y=".5" data-mx=".24" data-my=".275" data-r="6" style={vars({ "--in": ".16s" })}>
-                <div className="n">soup: 1 cup = her small mug. weigh it!!</div>
+                <div className="n">bedsheet screen, popcorn bar, 20 friends</div>
               </div>
               <div className="frag f-book desk-only" data-row="lh" data-o="8" data-x=".64" data-y=".87" data-r="-5" style={vars({ "--in": ".44s" })}>
                 <div className="n card-frag">
@@ -401,7 +399,7 @@ export function EurekaStory({ fonts }: { fonts: string }) {
                   </div>
                   <p>
                     <I icon={BookmarkSimple} w="fill" />
-                    how tower clocks get repaired
+                    the clock only runs late when she lies
                   </p>
                 </div>
               </div>
