@@ -4,6 +4,7 @@ import { GradualBlur } from "@/components/gradual-blur";
 import { ThemeToggle, themeScript } from "@/components/theme-toggle";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { home } from "@/lib/seo";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -16,11 +17,7 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
-const title = "Itay Blokh (sho0pi) - $13k a month from apps before 30";
-
-/* one sentence that fits a result snippet (about 155 characters): who, what, the bet */
-const description =
-  "Itay Blokh (sho0pi) is a cybersecurity R&D engineer in Singapore, maker of StampStory, Eureka and Gaia, chasing $13,000 a month in passive income before 30.";
+const { title, description } = home;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://shoopi.dev"),
