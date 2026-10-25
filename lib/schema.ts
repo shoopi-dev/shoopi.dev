@@ -164,3 +164,28 @@ export const eurekaGraph = {
     eurekaApp,
   ],
 };
+
+/** /work: the services, offered by the same Person the home page describes */
+export const workGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": `${HOME}/work#service`,
+      name: "Websites, system architecture and AI-agent R&D",
+      description: site.work.intro,
+      url: `${HOME}/work`,
+      serviceType: site.work.services.map((s) => s.title),
+      areaServed: "Worldwide",
+      provider: personRef,
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "What I do",
+        itemListElement: site.work.services.map((s) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: s.title, description: s.description },
+        })),
+      },
+    },
+  ],
+};

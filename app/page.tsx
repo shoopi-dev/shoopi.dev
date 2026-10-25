@@ -7,7 +7,7 @@ import { Widget } from "@/components/widget";
 import { AppIcon } from "@/components/app-icon";
 import { AlsoFolder, type FolderItem } from "@/components/also-folder";
 import { SocialDock } from "@/components/social-dock";
-import { ThemeButton } from "@/components/theme-toggle";
+import { TopPill } from "@/components/top-pill";
 import { Lockup, MorphO } from "@/components/lockup";
 import { AppList } from "@/components/app-list";
 import { About } from "@/components/about";
@@ -62,15 +62,11 @@ export default async function Home() {
       <header className="px-4 pt-6">
         {/* the byline, with the light and dark switch at its end: on this page the
             toggle lives here, not floating in the corner */}
-        <Rise className="flex justify-center">
-          <div className="glass-pill inline-flex items-center rounded-full py-1 pl-4 pr-1 text-[13px] font-medium text-ink/70">
-            <span>
-              <span className="font-semibold text-ink">{site.fullName}</span> · @sho0pi · {site.location}
-            </span>
-            <span className="ml-3 mr-1 h-5 w-px bg-ink/15" aria-hidden />
-            <ThemeButton />
-          </div>
-        </Rise>
+        <TopPill>
+          <span>
+            <span className="font-semibold text-ink">{site.fullName}</span> · @sho0pi · {site.location}
+          </span>
+        </TopPill>
 
         {/* Hero: staggered headline, inline avatar, social pills. A size smaller
             and tighter on phones, so the springboard still makes the first screen */}
