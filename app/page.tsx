@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { site } from "@/data/site";
 import { fmtMoney, fmtDate, dayOfChallenge } from "@/lib/format";
 import { Rise } from "@/components/animate";
@@ -19,6 +20,7 @@ import { Activity } from "@/components/activity";
 import { JsonLd } from "@/components/json-ld";
 import { homeGraph } from "@/lib/schema";
 import { getEarnings } from "@/lib/earnings";
+import { home, shareVersion, social } from "@/lib/seo";
 import { GoalGrid } from "@/components/goal-grid";
 
 /* one entrance timeline for the whole page (seconds) */
@@ -35,6 +37,28 @@ const also: FolderItem[] = [
   ...site.projects.map((p) => ({ name: p.name, line: p.description, href: p.link ?? "/", icon: p.icon })),
   { name: "Travel blog", line: "The travel blog I write with my girlfriend.", href: site.blog.url, icon: "/icons/babees.png" },
 ];
+
+/* hourly, on its own: the day count, the Today date and the share image's version move even if
+   the earnings fetch (which sets the same pace) fails */
+export const revalidate = 3600;
+
+/* the share card points at the image by a version of what it shows, so a platform holding an old
+   copy fetches the new one once the money, the day or the apps change */
+export async function generateMetadata(): Promise<Metadata> {
+  const earnings = await getEarnings();
+  const version = shareVersion(
+    dayOfChallenge(site.startDate),
+    Math.round(earnings.total * 100),
+    site.apps.filter((a) => a.status !== "soon").length,
+  );
+  return social({
+    title: home.title,
+    description: home.description,
+    url: "https://shoopi.dev",
+    image: `/opengraph-image?v=${version}`,
+    imageAlt: home.imageAlt,
+  });
+}
 
 export default async function Home() {
   const square = site.goal / 100; // the grid is 100 squares
