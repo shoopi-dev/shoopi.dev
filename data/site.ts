@@ -6,8 +6,6 @@ export type Project = {
   description: string;
   status: ProjectStatus;
   icon?: string;
-  cover?: string;
-  revenueLabel?: string; // overrides the revenue amount in the pill
   revenue?: number; // US$ a month. Apps: MRR, only a fallback - lib/earnings.ts reads the real figure
   link?: string;
 };
@@ -46,6 +44,8 @@ export const site = {
   jobTitle: "Cybersecurity R&D Engineer",
   location: "Singapore",
   bio: "I'm from Israel, living in Singapore, and spent over two years traveling the world, collecting people and cultures along the way. These days I'm a cybersecurity R&D engineer who builds tools that make everyday life better. Right now that means two things: shipping the apps I actually want to use, and helping companies and founders build theirs - websites, system architecture, hands-on R&D. Gaia, my open-source AI agent, is the biggest of them. This site tracks the bet: $13,000 a month in passive income before I turn 30, in public. Only what my own products earn counts; client work pays the bills.",
+  // from LinkedIn, said once under the bio: the R&D years and the school behind them
+  background: "Before all that: four years of R&D in Unit 8200, and Ben-Gurion University of the Negev.",
   // third person on purpose: search results and AI answers quote a sentence like this, and
   // "I" means nothing once it is lifted out of the page. Shown under the About heading and
   // reused as the start of the structured-data description (lib/schema.ts)
@@ -100,30 +100,18 @@ export const site = {
       name: "Gaia",
       emoji: "🌍",
       icon: "/icons/gaia.png",
-      cover: "/covers/gaia.png",
       description:
         "AI assistant that forges specialist sub-agents on demand, remembers everything, and lives in Telegram, WhatsApp, and your terminal.",
       status: "live",
-      revenue: 0,
-      revenueLabel: "Open source",
       link: "https://gaia-agent.com",
     },
     {
       name: "Client work", // rename here if this ever gets its own brand
       emoji: "🧩",
-      cover: "/covers/client-work.svg",
       description:
         "Websites, system architecture, and hands-on R&D for founders and small teams. See what I have shipped and how I work.",
-      status: "live",
-      revenueLabel: "Pays the bills, not counted", // active income never fills the grid
+      status: "live", // active income: it pays the bills and never fills the grid
       link: "/work",
-    },
-    {
-      name: "Work in progress",
-      emoji: "🛠️",
-      cover: "/covers/wip.svg",
-      description: "Something new is cooking. Revealed when it ships.",
-      status: "soon",
     },
   ] satisfies Project[]) as Project[],
   apps: ([
@@ -241,5 +229,31 @@ export const site = {
   },
   // weekly, and only when something moved: "+100 premium subs",
   // "1 new SaaS client, 2 cancellations". The section hides while empty
-  updates: [] as Update[],
+  updates: [
+    {
+      date: "2026-10-21",
+      title: "Eureka is on the App Store",
+      body: "App two. Android has a waitlist.",
+    },
+    {
+      date: "2026-10-20",
+      title: "App Store review cleared in 4 days",
+      body: "Building solo, and Apple said yes on the first try.",
+    },
+    {
+      date: "2026-10-07",
+      title: "First paying user",
+      body: "The first dollar that counts toward the grid.",
+    },
+    {
+      date: "2026-09-25",
+      title: "StampStory is on the App Store",
+      body: "App one: a scratch map for your travels.",
+    },
+    {
+      date: "2026-09-01",
+      title: "Day 1: the bet starts",
+      body: "$13,000 a month in passive income before I turn 30, in public.",
+    },
+  ] as Update[],
 };

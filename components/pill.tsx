@@ -27,7 +27,7 @@ export function Pill({ href, delay = 0, icon, label, primary = false, className 
         // an icon alone can be ambiguous, so the mouse gets its name too
         title={round ? label : undefined}
         className={`glass-pill ${primary ? "primary" : ""} inline-flex items-center justify-center gap-2 rounded-full font-semibold ${
-          round ? "h-12 w-12" : "px-5 py-2.5 text-base"
+          round ? "pill-round h-12 w-12" : "px-5 py-2.5 text-base"
         } ${className}`}
       >
         {icon && (

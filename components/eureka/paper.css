@@ -98,8 +98,8 @@
   background: var(--nb-card);
   border: 1px solid var(--nb-line);
   box-shadow: 0 16px 40px -24px var(--nb-shadow);
-  backdrop-filter: none;
   -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 /* the ground: the site's aurora gives way to the paper, its dots fixed while the page scrolls */

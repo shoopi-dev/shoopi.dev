@@ -306,8 +306,8 @@ section[id] {
     inset -1px 0 1px var(--spec-side),
     inset 0 -1px 2px rgb(17 27 40 / 0.06),
     0 12px 40px var(--drop);
-  backdrop-filter: blur(28px) saturate(1.9) brightness(1.06);
   -webkit-backdrop-filter: blur(28px) saturate(1.9) brightness(1.06);
+  backdrop-filter: blur(28px) saturate(1.9) brightness(1.06);
 }
 
 /* glossy squircle tile: inner top highlight + soft drop, catchy.fan inspired */
@@ -334,8 +334,8 @@ section[id] {
     inset 0 -1px 1px rgb(17 27 40 / 0.08),
     0 1px 2px var(--drop),
     0 10px 24px -10px var(--drop-deep);
-  backdrop-filter: blur(10px) saturate(1.9) brightness(1.05);
   -webkit-backdrop-filter: blur(10px) saturate(1.9) brightness(1.05);
+  backdrop-filter: blur(10px) saturate(1.9) brightness(1.05);
   transition:
     scale 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
     background-color 0.25s ease,
@@ -372,8 +372,8 @@ section[id] {
    turns to mud), a little more fill to make up for it */
 .glass-pill.in-glass {
   background: linear-gradient(180deg, var(--pill-in-glass-top) 0%, var(--pill-in-glass-bottom) 100%);
-  backdrop-filter: none;
   -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 /* the one primary action per screen: the same lens, filled with the button
@@ -429,8 +429,8 @@ section[id] {
     rgb(255 255 255 / 0.04) 44%,
     rgb(255 255 255 / 0.11)
   );
-  backdrop-filter: blur(14px) saturate(180%);
   -webkit-backdrop-filter: blur(14px) saturate(180%);
+  backdrop-filter: blur(14px) saturate(180%);
   box-shadow:
     inset 0 1px 1px rgb(255 255 255 / 0.5),
     inset 0 -2px 3px rgb(255 255 255 / 0.14),
@@ -637,14 +637,13 @@ section[id] {
 }
 
 /* touch screens never hover, so the hero handle plays its o -> 0 once on its
-   own, after the entrance settles. The generated wordmark has two groups and
-   logo/build-wordmark.py emits them in this order: the o at rest, then the
-   zero. The keyframes mirror its group-hover values */
+   own, after the entrance settles. The keyframes mirror MorphO's group-hover
+   values (components/lockup.tsx) */
 @media (hover: none) and (prefers-reduced-motion: no-preference) {
-  h1 svg[aria-label="sho0pi"] > g:first-of-type {
+  h1 .morph-o {
     animation: wink-o 2s ease-in-out 1.6s backwards;
   }
-  h1 svg[aria-label="sho0pi"] > g:last-of-type {
+  h1 .morph-zero {
     animation: wink-zero 2s ease-in-out 1.6s backwards;
   }
 }
@@ -665,6 +664,83 @@ section[id] {
   }
 }
 
+/* the home page's toggle sits in its byline pill (ThemeButton), so the floating one steps aside */
+body:has(.theme-inline) .theme-fixed {
+  display: none;
+}
+
+/* a hero's pills (SocialDock: the home page's socials, /work's two actions): once the hero
+   scrolls away they dock at the bottom of the screen as one glass bar, clear of the home indicator */
+.dock.docked {
+  position: fixed;
+  left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  z-index: 45; /* above the page's bottom blur (GradualBlur, 40), which would frost it */
+  translate: -50% 0;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 9px;
+  border-radius: 34px;
+  animation: dock-in 0.45s cubic-bezier(0.2, 0.9, 0.25, 1.08) both;
+}
+/* never glass inside glass: the pills keep their lens but drop their own blur. The primary
+   pill is a solid blue fill already */
+.dock.docked .glass-pill:not(.primary) {
+  background: linear-gradient(180deg, var(--pill-in-glass-top) 0%, var(--pill-in-glass-bottom) 100%);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+@keyframes dock-in {
+  from {
+    opacity: 0;
+    translate: -50% 24px;
+  }
+}
+@media (max-width: 639px) {
+  .dock.docked {
+    gap: 7px;
+    padding: 7px;
+  }
+  .dock.docked .pill-round {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  /* the blog keeps its bee, its name gives way so the bar fits a phone */
+  .dock.docked .glass-pill.blog {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+  }
+  .dock.docked .blog-name {
+    display: none;
+  }
+}
+
+/* the springboard's "Also" folder (AlsoFolder): a full-screen sheet over a frosted page */
+dialog.folder {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+}
+dialog.folder[open] {
+  display: grid;
+  place-items: center;
+}
+dialog.folder::backdrop {
+  background: rgb(17 27 40 / 0.18);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  backdrop-filter: blur(10px) saturate(1.3);
+}
+:root[data-theme="dark"] dialog.folder::backdrop {
+  background: rgb(0 0 0 / 0.42);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rise,
   .pop {
@@ -674,7 +750,8 @@ section[id] {
   .float,
   .sheen::after,
   .blob,
-  .live-dot {
+  .live-dot,
+  .dock.docked {
     animation: none;
   }
   /* hover and press still brighten, they just don't move */
@@ -719,8 +796,8 @@ section[id] {
 /* phones: lighter blur, one less blob - backdrop-filter is the costly part */
 @media (max-width: 640px) {
   .glass {
-    backdrop-filter: blur(14px) saturate(1.7);
     -webkit-backdrop-filter: blur(14px) saturate(1.7);
+    backdrop-filter: blur(14px) saturate(1.7);
   }
   .blob {
     filter: blur(50px);
@@ -732,18 +809,23 @@ section[id] {
 
 /* frosted surfaces go near-solid when the user asks for less transparency */
 @media (prefers-reduced-transparency: reduce) {
+  dialog.folder::backdrop {
+    background: rgb(17 27 40 / 0.5);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
   .glass {
     background: var(--card);
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
   .tile-soon {
     background: var(--raised);
   }
   .glass-pill:not(.primary) {
     background: var(--card);
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 }
 
@@ -756,8 +838,8 @@ section[id] {
   .tile-liquid {
     background: var(--card);
     border: 1.5px solid var(--ink);
-    backdrop-filter: none;
     -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
   .tile-spec,
   .tile-cursor-glow {

@@ -38,12 +38,12 @@ export function MorphO() {
   return (
     <span className="relative inline-block">
       <span
-        className={`${MORPH} group-hover:scale-75 group-hover:opacity-0 group-hover:blur-[4px] group-active:scale-75 group-active:opacity-0 group-active:blur-[4px]`}
+        className={`morph-o ${MORPH} group-hover:scale-75 group-hover:opacity-0 group-hover:blur-[4px] group-active:scale-75 group-active:opacity-0 group-active:blur-[4px]`}
       >
         o
       </span>
       <span
-        className={`${MORPH} absolute bottom-0 left-1/2 -translate-x-1/2 scale-125 opacity-0 blur-[4px] group-hover:scale-100 group-hover:opacity-100 group-hover:blur-none group-active:scale-100 group-active:opacity-100 group-active:blur-none`}
+        className={`morph-zero ${MORPH} absolute bottom-0 left-1/2 -translate-x-1/2 scale-125 opacity-0 blur-[4px] group-hover:scale-100 group-hover:opacity-100 group-hover:blur-none group-active:scale-100 group-active:opacity-100 group-active:blur-none`}
       >
         Ø
       </span>

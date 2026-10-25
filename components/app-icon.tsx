@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useRef } from "react";
-import type { PointerEvent as ReactPointerEvent } from "react";
+import type { PointerEvent as ReactPointerEvent, ReactNode } from "react";
 import type { Project } from "@/data/site";
 import { externalProps } from "@/lib/link";
 import { statusBadge } from "@/lib/status";
@@ -16,10 +16,17 @@ const statusLabel: Record<Project["status"], string> = {
 /* how far the tile leans toward the cursor at the edges */
 const MAGNET_PX = 7;
 
-/** springboard tile: liquid-glass squircle that leans toward the cursor,
-    with a tracking glow; dark glass "?" for coming soon */
-export function AppIcon({ p, delay = 0 }: { p: Project; delay?: number }) {
-  const soon = p.status === "soon";
+/** liquid-glass squircle that leans toward the cursor, with a tracking glow,
+    floating in a row that waves together (`delay` offsets the bob) */
+export function LiquidTile({
+  delay = 0,
+  soon = false,
+  children,
+}: {
+  delay?: number;
+  soon?: boolean;
+  children: ReactNode;
+}) {
   const tile = useRef<HTMLDivElement>(null);
 
   const onMove = useCallback((e: ReactPointerEvent<HTMLDivElement>) => {
@@ -41,27 +48,38 @@ export function AppIcon({ p, delay = 0 }: { p: Project; delay?: number }) {
     el.style.setProperty("--ty", "0px");
   }, []);
 
+  return (
+    <div className="float" style={{ animationDelay: `${-delay * 2.3}s`, animationDuration: "5s" }}>
+      <div
+        ref={tile}
+        onPointerMove={onMove}
+        onPointerLeave={onLeave}
+        className={`tile-liquid relative flex h-26 w-26 items-center justify-center overflow-hidden rounded-[24px] text-3xl ${soon ? "tile-liquid-soon" : ""}`}
+      >
+        <span className="tile-spec" aria-hidden />
+        <span className="tile-cursor-glow" aria-hidden />
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/** springboard icon: the tile, its name and a status badge; dark glass "?" for coming soon */
+export function AppIcon({ p, delay = 0 }: { p: Project; delay?: number }) {
+  const soon = p.status === "soon";
+
   const icon = (
     <Pop delay={delay} className="flex flex-col items-center gap-2.5">
-      <div className="float" style={{ animationDelay: `${-delay * 2.3}s`, animationDuration: "5s" }}>
-        <div
-          ref={tile}
-          onPointerMove={onMove}
-          onPointerLeave={onLeave}
-          className={`tile-liquid relative flex h-26 w-26 items-center justify-center overflow-hidden rounded-[24px] text-3xl ${soon ? "tile-liquid-soon" : ""}`}
-        >
-          <span className="tile-spec" aria-hidden />
-          <span className="tile-cursor-glow" aria-hidden />
-          {soon ? (
-            <span className="relative text-3xl text-ink/30">?</span>
-          ) : p.icon ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={p.icon} alt="" className="relative h-full w-full object-cover" />
-          ) : (
-            <span className="relative">{p.emoji}</span>
-          )}
-        </div>
-      </div>
+      <LiquidTile delay={delay} soon={soon}>
+        {soon ? (
+          <span className="relative text-3xl text-ink/30">?</span>
+        ) : p.icon ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={p.icon} alt="" className="relative h-full w-full object-cover" />
+        ) : (
+          <span className="relative">{p.emoji}</span>
+        )}
+      </LiquidTile>
       <span className={`max-w-24 truncate text-sm font-medium ${soon ? "text-ink/45" : ""}`}>
         {soon ? "???" : p.name}
       </span>

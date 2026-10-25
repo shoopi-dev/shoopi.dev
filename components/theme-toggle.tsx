@@ -9,8 +9,17 @@ const KEY = "theme";
     the default: only an explicit "dark" in storage changes it. */
 export const themeScript = `try{if(localStorage.getItem("${KEY}")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}`;
 
-/** Fixed sun / moon lens, top right on every page. The icon is picked by CSS
-    from `data-theme`, so the server render never disagrees with the DOM. */
+const toggle = () => {
+  const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try {
+    localStorage.setItem(KEY, next);
+  } catch {}
+};
+
+/** Fixed sun / moon lens, top right on every page. A page with its own `ThemeButton` hides it
+    (`.theme-fixed` in globals.css). The icon is picked by CSS from `data-theme`, so the server
+    render never disagrees with the DOM. */
 export function ThemeToggle() {
   // React's dev remount resets <html> attributes; put the saved one back. No-op in production
   useLayoutEffect(() => {
@@ -19,16 +28,8 @@ export function ThemeToggle() {
     } catch {}
   }, []);
 
-  const toggle = () => {
-    const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    try {
-      localStorage.setItem(KEY, next);
-    } catch {}
-  };
-
   return (
-    <Pop as="span" delay={0.3} className="fixed right-4 top-4 z-50 inline-flex sm:right-6 sm:top-6">
+    <Pop as="span" delay={0.3} className="theme-fixed fixed right-4 top-4 z-50 inline-flex sm:right-6 sm:top-6">
       <button
         type="button"
         onClick={toggle}
@@ -36,32 +37,56 @@ export function ThemeToggle() {
         title="Toggle dark mode"
         className="glass-pill inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full text-ink"
       >
-        {/* sun in light, moon in dark */}
-        <svg
-          viewBox="0 0 24 24"
-          className="h-[18px] w-[18px] dark:hidden"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          aria-hidden
-        >
-          <circle cx="12" cy="12" r="4" />
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-        </svg>
-        <svg
-          viewBox="0 0 24 24"
-          className="hidden h-[18px] w-[18px] dark:block"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <path d="M20.5 14.1A8.5 8.5 0 1 1 9.9 3.5a7 7 0 0 0 10.6 10.6Z" />
-        </svg>
+        <SunMoon />
       </button>
     </Pop>
+  );
+}
+
+/** the same toggle set inside another surface (the home page's byline pill): a plain round
+    button, since the surface around it is already the glass */
+export function ThemeButton({ className = "" }: { className?: string }) {
+  return (
+    <button
+      type="button"
+      onClick={toggle}
+      aria-label="Toggle dark mode"
+      title="Toggle dark mode"
+      className={`theme-inline inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-ink transition-colors hover:bg-ink/10 ${className}`}
+    >
+      <SunMoon />
+    </button>
+  );
+}
+
+function SunMoon() {
+  return (
+    <>
+      {/* sun in light, moon in dark */}
+      <svg
+        viewBox="0 0 24 24"
+        className="h-[18px] w-[18px] dark:hidden"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        aria-hidden
+      >
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+      </svg>
+      <svg
+        viewBox="0 0 24 24"
+        className="hidden h-[18px] w-[18px] dark:block"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden
+      >
+        <path d="M20.5 14.1A8.5 8.5 0 1 1 9.9 3.5a7 7 0 0 0 10.6 10.6Z" />
+      </svg>
+    </>
   );
 }

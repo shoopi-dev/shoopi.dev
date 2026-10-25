@@ -20,7 +20,7 @@ const title = "Itay Blokh (sho0pi) - $13k a month from apps before 30";
 
 /* one sentence that fits a result snippet (about 155 characters): who, what, the bet */
 const description =
-  "Itay Blokh (sho0pi) is a cybersecurity R&D engineer in Singapore, maker of Gaia and StampStory, chasing $13,000 a month in passive income before 30.";
+  "Itay Blokh (sho0pi) is a cybersecurity R&D engineer in Singapore, maker of StampStory, Eureka and Gaia, chasing $13,000 a month in passive income before 30.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://shoopi.dev"),
