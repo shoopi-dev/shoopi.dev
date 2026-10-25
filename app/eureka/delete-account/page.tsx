@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description,
     url: `${e.url}/delete-account`,
     image: e.ogImage,
-    imageAlt: "Eureka: a glowing light bulb, the app's icon",
+    imageAlt: "Eureka: a spoken thought filed into an idea's clean page, under the words Brainstorm out loud",
     siteName: e.name,
   }),
 };

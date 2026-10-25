@@ -30,7 +30,7 @@ export const eureka = {
   support,
   updated: "2026-10-16",
   url: "https://eureka.shoopi.dev",
-  ogImage: "https://eureka.shoopi.dev/eureka/og.jpg", // 1200x630, public/eureka/og.jpg
+  ogImage: "https://eureka.shoopi.dev/eureka/og-share.jpg", // 1200x630, public/eureka/og-share.jpg
   store: {
     // released 2026-10-21; Google Play's flips the same way once the app leaves its closed test
     ios: { status: "live" as "soon" | "live", url: "https://apps.apple.com/app/eureka-ai-idea-notes/id6822832627" },
