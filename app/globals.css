@@ -695,6 +695,25 @@ section[id] {
   .tile-cursor-glow {
     display: none;
   }
+  /* StampStory's scroll story (components/stampstory-landing): the stage still follows the scroll,
+     each holding its end state; nothing moves on its own */
+  .ss .scroll-hint span::after,
+  .ss .orbie .arm,
+  .ss .orbie .bodyimg,
+  .ss .g,
+  .ss .g::after,
+  .ss .reveal,
+  .ss .install,
+  .ss .skip,
+  .ss .progress,
+  .ss .again {
+    animation: none;
+    transition: none;
+  }
+  .ss .reveal {
+    opacity: 1;
+    translate: none;
+  }
 }
 
 /* phones: lighter blur, one less blob - backdrop-filter is the costly part */
