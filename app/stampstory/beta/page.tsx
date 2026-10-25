@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description,
     url: `${s.url}/beta`,
     image: s.ogImage,
-    imageAlt: "StampStory: a travel passport with a stamp for every country you have visited",
+    imageAlt: "StampStory: a passport page of 23 countries posted to a Story, with friends reacting",
     siteName: s.name,
   }),
 };
