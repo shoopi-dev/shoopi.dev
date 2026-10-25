@@ -52,6 +52,45 @@ export const stampstory = {
     install: "https://play.google.com/store/apps/details?id=dev.shoopi.stampstory",
   },
 
+  /** The landing page's scroll story (components/stampstory-landing): a sample traveler's trip, told in stages. */
+  story: {
+    question: { before: "How many countries have ", you: "you", after: " been to?" },
+    um: "Um...",
+    // the answer everyone gives, crossing itself out
+    guesses: ["17?", "20?", "Maybe 25?"],
+    hint: "let's count",
+    stages: [
+      { step: "01 · mark", title: "Every trip, one tap.", body: "Tap where you have been on the globe, or tick countries off a list. Each one fills in with its own color." },
+      { step: "02 · count", title: "So that's 23.", body: "Not 20, not 25. Your whole world, counted for you, on a globe you can spin." },
+      { step: "03 · passport", title: "Your passport fills itself.", body: "A stamp for every new rank and continent, and a bar for each part of the world." },
+      { step: "04 · share", title: "Post it.", body: "Your passport becomes a story-sized card. Post it to your Stories or send it to friends, and see where they have been." },
+      { step: "05 · welcomes", title: "Land. Get welcomed.", body: "Touch down somewhere new and your phone says hello. Tap it and the country is stamped. That's how Kenya got on Sam's map." },
+    ],
+    traveler: "Sam Rivera",
+    // in the order the story marks them: Japan, France and Peru first
+    trip: [
+      "Japan", "France", "Peru", "Chile", "Argentina", "Mexico", "United States of America", "Portugal", "Spain",
+      "Morocco", "Italy", "Germany", "Greece", "Egypt", "Israel", "Kenya", "South Africa", "Thailand", "Vietnam",
+      "Singapore", "Indonesia", "Australia", "New Zealand",
+    ],
+    count: { one: "country", many: "countries", world: "of the world", continents: "continents" },
+    passport: "StampStory passport",
+    post: "Post it",
+    posted: "Posted to your story",
+    welcome: { from: "StampStory", when: "now", title: "Welcome to Kenya 🇰🇪", body: "Tap to stamp it on your map." },
+    end: {
+      title: "Where have you been?",
+      facts: [
+        { title: "No account. No server.", body: "Your countries live on your phone and never leave it." },
+        { title: "14 themes", body: "Sky and Night Lights are free. Each one paints the whole world." },
+        { title: "English and 日本語", body: "Every country, in the names your maps use." },
+      ],
+      again: "Watch again",
+    },
+    bar: { ios: "On iPhone now", android: "Android is coming soon", join: "Join the waitlist" },
+    skip: { long: "Skip to the end", short: "Skip" },
+  },
+
   steps: [
     { n: "01", title: "Mark where you've been", body: "Tap countries on the globe, or tick them off the list in one go." },
     { n: "02", title: "Watch the passport fill", body: "Stamps and continents appear every time you add a country." },
