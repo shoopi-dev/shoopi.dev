@@ -4,18 +4,18 @@ import { fmtDate } from "@/lib/format";
 import { externalProps } from "@/lib/link";
 import { Pop } from "./animate";
 
-/** newest travel-blog posts under About - the story behind the photos */
-export async function FromTheRoad({ delay = 0 }: { delay?: number }) {
+/** newest travel-blog posts, beside the updates - the story behind the photos */
+export async function FromTheRoad({ delay = 0, className = "" }: { delay?: number; className?: string }) {
   const posts = await getPosts(site.blog.feed);
   if (!posts.length) return null;
 
   return (
-    <Pop delay={delay} className="w-full">
-      <div className="glass rounded-[22px] p-6">
+    <Pop as="section" aria-labelledby="road-h" delay={delay} className={className}>
+      <div className="glass h-full rounded-[22px] p-6">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-ink/70">
+          <h2 id="road-h" className="text-xs font-semibold uppercase tracking-wide text-ink/70">
             From the road
-          </h3>
+          </h2>
           <a
             href={site.blog.url}
             {...externalProps(site.blog.url)}

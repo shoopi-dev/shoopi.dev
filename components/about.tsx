@@ -1,21 +1,26 @@
 import { Fragment } from "react";
 import { site } from "@/data/site";
 import { Pop } from "./animate";
-import { SectionHeader } from "./section-header";
-import { FromTheRoad } from "./from-the-road";
 
 /* a slight fan, not a scatter: the photos sit in a row */
 const TILT = ["-rotate-6", "rotate-3", "-rotate-2"];
 
-export function About({ delay = 0 }: { delay?: number }) {
+/** a card on the home page's Today: who I am, in my words, with the chips and the road photos */
+export function About({ delay = 0, className = "" }: { delay?: number; className?: string }) {
   return (
-    <section id="about" className="mt-14 flex flex-col items-center gap-4">
-      <SectionHeader title={`About ${site.fullName}`} subtitle={site.summary} delay={delay} />
-      <Pop delay={delay + 0.06} className="w-full">
+    <Pop as="section" id="about" aria-labelledby="about-h" delay={delay} className={className}>
+      <div className="glass h-full rounded-[22px] p-6">
+        <h2 id="about-h" className="font-display text-3xl font-bold tracking-tight">
+          About {site.fullName}
+        </h2>
+        <p className="mt-1.5 text-sm text-ink/60">{site.summary}</p>
         {/* two columns on wide screens: keeps the bio at a readable measure
             instead of one very long line */}
-        <div className="glass grid gap-5 rounded-[22px] p-6 sm:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] sm:gap-8">
-          <p className="text-base leading-relaxed text-ink/80">{site.bio}</p>
+        <div className="mt-5 grid gap-5 sm:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] sm:gap-8">
+          <div className="flex flex-col gap-3.5 text-base leading-relaxed text-ink/80">
+            <p>{site.bio}</p>
+            <p>{site.background}</p>
+          </div>
           {/* chips on top, travel polaroids settle at the bottom. One row of
               30px capsules: who I am (ink icon + label), then the stack as
               logos in their own colours. The hero buttons' lens, but `in-glass`
@@ -73,8 +78,7 @@ export function About({ delay = 0 }: { delay?: number }) {
             </div>
           </div>
         </div>
-      </Pop>
-      <FromTheRoad delay={delay + 0.12} />
-    </section>
+      </div>
+    </Pop>
   );
 }

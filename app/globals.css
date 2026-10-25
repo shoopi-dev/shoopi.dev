@@ -637,14 +637,13 @@ section[id] {
 }
 
 /* touch screens never hover, so the hero handle plays its o -> 0 once on its
-   own, after the entrance settles. The generated wordmark has two groups and
-   logo/build-wordmark.py emits them in this order: the o at rest, then the
-   zero. The keyframes mirror its group-hover values */
+   own, after the entrance settles. The keyframes mirror MorphO's group-hover
+   values (components/lockup.tsx) */
 @media (hover: none) and (prefers-reduced-motion: no-preference) {
-  h1 svg[aria-label="sho0pi"] > g:first-of-type {
+  h1 .morph-o {
     animation: wink-o 2s ease-in-out 1.6s backwards;
   }
-  h1 svg[aria-label="sho0pi"] > g:last-of-type {
+  h1 .morph-zero {
     animation: wink-zero 2s ease-in-out 1.6s backwards;
   }
 }
@@ -665,6 +664,80 @@ section[id] {
   }
 }
 
+/* the home page's toggle sits in its byline pill (ThemeButton), so the floating one steps aside */
+body:has(.theme-inline) .theme-fixed {
+  display: none;
+}
+
+/* the home page's social pills (SocialDock): once the hero scrolls away they dock at the
+   bottom of the screen as one glass bar, clear of the home indicator */
+.dock.docked {
+  position: fixed;
+  left: 50%;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  z-index: 45; /* above the page's bottom blur (GradualBlur, 40), which would frost it */
+  translate: -50% 0;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 9px;
+  border-radius: 34px;
+  animation: dock-in 0.45s cubic-bezier(0.2, 0.9, 0.25, 1.08) both;
+}
+/* never glass inside glass: the pills keep their lens but drop their own blur */
+.dock.docked .glass-pill {
+  background: linear-gradient(180deg, var(--pill-in-glass-top) 0%, var(--pill-in-glass-bottom) 100%);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+@keyframes dock-in {
+  from {
+    opacity: 0;
+    translate: -50% 24px;
+  }
+}
+@media (max-width: 639px) {
+  .dock.docked {
+    gap: 7px;
+    padding: 7px;
+  }
+  .dock.docked .glass-pill {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+  /* the blog keeps its bee, its name gives way so the bar fits a phone */
+  .dock.docked .glass-pill.blog {
+    padding: 0;
+  }
+  .dock.docked .blog-name {
+    display: none;
+  }
+}
+
+/* the springboard's "Also" folder (AlsoFolder): a full-screen sheet over a frosted page */
+dialog.folder {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+}
+dialog.folder[open] {
+  display: grid;
+  place-items: center;
+}
+dialog.folder::backdrop {
+  background: rgb(17 27 40 / 0.18);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  backdrop-filter: blur(10px) saturate(1.3);
+}
+:root[data-theme="dark"] dialog.folder::backdrop {
+  background: rgb(0 0 0 / 0.42);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .rise,
   .pop {
@@ -674,7 +747,8 @@ section[id] {
   .float,
   .sheen::after,
   .blob,
-  .live-dot {
+  .live-dot,
+  .dock.docked {
     animation: none;
   }
   /* hover and press still brighten, they just don't move */
@@ -732,6 +806,11 @@ section[id] {
 
 /* frosted surfaces go near-solid when the user asks for less transparency */
 @media (prefers-reduced-transparency: reduce) {
+  dialog.folder::backdrop {
+    background: rgb(17 27 40 / 0.5);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
   .glass {
     background: var(--card);
     -webkit-backdrop-filter: none;

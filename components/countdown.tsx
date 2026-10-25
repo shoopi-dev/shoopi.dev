@@ -43,28 +43,31 @@ export function Countdown({ deadline }: { deadline: string }) {
   const t = clock ? parts(deadline, clock) : null;
 
   return (
-    <div className="flex items-baseline justify-center gap-3 sm:gap-6">
+    // days, then the clock; on a narrow widget the clock wraps under the days
+    <div className="mt-auto flex flex-wrap items-baseline gap-x-5 gap-y-3 pt-4">
       <div className="flex items-baseline gap-2">
-        <span className="font-mono text-4xl font-bold tracking-[-0.03em] text-ink sm:text-5xl">
+        <span className="font-mono text-5xl font-bold tracking-[-0.05em] text-ink tabular-nums">
           {t?.days ?? "–"}
         </span>
         <span className="text-sm font-medium text-ink/60">days</span>
       </div>
-      {(
-        [
-          ["hrs", t?.hours],
-          ["min", t?.min],
-          ["sec", t?.sec],
-        ] as const
-      ).map(([label, value]) => (
-        <div key={label} className="flex items-baseline gap-1.5">
-          {/* red only ticks: the seconds carry it, the bigger units stay ink */}
-          <span className={`w-[2ch] font-mono text-xl font-semibold tracking-[-0.02em] sm:text-2xl ${label === "sec" ? "text-red-text" : "text-ink"}`}>
-            {value ?? "–"}
-          </span>
-          <span className="text-xs font-medium text-ink/60">{label}</span>
-        </div>
-      ))}
+      <div className="flex items-baseline gap-4">
+        {(
+          [
+            ["hrs", t?.hours],
+            ["min", t?.min],
+            ["sec", t?.sec],
+          ] as const
+        ).map(([label, value]) => (
+          <div key={label} className="flex items-baseline gap-1.5">
+            {/* red only ticks: the seconds carry it, the bigger units stay ink */}
+            <span className={`w-[2ch] font-mono text-xl font-semibold tracking-[-0.02em] tabular-nums ${label === "sec" ? "text-red-text" : "text-ink"}`}>
+              {value === undefined ? "–" : String(value).padStart(2, "0")}
+            </span>
+            <span className="text-xs font-medium text-ink/60">{label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

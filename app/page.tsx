@@ -4,11 +4,15 @@ import { Rise } from "@/components/animate";
 import { SectionHeader } from "@/components/section-header";
 import { Pill } from "@/components/pill";
 import { Widget } from "@/components/widget";
-import { ProjectCard } from "@/components/project-card";
 import { AppIcon } from "@/components/app-icon";
+import { AlsoFolder, type FolderItem } from "@/components/also-folder";
+import { SocialDock } from "@/components/social-dock";
+import { ThemeButton } from "@/components/theme-toggle";
 import { Lockup, MorphO } from "@/components/lockup";
+import { AppList } from "@/components/app-list";
 import { About } from "@/components/about";
 import { Updates } from "@/components/updates";
+import { FromTheRoad } from "@/components/from-the-road";
 import { Footer } from "@/components/footer";
 import { Countdown } from "@/components/countdown";
 import { Activity } from "@/components/activity";
@@ -21,13 +25,17 @@ import { GoalGrid } from "@/components/goal-grid";
 const T = {
   word: (i: number) => 0.04 + i * 0.045,
   pills: 0.62,
-  widgets: 0.72,
-  apps: 0.84,
-  projects: 0.94,
-  about: 1.02,
-  updates: 1.1,
+  home: 0.72, // the springboard: icons and widgets
+  today: 1.0,
   contact: 1.18,
 };
+
+/* the side projects, in the springboard's "Also" folder */
+const also: FolderItem[] = [
+  ...site.projects.map((p) => ({ name: p.name, line: p.description, href: p.link ?? "/", icon: p.icon })),
+  { name: "Travel blog", line: "The travel blog I write with my girlfriend.", href: site.blog.url, icon: "/icons/babees.png" },
+];
+
 export default async function Home() {
   const square = site.goal / 100; // the grid is 100 squares
   const earnings = await getEarnings();
@@ -39,15 +47,34 @@ export default async function Home() {
   // one rule for both figures: cents under $100, or whenever they are not whole dollars
   const withCents = (n: number) => n < 100 || Math.round(n * 100) % 100 !== 0;
   const day = dayOfChallenge(site.startDate);
-  const latest = site.updates[0]; // newest weekly update, if there is one
+  const latest = site.updates[0]; // newest update, if there is one
+  // the Today page's date line, in Singapore where the work happens
+  const today = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    timeZone: "Asia/Singapore",
+  });
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-4xl flex-col">
+    <div className="mx-auto flex min-h-dvh w-full max-w-5xl flex-col">
       <JsonLd data={homeGraph} />
-      <main className="flex flex-1 flex-col gap-4 px-4 pb-40 pt-6">
+      <header className="px-4 pt-6">
+        {/* the byline, with the light and dark switch at its end: on this page the
+            toggle lives here, not floating in the corner */}
+        <Rise className="flex justify-center">
+          <div className="glass-pill inline-flex items-center rounded-full py-1 pl-4 pr-1 text-[13px] font-medium text-ink/70">
+            <span>
+              <span className="font-semibold text-ink">{site.fullName}</span> · @sho0pi · {site.location}
+            </span>
+            <span className="ml-3 mr-1 h-5 w-px bg-ink/15" aria-hidden />
+            <ThemeButton />
+          </div>
+        </Rise>
+
         {/* Hero: staggered headline, inline avatar, social pills. A size smaller
-            and tighter on phones, so the grid still makes the first screen */}
-        <section className="group px-2 py-10 text-center sm:py-16">
+            and tighter on phones, so the springboard still makes the first screen */}
+        <section className="group px-2 pt-10 text-center sm:pt-14">
           {/* grey words at /55: the lightest ink that keeps large text at 3:1
               over the purple glow */}
           <h1 className="font-display text-3xl font-bold leading-snug tracking-tight text-balance sm:text-5xl sm:leading-[1.2]">
@@ -76,6 +103,8 @@ export default async function Home() {
                   {site.say}
                 </span>
               </span>{" "}
+              {/* the full name in the one h1, so a search for it lands here */}
+              Blokh{" "}
             </Rise>
             <Rise as="span" delay={T.word(2)} className="inline-block align-middle">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -127,8 +156,9 @@ export default async function Home() {
           </h1>
 
           {/* icon-only: the handle is already in the headline. The blog is the
-              one capsule, its own bee and a name, since no glyph says "travel blog" */}
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+              one capsule, its own bee and a name, since no glyph says "travel blog".
+              Once the hero scrolls away the row docks at the bottom of the screen */}
+          <SocialDock label={`${site.fullName} elsewhere`}>
             <Pill
               href={site.socials.github}
               icon="/icons/github.svg"
@@ -159,98 +189,108 @@ export default async function Home() {
               label={`Email ${site.socials.email}`}
               delay={T.pills + 0.2}
             />
-            <Pill href={site.blog.url} delay={T.pills + 0.25} className="h-12 pl-3 text-sm">
+            <Pill href={site.blog.url} label="Travel blog" delay={T.pills + 0.25} className="blog h-12 pl-3 text-sm">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/icons/babees.png" alt="" className="h-7 w-7" />
-              Travel blog
+              <span className="blog-name">Travel blog</span>
             </Pill>
-          </div>
+          </SocialDock>
         </section>
+      </header>
 
-        {/* Goal - progress grid */}
-        <section id="goal" className="flex flex-col gap-4">
-          <Widget label={`goal · each square = ${fmtMoney(square)}/mo`} delay={T.widgets}>
-            <GoalGrid apps={earnings.apps} square={square} />
-            <p className="mt-3 flex flex-wrap items-baseline gap-x-2 text-sm text-ink/60">
-              <span>
-                <span className="font-mono text-lg font-bold text-ink">
-                  {fmtMoney(earnings.total, withCents(earnings.total))}
-                </span>
-                /mo
-              </span>
-              <span>· {pct.toFixed(pct && pct < 0.01 ? 4 : 2)}% of {fmtMoney(site.goal)}</span>
-              {left > 0 && (
-                <span>
-                  · <span className="font-semibold text-ink">{fmtMoney(left, withCents(left))}</span> to the{" "}
-                  {totalCents < squareCents ? "first" : "next"} square
-                </span>
-              )}
-              <span aria-hidden>·</span>
-              <span className="tabular-nums">day {day}</span>
-            </p>
-            {latest && (
-              // inline flow, not flex: a long title wraps like a sentence
-              <a
-                href="#updates"
-                className="mt-2 block w-fit text-xs text-ink/60 transition-colors hover:text-ink"
-              >
-                <span
-                  className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-mask align-middle"
-                  aria-hidden
+      <main className="flex flex-1 flex-col px-4 pb-40">
+        {/* the springboard. Desktop: two columns, the icons over the time left beside the goal
+            over the work, the last card in each stretching so their bottoms line up. Phones
+            and tablets: one column (the columns are display: contents), in reading order */}
+        <div className="mt-11 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-[22px]">
+          <div className="contents lg:flex lg:flex-col lg:gap-[22px]">
+            <section aria-labelledby="springboard-h" className="order-1 flex justify-center">
+              <h2 id="springboard-h" className="sr-only">
+                Apps
+              </h2>
+              {/* 2x2 on phones and beside the goal, one row of four on tablets */}
+              <div className="grid w-fit grid-cols-2 content-center gap-x-[30px] gap-y-[22px] py-1 sm:grid-cols-4 lg:grid-cols-2">
+                {site.apps.map((p, i) => (
+                  <AppIcon key={p.name} p={p} delay={T.home + i * 0.06} />
+                ))}
+                {/* one slot for the next app, unnamed until it ships */}
+                <AppIcon
+                  p={{ name: "???", emoji: "", description: "", status: "soon" }}
+                  delay={T.home + site.apps.length * 0.06}
                 />
-                <time dateTime={latest.date} className="tabular-nums">
-                  {fmtDate(latest.date, false)}
-                </time>
-                <span aria-hidden> · </span>
-                {latest.title}
-              </a>
-            )}
-          </Widget>
+                <AlsoFolder items={also} delay={T.home + (site.apps.length + 1) * 0.06} />
+              </div>
+            </section>
 
-          {/* money, then work, then time: the proof of motion sits right under
-              the $0 it answers */}
-          <Activity delay={T.widgets + 0.06} />
+            <Widget label="time left" live delay={T.home + 0.12} className="order-3 lg:flex-1">
+              <p className="-mt-1.5 text-xs text-ink/60">until 30, on 7 July 2031</p>
+              <Countdown deadline={site.deadline} />
+            </Widget>
+          </div>
 
-          <Widget label="time left" live delay={T.widgets + 0.12}>
-            <Countdown deadline={site.deadline} />
-          </Widget>
-        </section>
+          <div className="contents lg:flex lg:flex-col lg:gap-[22px]">
+            <Widget label={`goal · each square = ${fmtMoney(square)}/mo`} delay={T.home} className="order-2">
+              <GoalGrid apps={earnings.apps} square={square} />
+              <p className="mt-3 flex flex-wrap items-baseline gap-x-2 text-sm text-ink/60">
+                <span>
+                  <span className="font-mono text-lg font-bold text-ink">
+                    {fmtMoney(earnings.total, withCents(earnings.total))}
+                  </span>
+                  /mo
+                </span>
+                <span>· {pct.toFixed(pct && pct < 0.01 ? 4 : 2)}% of {fmtMoney(site.goal)}</span>
+                {/* phones break before what the square still needs, so no line starts with a dot */}
+                {left > 0 && <span className="basis-full sm:hidden" aria-hidden />}
+                {left > 0 && (
+                  <span>
+                    <span className="max-sm:hidden">· </span>
+                    <span className="font-semibold text-ink">{fmtMoney(left, withCents(left))}</span> to the{" "}
+                    {totalCents < squareCents ? "first" : "next"} square
+                  </span>
+                )}
+                <span className="whitespace-nowrap tabular-nums">· day {day}</span>
+              </p>
+              {latest && (
+                // inline flow, not flex: a long title wraps like a sentence
+                <a
+                  href="#updates"
+                  className="mt-2 block w-fit text-xs text-ink/60 transition-colors hover:text-ink"
+                >
+                  <span
+                    className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-mask align-middle"
+                    aria-hidden
+                  />
+                  <time dateTime={latest.date} className="tabular-nums">
+                    {fmtDate(latest.date, false)}
+                  </time>
+                  <span aria-hidden> · </span>
+                  {latest.title}
+                </a>
+              )}
+            </Widget>
 
-        {/* Apps */}
-        <section id="apps" className="mt-14 flex flex-col items-center gap-2">
-          <SectionHeader title="Apps" delay={T.apps} />
-          {/* 2x2 on phones: flex-wrap left a lone tile on a 412px Pixel (3+1) */}
-          <div className="mt-5 grid w-fit grid-cols-2 gap-x-6 gap-y-5 px-2 sm:grid-cols-4">
-            {site.apps.map((p, i) => (
-              <AppIcon key={p.name} p={p} delay={T.apps + 0.06 + i * 0.06} />
-            ))}
-            {Array.from({ length: Math.max(0, 4 - site.apps.length) }, (_, i) => (
-              <AppIcon
-                key={`slot-${i}`}
-                p={{ name: "???", emoji: "", description: "", status: "soon" }}
-                delay={T.apps + 0.06 + (site.apps.length + i) * 0.06}
-              />
-            ))}
+            {/* money, then work: the proof of motion sits right under the $0 it answers */}
+            <Activity delay={T.home + 0.06} className="order-4 lg:flex-1" />
+          </div>
+        </div>
+
+        {/* Today: below the springboard, the words - what the apps are, who I am, what moved */}
+        <section aria-label="Today" className="pt-18">
+          <div className="mx-auto mb-6 h-[5px] w-10 rounded-full bg-ink/15" aria-hidden />
+          <Rise delay={T.today}>
+            <p className="text-xs font-semibold uppercase tracking-[0.07em] text-ink/60 tabular-nums">
+              {today} · day {day}
+            </p>
+            <p className="mt-1 font-display text-4xl font-extrabold tracking-tight">Today</p>
+          </Rise>
+          {/* cards keep their own height: a short card never stretches into an empty panel */}
+          <div className="mt-5 grid items-start gap-4 lg:grid-cols-2 lg:gap-[22px]">
+            <AppList delay={T.today + 0.06} className="lg:col-span-2" />
+            <About delay={T.today + 0.12} className="lg:col-span-2" />
+            <Updates delay={T.today + 0.18} />
+            <FromTheRoad delay={T.today + 0.24} />
           </div>
         </section>
-
-        {/* Current projects */}
-        <section id="projects" className="mt-14 flex flex-col items-center gap-2">
-          <SectionHeader
-            title="Current Projects"
-            subtitle="Everything I'm working on to support the journey."
-            delay={T.projects}
-          />
-          <div className="mt-5 grid w-full gap-4 sm:grid-cols-3">
-            {site.projects.map((p, i) => (
-              <ProjectCard key={p.name} p={p} delay={T.projects + 0.08 + i * 0.07} />
-            ))}
-          </div>
-        </section>
-
-        <About delay={T.about} />
-
-        <Updates delay={T.updates} />
 
         {/* Contact */}
         <section

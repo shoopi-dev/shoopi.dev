@@ -2,8 +2,8 @@ import { site } from "@/data/site";
 import { stampstory as s } from "@/data/stampstory";
 import { eureka as e } from "@/data/eureka";
 
-/* Structured data for the two pages that are about these entities: the home page and the StampStory
-   landing page. One @id per entity, so every mention points at the same Person and Organization
+/* Structured data for the pages that are about these entities: the home page and the apps'
+   landing pages. One @id per entity, so every mention points at the same Person and Organization
    instead of inventing a new one. It used to ride on every route, the 404 included. */
 
 const HOME = "https://shoopi.dev";
@@ -13,6 +13,7 @@ const id = {
   site: `${HOME}/#website`,
   gaia: `${HOME}/#gaia`,
   app: `${s.url}/#stampstory`,
+  eureka: `${e.url}/#eureka`,
 };
 
 // references that still say who they are, so a page carrying only a fragment stays readable
@@ -37,6 +38,22 @@ const stampstoryApp = {
   publisher: orgRef,
 };
 
+const eurekaApp = {
+  "@type": "MobileApplication",
+  "@id": id.eureka,
+  name: e.name,
+  alternateName: e.title, // the App Store title
+  url: e.url,
+  description: e.subtitle,
+  image: `${e.url}/eureka/icon.png`,
+  applicationCategory: "ProductivityApplication",
+  operatingSystem: e.store.android.status === "live" ? "iOS, Android" : "iOS",
+  installUrl: e.store.ios.status === "live" ? e.store.ios.url : undefined,
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  author: personRef,
+  publisher: orgRef,
+};
+
 export const homeGraph = {
   "@context": "https://schema.org",
   "@graph": [
@@ -47,13 +64,14 @@ export const homeGraph = {
       givenName: "Itay",
       familyName: "Blokh",
       alternateName: "sho0pi",
-      description: `${site.summary} Maker of Gaia, an open-source AI agent, and StampStory, a travel passport app for iPhone.`,
+      description: `${site.summary} Maker of StampStory, a travel passport app, Eureka, voice-first idea notes, and Gaia, an open-source AI agent.`,
       image: `${HOME}/avatar.jpg`,
       jobTitle: site.jobTitle,
       url: HOME,
       email: `mailto:${site.socials.email}`,
       address: { "@type": "PostalAddress", addressLocality: "Singapore", addressCountry: "SG" },
       nationality: { "@type": "Country", name: "Israel" },
+      alumniOf: { "@type": "CollegeOrUniversity", name: "Ben-Gurion University of the Negev" },
       sameAs: [site.socials.github, site.socials.x, site.socials.linkedin, site.socials.instagram],
       knowsAbout: [
         "Cybersecurity",
@@ -111,6 +129,7 @@ export const homeGraph = {
       author: personRef,
     },
     stampstoryApp,
+    eurekaApp,
   ],
 };
 
@@ -142,5 +161,6 @@ export const eurekaGraph = {
       inLanguage: "en",
       publisher: orgRef,
     },
+    eurekaApp,
   ],
 };

@@ -1,17 +1,19 @@
 import { site } from "@/data/site";
 import { fmtDate } from "@/lib/format";
 import { Pop } from "./animate";
-import { SectionHeader } from "./section-header";
 
-/** dated journey log - proof the site is alive. Hidden while empty. */
-export function Updates({ delay = 0 }: { delay?: number }) {
+/** dated journey log - proof the site is alive, and fresh dated text for search. Hidden while empty. */
+export function Updates({ delay = 0, className = "" }: { delay?: number; className?: string }) {
   if (site.updates.length === 0) return null;
 
   return (
-    <section id="updates" className="mt-14 flex flex-col items-center gap-4">
-      <SectionHeader title="Updates" subtitle="The journey, as it happens." delay={delay} />
-      <Pop delay={delay + 0.1} className="w-full">
-        <ol className="glass flex flex-col gap-5 rounded-[22px] p-6">
+    <Pop as="section" id="updates" aria-labelledby="updates-h" delay={delay} className={className}>
+      <div className="glass h-full rounded-[22px] p-6">
+        <h2 id="updates-h" className="font-display text-xl font-semibold tracking-tight">
+          Updates
+        </h2>
+        <p className="mt-1.5 text-sm text-ink/60">The journey, as it happens.</p>
+        <ol className="mt-4 flex flex-col gap-4">
           {site.updates.map((u) => (
             <li key={u.date + u.title} className="flex flex-col gap-1">
               <time
@@ -25,7 +27,7 @@ export function Updates({ delay = 0 }: { delay?: number }) {
             </li>
           ))}
         </ol>
-      </Pop>
-    </section>
+      </div>
+    </Pop>
   );
 }
