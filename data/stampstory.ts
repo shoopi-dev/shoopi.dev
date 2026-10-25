@@ -33,7 +33,7 @@ export const stampstory = {
   support,
   updated: "2026-10-20",
   url: "https://stampstory.shoopi.dev",
-  ogImage: "https://stampstory.shoopi.dev/stampstory/og.jpg", // 1200x630, public/stampstory/og.jpg
+  ogImage: "https://stampstory.shoopi.dev/stampstory/og-story.jpg", // 1200x630, public/stampstory/og-story.jpg
   developer: {
     name: site.fullName,
     handle: site.handle,
