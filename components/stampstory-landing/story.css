@@ -86,6 +86,9 @@
 }
 /* ---------- the story ---------- */
 .ss .story { position: relative; }
+/* everything on the stage but the question is placed by story-engine.ts: hidden until its first frame,
+   or the page paints the phone, the passport and the memories in a pile before the script runs */
+.ss:not(.ready) .stage > :not(.ask) { visibility: hidden; }
 .ss .stage {
     position: sticky;
     top: 0;
