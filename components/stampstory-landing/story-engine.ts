@@ -621,11 +621,13 @@ export function start(root: El): () => void {
   };
 
   /* ---------- the loop runs while the story is on screen; a scroll elsewhere asks for one frame ---------- */
-  let raf = 0, alive = true, storyIn = true;
+  let raf = 0, alive = true, storyIn = true, laidOut = false;
   const tick = (now: number) => {
     raf = 0;
     if (!alive) return;
     frame(now);
+    // the pieces stay hidden (story.css) until a frame has put them where they belong
+    if (laidOut) root.classList.add("ready");
     if (storyIn) raf = requestAnimationFrame(tick);
   };
   const kick = () => {
@@ -691,7 +693,7 @@ export function start(root: El): () => void {
   fonts.then(() => {
     if (!alive) return;
     layout();
-    root.classList.add("ready");
+    laidOut = true;
     kick();
   });
   fetch("/stampstory/world.json")
