@@ -80,8 +80,8 @@ export default function WordLahPage() {
               <div className="flex flex-col gap-1">
                 <h2 className="font-display text-xl font-bold tracking-tight">Your sky follows you.</h2>
                 <p className="text-sm leading-relaxed text-ink/70">
-                  Sign in with Apple or Google, and your streak, tokens and boosters come with you to every phone.
-                  Nobody else can read them, and you can delete your account in the app. The game is free and paid
+                  Play as a guest, or save with Apple or Google, and your streak, tokens and boosters come with you
+                  to every phone. Other players never see them, and you can delete your account in the app. The game is free and paid
                   for by Google&apos;s ads, which ask for your consent where the law says so; No ads takes the banner
                   away for good.
                 </p>
