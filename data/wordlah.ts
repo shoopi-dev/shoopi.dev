@@ -73,7 +73,7 @@ export const wordlah = {
     },
     {
       q: "How do I remove the ads?",
-      a: "Buy No ads in the Mama shop. It removes the banner for good on your store account. Short ads stay available, since you choose each one.",
+      a: "Buy No ads in the Mama shop. It removes the banner for good, and previous days' puzzles open without a short ad. You can still watch short ads for free tokens and boosters, since you choose each one.",
     },
     {
       q: "What is Cheem Mode?",
@@ -148,14 +148,14 @@ export const wordlah = {
       id: "ads",
       title: "Ads",
       body: [
-        "Ads are served by Google AdMob, through the Google Mobile Ads software built into the app. WordLah shows two kinds: a banner on the game screen, and short ads that play only when you tap to watch one: for 50 tokens or a booster, at most three a day, or to open a previous day's puzzle from the calendar.",
+        "Ads are served by Google AdMob, through the Google Mobile Ads software built into the app. WordLah shows two kinds: a banner on the game screen, and short ads that play only when you tap to watch one: for 50 tokens or a booster, at most three a day, or to open a previous day's puzzle from the calendar (not with No ads).",
       ],
       list: [
         "What Google collects. To choose, show and measure ads and to prevent fraud, Google's software sends Google information such as your phone's advertising identifier (on Android only), an identifier for this app on your phone, your internet address and the rough location it implies, your phone's model, system and language, the app and its version, and which ads were shown and tapped. Google uses it as its own privacy policy describes, and explains how at policies.google.com/technologies/partner-sites. Your WordLah account is never shared with Google for ads.",
         "Consent. In the EEA, the UK and Switzerland, the app shows Google's consent form before any ads load, and your answer decides whether ads may be personalised and whether Google may store and read information on your phone for ads. You can change it at any time under Privacy choices in the app's Settings.",
         "No tracking on iPhone. WordLah never asks to track you across other companies' apps and websites, so on iPhone Google does not receive your advertising identifier and ads are not personalised from your activity elsewhere.",
         "On Android, you can reset or delete your advertising ID in your phone's Settings, under Security & privacy (or Google), Ads.",
-        "No ads, bought in the Mama shop, removes the banner for good. Short ads stay available, since you choose each one.",
+        "No ads, bought in the Mama shop, removes the banner for good and the short ad before a previous day's puzzle. Short ads for tokens and boosters stay available, since you choose each one.",
       ],
       after: [
         "I see only Google's totals for the app, such as how many ads were shown and what they earned. Nothing in them is about you.",
@@ -327,7 +327,7 @@ export const wordlah = {
       id: "noads",
       title: "No ads",
       body: [
-        "No ads is one payment. It removes the banner from the game for good, and is kept with your account; Restore purchases also brings it back from your store account. Short ads stay available, since you choose each one.",
+        "No ads is one payment. It removes the banner from the game for good, and previous days' puzzles open without a short ad. It is kept with your account; Restore purchases also brings it back from your store account. Short ads for free tokens and boosters stay available, since you choose each one.",
       ],
     },
     {
