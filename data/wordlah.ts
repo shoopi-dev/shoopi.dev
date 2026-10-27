@@ -21,8 +21,7 @@ export const supportMail = (() => {
 /**
  * Everything the WordLah pages say. Keep it true to what the app does: the app repo's CLAUDE.md (what is stored, the
  * wallet, the account and its sync, guests, the board, the ads, the analytics and their events) is where each sentence
- * comes from, and a new SDK, data flow or analytics event changes this first. When real payments arrive through RevenueCat, add it to "What leaves your device" and "Who else is involved",
- * as StampStory does.
+ * comes from, and a new SDK, data flow or analytics event changes this first.
  * Unlisted until launch: the pages are noindex (app/wordlah/layout.tsx), and out of the sitemap and site.apps.
  */
 export const wordlah = {
@@ -31,7 +30,7 @@ export const wordlah = {
   tagline: "Guess the word, then get the joke",
   subtitle: "A new Singlish word every day. Six tries to find it, and a joke when you do.",
   support,
-  updated: "2026-10-26",
+  updated: "2026-10-27",
   url: "https://shoopi.dev/wordlah",
   ogImage: "https://shoopi.dev/wordlah/og.jpg", // 1200x630, public/wordlah/og.jpg
   store: {
@@ -190,7 +189,7 @@ export const wordlah = {
         "When you start a day, your phone asks WordLah's server for that day's word. When you finish it, your guesses go to the server, which checks them and keeps your result for the leaderboard.",
         "Ad requests to Google, as described above.",
         "Usage counts, to PostHog, as described above.",
-        "Purchases. Token packs and No ads are bought through Apple or Google with your store account. I never see your card details, and Apple and Google hold the purchase record.",
+        "Purchases. Token packs and No ads are bought through Apple or Google with your store account, and I never see your card details. RevenueCat checks each purchase on WordLah's behalf, so what you bought reaches your account and follows it to any phone you sign in on. RevenueCat receives your account identifier, a guest's included, the store's receipt, and basic device and app version information, and never your games or your guesses. The shop also asks it for your store's prices, so they show in your currency.",
         "The picture you share. When you tap Share my sky, the picture of your game is made on your phone and handed to your phone's share sheet, and goes wherever you send it. It shows the colours of your guesses, never the letters.",
       ],
     },
@@ -224,12 +223,13 @@ export const wordlah = {
       list: [
         "Supabase runs WordLah's server: your account, your games, your wallet, your name on the leaderboard and your results are stored in its Singapore region. Only your account can read its games and wallet; the leaderboard shows other players only names, places, tries and times.",
         "Apple and Google sign you in, and process payments and hold the purchase record. Their terms and privacy policies apply.",
+        "RevenueCat checks purchases and keeps their record against your account identifier.",
         "Google shows and measures the ads, and decides how it uses what its ad software collects, under its own privacy policy.",
         "PostHog counts how the app is used, and keeps the copy of the game tables described above, in its EU cloud.",
         "Vercel hosts this website.",
       ],
       after: [
-        "Supabase, Google, PostHog and Vercel are companies in the United States, and some of the data may be processed there. Where it comes from the EEA or the UK, the transfer relies on the European Commission's standard contractual clauses or the EU-U.S. Data Privacy Framework.",
+        "Supabase, Google, RevenueCat, PostHog and Vercel are companies in the United States, and some of the data may be processed there. Where it comes from the EEA or the UK, the transfer relies on the European Commission's standard contractual clauses or the EU-U.S. Data Privacy Framework.",
         "Nobody else. I do not sell your data or hand it to anyone.",
       ],
     },
@@ -242,7 +242,7 @@ export const wordlah = {
         "On your phone: until you sign out or delete your account, either of which empties the phone of them, or delete the app.",
         "Usage counts: deleted with your account, and otherwise kept by PostHog for as long as the plan WordLah is on keeps them. PostHog's copy of the game tables follows the server's within 6 hours.",
         "Ad data: kept by Google as its own retention policy describes, at policies.google.com/technologies/retention.",
-        "Purchase records: kept by Apple and Google for as long as they need to honour a restore and to meet their own tax and accounting obligations.",
+        "Purchase records: kept by Apple, Google and RevenueCat for as long as they need to honour a restore and to meet their tax and accounting obligations.",
       ],
     },
     {
@@ -445,7 +445,7 @@ export const wordlah = {
       id: "kept",
       title: "What is kept",
       body: [
-        "Purchase records stay with Apple or Google, which need them for refunds, taxes and Restore purchases.",
+        "Purchase records stay with Apple or Google, which need them for refunds, taxes and Restore purchases, and with RevenueCat, which checks purchases for WordLah, under an identifier that no longer leads to you.",
         "What Google's ad software collected stays with Google under its own retention policy; it was never tied to your WordLah account.",
       ],
     },
