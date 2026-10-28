@@ -21,8 +21,7 @@ export const supportMail = (() => {
 /**
  * Everything the WordLah pages say. Keep it true to what the app does: the app repo's CLAUDE.md (what is stored, the
  * wallet, the account and its sync, guests, the board, the ads, the analytics and their events) is where each sentence
- * comes from, and a new SDK, data flow or analytics event changes this first. When real payments arrive through RevenueCat, add it to "What leaves your device" and "Who else is involved",
- * as StampStory does.
+ * comes from, and a new SDK, data flow or analytics event changes this first.
  * Unlisted until launch: the pages are noindex (app/wordlah/layout.tsx), and out of the sitemap and site.apps.
  */
 export const wordlah = {
@@ -31,7 +30,7 @@ export const wordlah = {
   tagline: "Guess the word, then get the joke",
   subtitle: "A new Singlish word every day. Six tries to find it, and a joke when you do.",
   support,
-  updated: "2026-10-26",
+  updated: "2026-10-28",
   url: "https://shoopi.dev/wordlah",
   ogImage: "https://shoopi.dev/wordlah/og.jpg", // 1200x630, public/wordlah/og.jpg
   store: {
@@ -74,7 +73,7 @@ export const wordlah = {
     },
     {
       q: "How do I remove the ads?",
-      a: "Buy No ads in the Mama shop. It removes the banner for good on your store account. Short ads stay available, since you choose each one.",
+      a: "Buy No ads in the Mama shop. It removes the banner for good, and previous days' puzzles open without a short ad. You can still watch short ads for free tokens and boosters, since you choose each one.",
     },
     {
       q: "What is Cheem Mode?",
@@ -149,14 +148,14 @@ export const wordlah = {
       id: "ads",
       title: "Ads",
       body: [
-        "Ads are served by Google AdMob, through the Google Mobile Ads software built into the app. WordLah shows two kinds: a banner on the game screen, and short ads that play only when you tap to watch one: for 50 tokens or a booster, at most three a day, or to open a previous day's puzzle from the calendar.",
+        "Ads are served by Google AdMob, through the Google Mobile Ads software built into the app. WordLah shows two kinds: a banner on the game screen, and short ads that play only when you tap to watch one: for 50 tokens or a booster, at most three a day, or to open a previous day's puzzle from the calendar (not with No ads).",
       ],
       list: [
         "What Google collects. To choose, show and measure ads and to prevent fraud, Google's software sends Google information such as your phone's advertising identifier (on Android only), an identifier for this app on your phone, your internet address and the rough location it implies, your phone's model, system and language, the app and its version, and which ads were shown and tapped. Google uses it as its own privacy policy describes, and explains how at policies.google.com/technologies/partner-sites. Your WordLah account is never shared with Google for ads.",
         "Consent. In the EEA, the UK and Switzerland, the app shows Google's consent form before any ads load, and your answer decides whether ads may be personalised and whether Google may store and read information on your phone for ads. You can change it at any time under Privacy choices in the app's Settings.",
         "No tracking on iPhone. WordLah never asks to track you across other companies' apps and websites, so on iPhone Google does not receive your advertising identifier and ads are not personalised from your activity elsewhere.",
         "On Android, you can reset or delete your advertising ID in your phone's Settings, under Security & privacy (or Google), Ads.",
-        "No ads, bought in the Mama shop, removes the banner for good. Short ads stay available, since you choose each one.",
+        "No ads, bought in the Mama shop, removes the banner for good and the short ad before a previous day's puzzle. Short ads for tokens and boosters stay available, since you choose each one.",
       ],
       after: [
         "I see only Google's totals for the app, such as how many ads were shown and what they earned. Nothing in them is about you.",
@@ -175,7 +174,7 @@ export const wordlah = {
       id: "usage",
       title: "How the app is used",
       body: [
-        "The app counts what is done in it, to learn what to make better: when it is opened and put away, which screens are seen, signing in, playing as a guest and saving, starting a day, each guess played (which try it was, never its letters), a word turned down and why, how a game ended, the boosters used and bought, the shop and purchases, short ads tapped and watched and the banner tapped, the leaderboard and previous games opened, Share my sky, and pokes at the Merlion.",
+        "The app counts what is done in it, to learn what to make better: when it is opened and put away, which screens are seen, signing in, playing as a guest and saving, starting a day, each guess played (which try it was, never its letters), a word turned down and why, how a game ended, the boosters used and bought, the shop and purchases, short ads tapped and watched and the banner tapped, the leaderboard and previous games opened, Share my sky, pokes at the Merlion, and the daily reminder asked for, turned on or off (with its hour) and opened.",
         "Each of these events carries your account identifier, a guest's included. On the sign-in page, before you have an account, it carries a random identifier made on your phone instead, which joins your account's when you sign in or play as a guest. Every event also carries your phone's system and model, the app version, your language and your time zone, and PostHog keeps with your account how you signed in, whether you are a guest, and your name on the leaderboard. They never carry the letters you guess, your email or your name from Apple or Google.",
         "The events go from your phone to PostHog, in its EU cloud. PostHog works out roughly where an event came from, its country and city, from the internet address it came from, and then discards the address without storing it.",
         "To read the counts beside how the game is played, PostHog also keeps a copy of WordLah's game tables, refreshed from the server every 6 hours: games, results, when each day's word was handed out, wallet changes, leaderboard names, and the word list and its schedule. The copy never includes anything from your Apple or Google sign-in, such as your email.",
@@ -190,7 +189,8 @@ export const wordlah = {
         "When you start a day, your phone asks WordLah's server for that day's word. When you finish it, your guesses go to the server, which checks them and keeps your result for the leaderboard.",
         "Ad requests to Google, as described above.",
         "Usage counts, to PostHog, as described above.",
-        "Purchases. Token packs and No ads are bought through Apple or Google with your store account. I never see your card details, and Apple and Google hold the purchase record.",
+        "Purchases. Token packs and No ads are bought through Apple or Google with your store account, and I never see your card details. RevenueCat checks each purchase on WordLah's behalf, so what you bought reaches your account and follows it to any phone you sign in on. RevenueCat receives your account identifier, a guest's included, the store's receipt, and basic device and app version information, and never your games or your guesses. The shop also asks it for your store's prices, so they show in your currency.",
+        "Reminders stay on your phone. If you turn on the daily reminder, your phone sets and shows it itself, at the time you chose; only the counts above about it leave the phone.",
         "The picture you share. When you tap Share my sky, the picture of your game is made on your phone and handed to your phone's share sheet, and goes wherever you send it. It shows the colours of your guesses, never the letters.",
       ],
     },
@@ -224,12 +224,13 @@ export const wordlah = {
       list: [
         "Supabase runs WordLah's server: your account, your games, your wallet, your name on the leaderboard and your results are stored in its Singapore region. Only your account can read its games and wallet; the leaderboard shows other players only names, places, tries and times.",
         "Apple and Google sign you in, and process payments and hold the purchase record. Their terms and privacy policies apply.",
+        "RevenueCat checks purchases and keeps their record against your account identifier.",
         "Google shows and measures the ads, and decides how it uses what its ad software collects, under its own privacy policy.",
         "PostHog counts how the app is used, and keeps the copy of the game tables described above, in its EU cloud.",
         "Vercel hosts this website.",
       ],
       after: [
-        "Supabase, Google, PostHog and Vercel are companies in the United States, and some of the data may be processed there. Where it comes from the EEA or the UK, the transfer relies on the European Commission's standard contractual clauses or the EU-U.S. Data Privacy Framework.",
+        "Supabase, Google, RevenueCat, PostHog and Vercel are companies in the United States, and some of the data may be processed there. Where it comes from the EEA or the UK, the transfer relies on the European Commission's standard contractual clauses or the EU-U.S. Data Privacy Framework.",
         "Nobody else. I do not sell your data or hand it to anyone.",
       ],
     },
@@ -242,7 +243,7 @@ export const wordlah = {
         "On your phone: until you sign out or delete your account, either of which empties the phone of them, or delete the app.",
         "Usage counts: deleted with your account, and otherwise kept by PostHog for as long as the plan WordLah is on keeps them. PostHog's copy of the game tables follows the server's within 6 hours.",
         "Ad data: kept by Google as its own retention policy describes, at policies.google.com/technologies/retention.",
-        "Purchase records: kept by Apple and Google for as long as they need to honour a restore and to meet their own tax and accounting obligations.",
+        "Purchase records: kept by Apple, Google and RevenueCat for as long as they need to honour a restore and to meet their tax and accounting obligations.",
       ],
     },
     {
@@ -327,7 +328,7 @@ export const wordlah = {
       id: "noads",
       title: "No ads",
       body: [
-        "No ads is one payment. It removes the banner from the game for good, and is kept with your account; Restore purchases also brings it back from your store account. Short ads stay available, since you choose each one.",
+        "No ads is one payment. It removes the banner from the game for good, and previous days' puzzles open without a short ad. It is kept with your account; Restore purchases also brings it back from your store account. Short ads for free tokens and boosters stay available, since you choose each one.",
       ],
     },
     {
@@ -445,7 +446,7 @@ export const wordlah = {
       id: "kept",
       title: "What is kept",
       body: [
-        "Purchase records stay with Apple or Google, which need them for refunds, taxes and Restore purchases.",
+        "Purchase records stay with Apple or Google, which need them for refunds, taxes and Restore purchases, and with RevenueCat, which checks purchases for WordLah, under an identifier that no longer leads to you.",
         "What Google's ad software collected stays with Google under its own retention policy; it was never tied to your WordLah account.",
       ],
     },
