@@ -16,12 +16,12 @@ export const metadata: Metadata = {
     description,
     url: `${s.url}/support`,
     image: s.ogImage,
-    imageAlt: "WordLah: Singa the lion, the app's icon, over a dusk sky",
+    imageAlt: s.ogAlt,
     siteName: s.name,
   }),
 };
 
-// the one action on the page: the palette's primary blue, no glass, like the rest of the documents
+// the one action on the page: the game's Singa red (wordlah.css turns the site's button to it), no glass
 const mailButton =
   "inline-flex items-center rounded-full bg-button px-5 py-2.5 text-sm font-semibold text-on-button transition-transform hover:-translate-y-0.5 active:scale-95";
 

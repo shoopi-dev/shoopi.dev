@@ -50,12 +50,24 @@ export function DocPage({
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col px-4">
       <header className="pb-6 pt-10">
-        <Link
-          href={app.home}
-          className="text-sm text-ink/60 underline decoration-dotted underline-offset-4 transition-colors hover:text-ink"
-        >
-          ← {app.name}
-        </Link>
+        {app.icon ? (
+          // an app with its icon: the icon and its name, the way back to its landing page
+          <Link
+            href={app.home}
+            className="inline-flex items-center gap-2.5 font-display text-base font-bold tracking-tight transition-opacity hover:opacity-75"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={app.icon} alt="" width={36} height={36} className="h-9 w-9 rounded-[10px] shadow-md" />
+            {app.name}
+          </Link>
+        ) : (
+          <Link
+            href={app.home}
+            className="text-sm text-ink/60 underline decoration-dotted underline-offset-4 transition-colors hover:text-ink"
+          >
+            ← {app.name}
+          </Link>
+        )}
         <h1 className="mt-6 font-display text-3xl font-bold tracking-tight">{title}</h1>
         {updated && <p className="mt-1.5 text-xs text-ink/60">Last updated {date}</p>}
         {intro && <div className="mt-4 text-[15px] leading-7 text-ink/80">{intro}</div>}

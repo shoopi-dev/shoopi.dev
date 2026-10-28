@@ -12,6 +12,8 @@ export type LegalSection = {
 /** The app a document belongs to: its name, its landing page, when its documents last changed, and its footer links. */
 export type DocApp = {
   name: string;
+  /** The app's icon, shown beside its name at the top of its documents. */
+  icon?: string;
   home: string;
   updated: string;
   links: { href: string; label: string }[];

@@ -27,17 +27,61 @@ export const supportMail = (() => {
 export const wordlah = {
   name: "WordLah",
   title: "WordLah: a daily Singlish word game",
-  tagline: "Guess the word, then get the joke",
-  subtitle: "A new Singlish word every day. Six tries to find it, and a joke when you do.",
+  /** The landing page's headline, its middle word in the game's teal. */
+  tagline: ["Guess the", "Singlish", "word, then get the joke"] as [string, string, string],
+  subtitle: "One Singlish word a day, the same for everyone. Six tries to find it, then the word card tells you what it means.",
   support,
   updated: "2026-10-28",
-  url: "https://shoopi.dev/wordlah",
-  ogImage: "https://shoopi.dev/wordlah/og.jpg", // 1200x630, public/wordlah/og.jpg
+  url: "https://wordlah.shoopi.dev",
+  ogImage: "https://wordlah.shoopi.dev/wordlah/og.jpg", // 1200x630, public/wordlah/og.jpg
+  ogAlt: "WordLah: the Merlion over a dusk sky, above the words A daily Singlish word game",
   store: {
     ios: { status: "soon" as "soon" | "live", url: "" },
     android: { status: "soon" as "soon" | "live", url: "" },
   },
 
+  /**
+   * The landing page (components/wordlah/play.tsx, picked by Itay on 2026-10-28 from four directions; its mock is
+   * ~/Dev/html_assets/wordlah/site/a-play.html): a round of the game playing on a loop beside the headline, then what
+   * comes after.
+   */
+  play: {
+    adults: "Free to play, with ads. For adults 18 and over.",
+    bar: "WordLah is coming to iPhone and Android",
+    card: {
+      kicker: "after every game",
+      title: "Then get the joke",
+      body: "After every game, the word card: what it means, where it comes from, what it says word for word, and a Singlish sentence using it. From Hokkien, Malay, English, Mandarin, Cantonese, Tamil or Teochew.",
+    },
+    sun: {
+      kicker: "the sun over the bay",
+      title: "Poke the Merlion",
+      body: "The Merlion is the sun over the skyline. He rises as you get closer: a win is a sunrise, a loss sets him into the night. Poke him and he giggles.",
+      bubble: "Poke me lah",
+    },
+    board: {
+      kicker: "today's leaderboard",
+      title: "One board for everyone",
+      body: "Fewest tries first, then fastest time, under a made-up name. Share my sky sends a picture of your colours under the sky, never the letters.",
+      share: "Share my sky",
+      shareBody: "Your colours, never the letters, so nobody gets spoiled.",
+    },
+    more: {
+      kicker: "also in the game",
+      title: "Help when you're stuck, and a reason to come back",
+      boosters: ["Boosters", "Hint, Remove 3 and One more try. You start with 3 Hints, 3 Remove 3 and 2 One more try."],
+      mama: ["The Mama shop", "Mama, an old cook, runs the Mama shop. Boosters cost tokens; watch a short ad for 50 tokens, three a day."],
+      cheem: ["Cheem Mode", "The hard mode: every letter you find must be used again."],
+      previous: ["Previous games", "Missed a day? Play it later from the calendar. It counts in your stats, never in your streak or on the board."],
+      reminder: ["A daily reminder", "At the time you choose, only on days you have not played, and a 9pm nudge when your streak would end at midnight."],
+      reminderLine: "New word out liao! Come try lah",
+      guest: ["Play as a guest", "Or sign in with Apple or Google, and your streak, tokens and boosters follow you to any phone."],
+    },
+    end: {
+      title: "A new word every midnight",
+      body: "A new word at midnight, on your phone's own clock. More than 700 Singlish words are lined up, one a day.",
+    },
+  },
   faq: [
     {
       q: "When does the new word come?",
@@ -456,6 +500,7 @@ export const wordlah = {
 /** What WordLah's documents need to know of it. */
 export const wordlahDoc: DocApp = {
   name: wordlah.name,
+  icon: "/wordlah/icon.png",
   home: "/wordlah",
   updated: wordlah.updated,
   links: [

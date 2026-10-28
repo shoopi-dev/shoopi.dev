@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { WordlahGround } from "@/components/wordlah/ground";
 
 /**
  * WordLah pages carry the app's own icon in the tab and its own title suffix, as StampStory's and Eureka's do.
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
   },
 };
 
+/** Every WordLah page is in the game's own colours and faces, over the site's aurora. */
 export default function WordLahLayout({ children }: { children: React.ReactNode }) {
-  return children;
+  return <WordlahGround>{children}</WordlahGround>;
 }

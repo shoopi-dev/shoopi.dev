@@ -1,0 +1,446 @@
+/* Every WordLah page wears the game's own colours (WordLah/ui/theme/Color.kt: DayColors, NightColors, HorizonColors,
+   ExtraColors) over the site's aurora: its paper and cards, teal for links and the one highlighted word, Singa red for
+   the one main action, and its night navy in dark. WordlahGround (ground.tsx) wraps them all from
+   app/wordlah/layout.tsx, so the shared document templates follow without knowing; nothing here reaches another
+   app's pages. The pieces (pieces.tsx) are drawn from the same tokens; 1em of a piece is one tile. */
+
+:root:has(.wl-ground) {
+  --wl-paper: #f4f9fb;
+  --wl-card: #ffffff;
+  --wl-raised: #e9f1f5;
+  --wl-line: #dce6ec;
+  --wl-ink: #1b2530;
+  --wl-ink2: #55636f;
+  --wl-shadow: rgb(20 50 70 / 0.25);
+  /* tiles and keys: teal right spot, mango wrong spot, grey not in the word; each with its lip under it */
+  --wl-tile: #ffffff;
+  --wl-tile-lip: #c2d5df;
+  --wl-tile-empty: #eaf6fb;
+  --wl-tile-empty-lip: #c9dee8;
+  --wl-teal: #0e9a92;
+  --wl-teal-lip: #00665f;
+  --wl-teal-text: #00665f;
+  --wl-mango: #ffb21e;
+  --wl-mango-lip: #da9500;
+  --wl-on-mango: #5f3b00;
+  --wl-grey: #d6e0e6;
+  --wl-grey-lip: #b7c6cf;
+  --wl-on-grey: #56636e;
+  /* Singa red: the lion and each screen's one main action, its text the game's ink; orchid: help and the meaning */
+  --wl-red: #ff4146;
+  --wl-red-lip: #e1082b;
+  --wl-on-red: #121a2e;
+  --wl-orchid: #9a4dd1;
+  --wl-orchid-lip: #6e2ba3;
+  --wl-orchid-text: #7d37ae;
+  --wl-highlight: #ffe3bd;
+  /* the Horizon sky: dusk is where a game starts, morning a win */
+  --wl-dusk: linear-gradient(180deg, #2a2160 0%, #7a3483 34%, #e8607a 58%, #ffb37a 80%, #ffd3a0 100%);
+  --wl-morning: linear-gradient(180deg, #4fb6e3 0%, #8fd3ec 34%, #c4e4ee 58%, #ffd9a8 80%, #fff1d6 100%);
+  --wl-city-dusk: #4a2160;
+  --wl-city-morning: #a9d6ec;
+  --wl-rays: rgb(255 230 170 / 0.4);
+  /* over the sky, keys and tiles stay light in both themes */
+  --wl-glass-tile: rgb(255 255 255 / 0.16);
+  --wl-glass-edge: rgb(255 255 255 / 0.4);
+  --wl-key: rgb(255 255 255 / 0.9);
+  --wl-key-lip: rgb(60 20 60 / 0.25);
+
+  /* the site's own colours turned to the game's, so the shared templates take them through their usual utilities */
+  --paper: var(--wl-paper);
+  --card: var(--wl-card);
+  --card-border: var(--wl-line);
+  --raised: var(--wl-raised);
+  --blue-text: var(--wl-teal-text);
+  --button: var(--wl-red);
+  --on-button: var(--wl-on-red);
+  --focus: var(--wl-teal-text);
+}
+:root[data-theme="dark"]:has(.wl-ground) {
+  --wl-paper: #121a2e;
+  --wl-card: #1a2440;
+  --wl-raised: #232e4f;
+  --wl-line: #2e3a5e;
+  --wl-ink: #eef2fa;
+  --wl-ink2: #a9b4cb;
+  --wl-shadow: rgb(0 0 0 / 0.5);
+  --wl-tile: #2e3960;
+  --wl-tile-lip: #1b2445;
+  --wl-tile-empty: #1f2a50;
+  --wl-tile-empty-lip: #141c3a;
+  --wl-teal-text: #5dc5bf;
+  --wl-grey: #29324f;
+  --wl-grey-lip: #1a2140;
+  --wl-on-grey: #a3aec6;
+  --wl-orchid: #d19cff;
+  --wl-orchid-text: #e0bfff;
+  --wl-highlight: #5a4210;
+  /* by night a game starts under the night dusk, and a win is the night's morning */
+  --wl-dusk: linear-gradient(180deg, #070b1e 0%, #111a42 34%, #232a5e 58%, #3a2f6e 80%, #7a4a7e 100%);
+  --wl-morning: linear-gradient(180deg, #3a4fa0 0%, #7062a8 34%, #8f6fb0 58%, #ffb38a 80%, #ffd9a8 100%);
+  --wl-city-dusk: #0b1030;
+  --wl-city-morning: #2c2a63;
+  /* the same turn as by day, restated: the site's own dark block would otherwise win it back */
+  --paper: var(--wl-paper);
+  --card: var(--wl-card);
+  --card-border: var(--wl-line);
+  --raised: var(--wl-raised);
+  --blue-text: var(--wl-teal-text);
+  --focus: var(--wl-teal-text);
+  /* the site's smoked glass, tinted to the game's night navy */
+  --glass-top: rgb(26 36 64 / 0.66);
+  --glass-bottom: rgb(26 36 64 / 0.44);
+  --pill-top: rgb(35 46 79 / 0.72);
+  --pill-bottom: rgb(26 36 64 / 0.4);
+  --pill-hover: rgb(35 46 79 / 0.5);
+  --pill-in-glass-top: rgb(35 46 79 / 0.85);
+  --pill-in-glass-bottom: rgb(26 36 64 / 0.6);
+}
+
+/* the game's faces, where next/font sets them; the site's body stays in its mono */
+.wl-ground {
+  --baloo: var(--font-baloo), var(--font-bricolage), -apple-system, sans-serif;
+  --ui: var(--font-figtree), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* a tile: its face, the lip under it, a shine on its top half, the letter in Baloo ExtraBold */
+.wl-tile {
+  --face: var(--wl-tile);
+  --lip: var(--wl-tile-lip);
+  --on: var(--wl-ink);
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 1em;
+  height: 1em;
+  flex: none;
+  border-radius: 0.2em;
+  background: var(--face);
+  box-shadow: 0 0.085em 0 var(--lip), 0 0.2em 0.3em rgb(25 8 45 / 0.18);
+  color: var(--on);
+  transform-style: preserve-3d;
+}
+.wl-tile::before {
+  content: "";
+  position: absolute;
+  left: 8%;
+  top: 6%;
+  width: 84%;
+  height: 34%;
+  border-radius: 0.14em;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.45), rgb(255 255 255 / 0));
+  pointer-events: none;
+}
+.wl-tile b {
+  position: relative;
+  font: 800 0.64em/1 var(--baloo);
+  transform: translateY(0.07em);
+}
+.wl-tile.k-right {
+  --face: var(--wl-teal);
+  --lip: var(--wl-teal-lip);
+  --on: #fff;
+}
+.wl-tile.k-moved {
+  --face: var(--wl-mango);
+  --lip: var(--wl-mango-lip);
+  --on: var(--wl-on-mango);
+}
+.wl-tile.k-out {
+  --face: var(--wl-grey);
+  --lip: var(--wl-grey-lip);
+  --on: var(--wl-on-grey);
+}
+.wl-tile.k-orchid {
+  --face: var(--wl-orchid);
+  --lip: var(--wl-orchid-lip);
+  --on: #fff;
+}
+.wl-tile.k-empty {
+  --face: var(--wl-tile-empty);
+  --lip: var(--wl-tile-empty-lip);
+  box-shadow: 0 0.085em 0 var(--lip);
+}
+.wl-tile.k-empty::before,
+.wl-tile.k-out::before {
+  opacity: 0.5;
+}
+/* over the sky: empty tiles are glass, typed tiles stay light in both themes, a ruled-out tile fades into the sky */
+.on-sky .wl-tile.k-empty {
+  --face: var(--wl-glass-tile);
+  --lip: transparent;
+  box-shadow: inset 0 0 0 0.03em var(--wl-glass-edge);
+}
+.on-sky .wl-tile.k-typed {
+  --face: rgb(255 255 255 / 0.95);
+  --lip: var(--wl-key-lip);
+  --on: #1b2530;
+}
+.on-sky .wl-tile.k-out {
+  --face: rgb(255 255 255 / 0.3);
+  --lip: rgb(0 0 0 / 0.14);
+  --on: #fff;
+}
+.on-sky .wl-tile.k-out::before {
+  opacity: 0.25;
+}
+.wl-row {
+  display: inline-flex;
+  gap: 0.12em;
+}
+.wl-board {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.14em;
+}
+/* a tile turning over to show its colour: --i is its place in the row */
+@keyframes wl-turn {
+  50% {
+    transform: rotateX(90deg);
+  }
+}
+.wl-tile.turn {
+  animation: wl-turn 0.5s cubic-bezier(0.45, 0, 0.55, 1) both;
+  animation-delay: calc(var(--i, 0) * 0.3s);
+}
+
+/* the Merlion as the sun: his head over slowly turning rays */
+.wl-sun {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 160px;
+  aspect-ratio: 1;
+}
+.wl-sun img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 10px rgb(80 20 10 / 0.3));
+  user-select: none;
+}
+.wl-rays {
+  position: absolute;
+  inset: -45%;
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, var(--wl-rays) 0deg 7deg, transparent 7deg 22.5deg);
+  -webkit-mask: radial-gradient(closest-side, #000 30%, transparent 100%);
+  mask: radial-gradient(closest-side, #000 30%, transparent 100%);
+  animation: wl-rays 60s linear infinite;
+}
+@keyframes wl-rays {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* a poke's flipbook: 28 frames in rows of 7, set and stepped by the page's engine */
+.wl-flip {
+  display: block;
+  aspect-ratio: 1;
+  background-size: 700% 400%;
+  background-repeat: no-repeat;
+}
+
+/* a speech bubble, white in both themes as the app's are */
+.wl-bubble {
+  position: relative;
+  display: inline-block;
+  padding: 0.42em 0.8em 0.36em;
+  border-radius: 1.1em;
+  background: #fff;
+  color: #1b1033;
+  font: 800 1em/1.1 var(--baloo);
+  box-shadow: 0 0.14em 0 rgb(27 16 51 / 0.16), 0 0.4em 0.9em rgb(27 16 51 / 0.2);
+  white-space: nowrap;
+}
+.wl-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -0.28em;
+  width: 0.7em;
+  height: 0.7em;
+  background: #fff;
+  border-radius: 0.1em;
+  transform: rotate(45deg);
+}
+.wl-bubble.t-bl::after {
+  left: 1em;
+}
+.wl-bubble.t-br::after {
+  right: 1em;
+}
+
+/* an origin tag: every pairing passes 4.5 to 1, by day and at night */
+.wl-origin {
+  display: inline-block;
+  padding: 0.05em 0.55em;
+  border-radius: 999px;
+  background: var(--ob);
+  color: var(--ot);
+  font: 700 0.85em/1.5 var(--ui);
+}
+.o-hokkien { --ob: #ffeee6; --ot: #9e3f00; }
+.o-malay { --ob: #eff6da; --ot: #5b6800; }
+.o-cantonese { --ob: #e0f9e9; --ot: #007346; }
+.o-tamil { --ob: #e3f5ff; --ot: #00698f; }
+.o-teochew { --ob: #ebf2ff; --ot: #2759bc; }
+.o-mandarin { --ob: #ffecf4; --ot: #a02b6d; }
+.o-english { --ob: #f4f1ef; --ot: #675f58; }
+:root[data-theme="dark"] .o-hokkien { --ob: #472a20; --ot: #ffbea2; }
+:root[data-theme="dark"] .o-malay { --ob: #2f3920; --ot: #c9d989; }
+:root[data-theme="dark"] .o-cantonese { --ob: #0d3d3b; --ot: #9be2b8; }
+:root[data-theme="dark"] .o-tamil { --ob: #0d3a56; --ot: #94daff; }
+:root[data-theme="dark"] .o-teochew { --ob: #1e3464; --ot: #b6d0ff; }
+:root[data-theme="dark"] .o-mandarin { --ob: #462549; --ot: #ffb7d8; }
+:root[data-theme="dark"] .o-english { --ob: #333642; --ot: #d5cec9; }
+
+/* the word card: the end of a game */
+.wl-card {
+  width: min(100%, 360px);
+  padding: 20px 20px 18px;
+  border-radius: 22px;
+  background: var(--wl-card);
+  color: var(--wl-ink);
+  box-shadow: 0 1px 0 var(--wl-line), 0 18px 40px var(--wl-shadow);
+  font: 500 15px/1.45 var(--ui);
+  text-align: left;
+}
+.wl-card p {
+  margin: 0;
+  line-height: 1.45;
+}
+.wl-card-tiles {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+  font-size: 46px;
+}
+.wl-card-tags {
+  text-align: center;
+  color: var(--wl-ink2);
+  font-size: 14px;
+}
+.wl-card-tags i {
+  margin-right: 4px;
+  font-weight: 600;
+}
+.wl-card .wl-card-sentence {
+  margin: 12px 0 14px;
+  font: 800 19px/1.25 var(--baloo);
+  text-align: center;
+}
+.wl-card-sentence mark {
+  background: linear-gradient(transparent 55%, var(--wl-highlight) 55%);
+  color: inherit;
+}
+.wl-card-label {
+  font: 700 13px var(--ui);
+  color: var(--wl-orchid-text);
+}
+.wl-card .wl-card-literally {
+  margin-top: 6px;
+  color: var(--wl-ink2);
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* today's leaderboard */
+.wl-leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font: 600 14px/1.3 var(--ui);
+  color: var(--wl-ink);
+}
+.wl-leaderboard li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: var(--wl-card);
+  box-shadow: 0 1px 0 var(--wl-line);
+}
+.wl-leaderboard li.you {
+  box-shadow: 0 0 0 2px var(--wl-teal);
+}
+.wl-leaderboard .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wl-leaderboard .name small {
+  margin-left: 4px;
+  font: 700 11px var(--ui);
+  color: var(--wl-teal-text);
+}
+.wl-leaderboard .tries,
+.wl-leaderboard .time {
+  color: var(--wl-ink2);
+  font-variant-numeric: tabular-nums;
+}
+.wl-leaderboard .place {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--wl-raised);
+  color: var(--wl-ink2);
+  font: 800 13px/1 var(--baloo);
+}
+.wl-leaderboard .p1 {
+  background: linear-gradient(180deg, #ffe9be, #ffb37a);
+  color: #5a1410;
+}
+.wl-leaderboard .p2 {
+  background: linear-gradient(180deg, #ffffff, #c9d3de);
+  color: #34404c;
+}
+.wl-leaderboard .p3 {
+  background: linear-gradient(180deg, #ffe0c8, #e3a27a);
+  color: #5a2a10;
+}
+
+/* a share picture's grid: colours, never letters */
+.wl-share {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.12em;
+}
+.wl-share span {
+  display: flex;
+  gap: 0.12em;
+}
+.wl-share i {
+  width: 1em;
+  height: 1em;
+  border-radius: 0.22em;
+  background: var(--wl-grey);
+}
+.wl-share i.k-right {
+  background: var(--wl-teal);
+}
+.wl-share i.k-moved {
+  background: var(--wl-mango);
+}
+
+/* the skyline fills whatever box it is put in */
+.wl-skyline {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wl-tile.turn,
+  .wl-rays {
+    animation: none;
+  }
+}
