@@ -30,7 +30,7 @@ export const wordlah = {
   tagline: "Guess the word, then get the joke",
   subtitle: "A new Singlish word every day. Six tries to find it, and a joke when you do.",
   support,
-  updated: "2026-10-27",
+  updated: "2026-10-28",
   url: "https://shoopi.dev/wordlah",
   ogImage: "https://shoopi.dev/wordlah/og.jpg", // 1200x630, public/wordlah/og.jpg
   store: {
@@ -190,7 +190,7 @@ export const wordlah = {
         "Ad requests to Google, as described above.",
         "Usage counts, to PostHog, as described above.",
         "Purchases. Token packs and No ads are bought through Apple or Google with your store account, and I never see your card details. RevenueCat checks each purchase on WordLah's behalf, so what you bought reaches your account and follows it to any phone you sign in on. RevenueCat receives your account identifier, a guest's included, the store's receipt, and basic device and app version information, and never your games or your guesses. The shop also asks it for your store's prices, so they show in your currency.",
-        "Nothing for reminders. If you turn on the daily reminder, your phone sets and shows the reminders itself, at the time you chose, and only the counts above about them leave it.",
+        "Reminders stay on your phone. If you turn on the daily reminder, your phone sets and shows it itself, at the time you chose; only the counts above about it leave the phone.",
         "The picture you share. When you tap Share my sky, the picture of your game is made on your phone and handed to your phone's share sheet, and goes wherever you send it. It shows the colours of your guesses, never the letters.",
       ],
     },
