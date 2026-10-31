@@ -37,7 +37,15 @@ export const wordlah = {
   ogAlt: "WordLah: the Merlion over a dusk sky, above the words A daily Singlish word game",
   store: {
     ios: { status: "soon" as "soon" | "live", url: "" },
-    android: { status: "soon" as "soon" | "live", url: "" },
+    // date: the day it lands on Google Play, as /android says it ("November 12"); empty until Google says
+    android: { status: "soon" as "soon" | "live", url: "", date: "" },
+  },
+  // until Google Play opens the app to everyone: a closed test needs 12 testers for 14 days (/beta, unlisted, as
+  // Eureka's). shoopi-testers is the one group for all the apps
+  beta: {
+    group: "https://groups.google.com/g/shoopi-testers",
+    optIn: "https://play.google.com/apps/testing/dev.shoopi.wordlah",
+    install: "https://play.google.com/store/apps/details?id=dev.shoopi.wordlah",
   },
 
   /**
@@ -48,6 +56,7 @@ export const wordlah = {
   play: {
     adults: "Free to play, with ads. For adults 18 and over.",
     bar: "WordLah is coming to iPhone and Android",
+    waitlist: ["On Android?", "Join the waitlist"],
     card: {
       kicker: "after every game",
       title: "Then get the joke",
