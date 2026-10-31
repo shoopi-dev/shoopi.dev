@@ -1,0 +1,808 @@
+/* WordLah's landing page (play.tsx): a real round of the game on the Horizon sky beside the headline, then what comes
+   after it in the site's glass. Everything is scoped to .wlp; the pieces' own styles are in wordlah.css. */
+
+.wlp {
+  --wrap: 1120px;
+}
+.wlp .wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* the hero */
+.wlp .hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 48px;
+  min-height: min(100svh, 940px);
+  padding: 64px 0 36px;
+}
+.wlp .pitch {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+.wlp .name {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 800 18px/1 var(--font-display);
+  letter-spacing: -0.02em;
+}
+.wlp .name img {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px var(--drop);
+}
+.wlp h1 {
+  font: 800 clamp(38px, 4.7vw, 58px) / 1.02 var(--font-display);
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.wlp h1 em {
+  font-style: normal;
+  color: var(--wl-teal);
+}
+.wlp .sub {
+  max-width: 34rem;
+  font-size: 15px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+}
+.wlp .badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.wlp .adults {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--ink) 60%, transparent);
+}
+
+.wlp .stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* the phone, drawn: a body, a screen, the island */
+.wlp .phone {
+  position: relative;
+  flex: none;
+  width: 340px;
+  height: 690px;
+  padding: 10px;
+  border-radius: 54px;
+  background: linear-gradient(140deg, #3a3a44, #121217 40%, #26262e);
+  box-shadow: 0 0 0 2px #55555f, 0 30px 70px rgb(20 8 40 / 0.35);
+}
+.wlp .screen {
+  --out-ink: rgb(27 37 48 / 0.6);
+  --out-line: rgb(27 37 48 / 0.28);
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 44px;
+  font-family: var(--ui);
+}
+:root[data-theme="dark"] .wlp .screen {
+  --out-ink: rgb(255 255 255 / 0.82);
+  --out-line: rgb(255 255 255 / 0.4);
+}
+.wlp .island {
+  position: absolute;
+  z-index: 30;
+  top: 11px;
+  left: 50%;
+  width: 96px;
+  height: 28px;
+  margin-left: -48px;
+  border-radius: 16px;
+  background: #000;
+}
+.wlp .home-bar {
+  position: absolute;
+  z-index: 30;
+  bottom: 7px;
+  left: 50%;
+  width: 112px;
+  height: 4px;
+  margin-left: -56px;
+  border-radius: 3px;
+  background: rgb(255 255 255 / 0.7);
+}
+
+.wlp .sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transition: opacity 1.4s ease;
+}
+.wlp .sky.dusk {
+  background: var(--wl-dusk);
+}
+.wlp .sky.morning {
+  background: var(--wl-morning);
+  opacity: 0;
+}
+.wlp .screen.won .sky.morning {
+  opacity: 1;
+}
+
+.wlp .topbar {
+  position: absolute;
+  z-index: 11;
+  top: 48px;
+  left: 18px;
+  right: 18px;
+  height: 30px;
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) 30px;
+  align-items: center;
+  color: #fff;
+  transition: color 0.6s;
+}
+/* over the bright morning the top bar goes ink, and a ruled-out tile's letter too, as the game's faded keys do */
+:root:not([data-theme="dark"]) .wlp .screen.won .topbar {
+  color: #1b2530;
+}
+:root:not([data-theme="dark"]) .wlp .screen.won .wl-tile.k-out {
+  --on: rgb(27 37 48 / 0.55);
+}
+.wlp .topbar svg {
+  width: 22px;
+  height: 22px;
+}
+.wlp .topbar .title {
+  overflow: hidden;
+  font: 800 17px/1 var(--baloo);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transform: translateY(2px);
+}
+.wlp .topbar .gear {
+  justify-self: end;
+}
+
+/* the Merlion as the sun: low at dusk, a notch higher with every guess, up with sparks on the win */
+.wlp .sunbox {
+  position: absolute;
+  z-index: 1;
+  top: var(--sun-top, 112px);
+  left: 50%;
+  width: 88px;
+  height: 88px;
+  margin-left: -44px;
+  transition: top 1.1s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+.wlp .sunbox .wl-sun {
+  width: 88px;
+}
+.wlp .poke .wl-flip {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.wlp .poking .wl-flip {
+  opacity: 1;
+}
+.wlp .poking .wl-sun img {
+  opacity: 0;
+}
+.wlp .hop {
+  animation: wlp-hop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+@keyframes wlp-hop {
+  40% {
+    translate: 0 -10px;
+  }
+}
+.wlp .spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px;
+  color: #ffe27a;
+  opacity: 0;
+  pointer-events: none;
+}
+.wlp .spark svg {
+  width: 100%;
+  height: 100%;
+}
+.wlp .screen.won .spark {
+  animation: wlp-spark 1.4s ease-out both;
+  animation-delay: var(--d);
+}
+@keyframes wlp-spark {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.3);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(1);
+  }
+}
+
+.wlp .skyline {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 170px;
+  height: 64px;
+  color: var(--wl-city-dusk);
+  transition: color 1.4s ease;
+}
+.wlp .screen.won .skyline {
+  color: var(--wl-city-morning);
+}
+
+.wlp .boardbox {
+  position: absolute;
+  z-index: 3;
+  top: 190px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  font-size: 44px;
+}
+.wlp .boardbox .wl-board,
+.wlp .boardbox .wl-row {
+  gap: 6px;
+}
+.wlp .boardbox .wl-tile.k-empty {
+  -webkit-backdrop-filter: blur(1.5px);
+  backdrop-filter: blur(1.5px);
+}
+/* a letter landing in its tile (bump: the site's own .pop is its entrance) */
+.wlp .wl-tile.bump {
+  animation: wlp-bump 0.16s ease-out;
+}
+@keyframes wlp-bump {
+  50% {
+    scale: 1.1;
+  }
+}
+.wlp .wl-row.shake {
+  animation: wlp-shake 0.42s ease;
+}
+@keyframes wlp-shake {
+  15%,
+  55% {
+    translate: -7px 0;
+  }
+  35%,
+  75% {
+    translate: 7px 0;
+  }
+}
+
+/* the keyboard, light over the sky in both themes */
+.wlp .deck {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 12px 8px 22px;
+  border-top: 1px solid rgb(255 255 255 / 0.3);
+  background: rgb(255 255 255 / 0.16);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.wlp .krow {
+  display: flex;
+  gap: 5px;
+  height: 38px;
+}
+.wlp .krow.mid {
+  padding: 0 13px;
+}
+.wlp .key {
+  display: grid;
+  place-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+  border-radius: 7px;
+  background: var(--wl-key);
+  box-shadow: 0 2px 0 var(--wl-key-lip);
+  color: #1b2530;
+  font: 800 15px/1 var(--baloo);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.wlp .key span {
+  display: inline-block;
+  transform: translateY(2px);
+}
+.wlp .key.wide {
+  flex: 1.55 1 0;
+  font: 800 11px/1 var(--baloo);
+  letter-spacing: 0.03em;
+}
+.wlp .key.enter {
+  background: var(--wl-red);
+  box-shadow: 0 2px 0 var(--wl-red-lip);
+  color: var(--wl-on-red);
+}
+.wlp .key.right {
+  background: var(--wl-teal);
+  box-shadow: 0 2px 0 var(--wl-teal-lip);
+  color: #fff;
+}
+.wlp .key.moved {
+  background: var(--wl-mango);
+  box-shadow: 0 2px 0 var(--wl-mango-lip);
+  color: var(--wl-on-mango);
+}
+.wlp .key.out {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--out-line);
+  color: var(--out-ink);
+}
+.wlp .key svg {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+
+/* the end: the word card rises over the board */
+.wlp .endcard {
+  position: absolute;
+  z-index: 10;
+  left: 12px;
+  right: 12px;
+  bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  translate: 0 120%;
+  visibility: hidden;
+  transition: translate 0.8s cubic-bezier(0.2, 0.9, 0.25, 1.08), visibility 0s 0.8s;
+}
+.wlp .screen.done .endcard {
+  translate: 0 0;
+  visibility: visible;
+  transition: translate 0.8s cubic-bezier(0.2, 0.9, 0.25, 1.08);
+}
+.wlp .endcard .wl-card {
+  width: 100%;
+  padding: 16px 16px 14px;
+  border-radius: 22px;
+  font-size: 14px;
+}
+.wlp .endcard .wl-card-tiles {
+  margin-bottom: 10px;
+  font-size: 38px;
+}
+.wlp .endcard .wl-card .wl-card-sentence {
+  margin: 9px 0 10px;
+  font-size: 17px;
+}
+
+/* the rows under the hero, each fading up as it comes into view */
+.wlp .reveal {
+  opacity: 0;
+  translate: 0 24px;
+  transition: opacity 0.7s ease, translate 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.wlp .reveal.in {
+  opacity: 1;
+  translate: 0 0;
+}
+.wlp .rows {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 24px 0 8px;
+}
+.wlp .feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 32px;
+  padding: 36px 40px;
+  border-radius: 34px;
+}
+.wlp .feature:nth-child(even) .piece {
+  order: -1;
+}
+.wlp h2 {
+  margin-bottom: 12px;
+  font: 800 clamp(28px, 3.6vw, 42px) / 1.05 var(--font-display);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.wlp .feature p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+}
+.wlp .kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  font: 600 12px var(--font-mono);
+  letter-spacing: 0.02em;
+  color: var(--blue-text);
+}
+.wlp .piece {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+}
+
+.wlp .cards {
+  position: relative;
+  width: min(100%, 340px);
+  height: 400px;
+}
+.wlp .cards .wl-card {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  translate: 0 -50%;
+  opacity: 0;
+  scale: 0.94;
+  rotate: -2deg;
+  transition: opacity 0.6s ease, scale 0.6s cubic-bezier(0.34, 1.4, 0.64, 1), rotate 0.6s ease;
+}
+.wlp .cards .wl-card.on {
+  opacity: 1;
+  scale: 1;
+  rotate: 0deg;
+}
+.wlp .dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+.wlp .dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--ink) 20%, transparent);
+  transition: background-color 0.3s, width 0.3s;
+}
+.wlp .dots i.on {
+  width: 18px;
+  border-radius: 4px;
+  background: var(--wl-teal);
+}
+
+.wlp .poke {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 240px;
+  height: 300px;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.wlp .poke .wl-sun {
+  width: 200px;
+}
+.wlp .poke .wl-flip {
+  top: 50px;
+  left: 20px;
+  width: 200px;
+}
+.wlp .poke .wl-bubble {
+  position: absolute;
+  top: 8px;
+  right: -26px;
+  font-size: 18px;
+  rotate: 4deg;
+}
+.wlp .poke .count {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font: 400 12px var(--font-mono);
+  text-align: center;
+  color: color-mix(in srgb, var(--ink) 60%, transparent);
+}
+
+.wlp .boardpiece {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: min(100%, 380px);
+}
+.wlp .boardpiece .wl-leaderboard li {
+  opacity: 0;
+  translate: 24px 0;
+  transition: opacity 0.5s ease, translate 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+  transition-delay: calc(var(--i) * 0.12s);
+}
+.wlp .boardpiece.in .wl-leaderboard li {
+  opacity: 1;
+  translate: 0 0;
+}
+.wlp .sharebox {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--wl-card);
+  box-shadow: 0 1px 0 var(--wl-line);
+  color: var(--wl-ink);
+  font: 500 14px/1.4 var(--ui);
+}
+.wlp .sharebox .wl-share {
+  flex: none;
+  font-size: 18px;
+}
+.wlp .sharebox b {
+  display: block;
+  font: 800 17px/1.1 var(--baloo);
+}
+.wlp .sharebox .t {
+  color: var(--wl-ink2);
+}
+
+/* the rest of the game */
+.wlp .more {
+  margin-top: 22px;
+  padding: 36px 40px;
+  border-radius: 34px;
+}
+.wlp .grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+.wlp .item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid var(--card-border);
+  border-radius: 22px;
+  background: var(--card);
+}
+.wlp .item h3 {
+  font: 700 18px/1.15 var(--font-display);
+  letter-spacing: -0.02em;
+}
+.wlp .item p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+}
+.wlp .item .art {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 92px;
+}
+.wlp .item .art .wl-tile {
+  font-size: 40px;
+}
+.wlp .item .art .mama {
+  width: auto;
+  height: 110px;
+  margin-top: -18px;
+  filter: drop-shadow(0 8px 10px rgb(30 8 40 / 0.22));
+}
+.wlp .item .cal {
+  display: grid;
+  grid-template-columns: repeat(7, 28px);
+  gap: 5px;
+  align-self: center;
+}
+.wlp .item .art .cal .wl-tile {
+  font-size: 28px;
+}
+.wlp .item .art .cal .wl-tile b {
+  font-size: 0.5em;
+}
+.wlp .notif {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--paper) 70%, var(--card));
+  font-family: var(--ui);
+}
+.wlp .notif img {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+}
+.wlp .notif b {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+.wlp .notif b small {
+  font-weight: 500;
+  color: color-mix(in srgb, var(--ink) 55%, transparent);
+}
+.wlp .notif span {
+  font-size: 13px;
+  color: color-mix(in srgb, var(--ink) 80%, transparent);
+}
+.wlp .item .cheem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 34px;
+}
+.wlp .item .art .cheem .wl-tile {
+  font-size: 34px;
+}
+.wlp .item .cheem .wl-tile.k-empty {
+  box-shadow: 0 0.085em 0 var(--wl-tile-empty-lip), inset 0 0 0 0.06em var(--wl-teal);
+}
+.wlp .item .guestrow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.wlp .item .guestrow span {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--raised);
+  color: var(--ink);
+  font: 600 12px var(--ui);
+}
+
+/* the close */
+.wlp .end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 72px 0 24px;
+  text-align: center;
+}
+.wlp .end .cheer {
+  width: 180px;
+  height: auto;
+  filter: drop-shadow(0 10px 14px rgb(30 8 40 / 0.28));
+}
+.wlp .end p {
+  max-width: 30rem;
+  font-size: 14px;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--ink) 72%, transparent);
+}
+.wlp .end .badges {
+  justify-content: center;
+}
+
+/* the floating install bar: top right beside the theme switch on a computer, the bottom on a phone; hidden while
+   the page's own badges show */
+.wlp .install {
+  position: fixed;
+  z-index: 49;
+  top: 24px;
+  right: 76px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px;
+  font: 600 12px/1.2 var(--font-mono);
+  transition: opacity 0.35s ease, translate 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+}
+.wlp .install img {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+}
+.wlp .install.hide {
+  opacity: 0;
+  translate: 0 -12px;
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .wlp .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    min-height: 0;
+    padding: 76px 0 32px;
+  }
+  .wlp .pitch {
+    align-items: center;
+    text-align: center;
+  }
+  .wlp .badges {
+    justify-content: center;
+  }
+  .wlp .feature {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    padding: 26px 20px;
+  }
+  .wlp .feature:nth-child(even) .piece {
+    order: 0;
+  }
+  .wlp .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .wlp .more {
+    padding: 26px 20px;
+  }
+}
+@media (max-width: 640px) {
+  .wlp .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .wlp .item .art {
+    height: auto;
+    min-height: 44px;
+  }
+  .wlp .item .art .mama {
+    margin-top: 0;
+  }
+  .wlp .cards {
+    height: 370px;
+  }
+  .wlp .boardpiece .wl-leaderboard .time {
+    display: none;
+  }
+  .wlp .boardpiece .wl-leaderboard li {
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+  }
+  .wlp .install {
+    top: auto;
+    right: auto;
+    left: 50%;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    translate: -50% 0;
+    white-space: nowrap;
+  }
+  .wlp .install.hide {
+    translate: -50% 12px;
+  }
+  .wlp .piece {
+    min-height: 0;
+  }
+  .wlp .poke .wl-bubble {
+    right: -6px;
+  }
+}
+@media (max-width: 372px) {
+  .wlp .phone {
+    zoom: 0.92;
+  }
+}

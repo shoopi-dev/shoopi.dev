@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description,
     url: `${w.url}/privacy`,
     image: w.ogImage,
-    imageAlt: "WordLah: Singa the lion, the app's icon, over a dusk sky",
+    imageAlt: w.ogAlt,
     siteName: w.name,
   }),
 };
