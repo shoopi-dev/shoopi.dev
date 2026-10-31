@@ -2,6 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element -- the art is small, fixed and already sized; next/image would only add a loader */
 import { useEffect, useRef, type CSSProperties } from "react";
+import Link from "next/link";
 import { wordlah as w } from "@/data/wordlah";
 import { Rise } from "@/components/animate";
 import { StoreBadge } from "@/components/stampstory";
@@ -24,12 +25,19 @@ const PLAY = w.store.android.status === "live" ? w.store.android.url : undefined
 const ICON = "/wordlah/icon.png";
 const KEYS = ["QWERTYUIOP", "ASDFGHJKL", "+ZXCVBNM-"];
 
-/** The stores' badges, the site's own; both say "Coming soon" until the app is out. */
+/** The stores' badges, the site's own; both say "Coming soon" until the app is out, and Android offers the waitlist. */
 function Badges({ delay = 0 }: { delay?: number }) {
   return (
-    <div className="badges" data-badges>
-      <StoreBadge store="ios" href={IOS} delay={delay} />
-      <StoreBadge store="android" href={PLAY} delay={delay + 0.06} />
+    <div className="badges-and" data-badges>
+      <div className="badges">
+        <StoreBadge store="ios" href={IOS} delay={delay} />
+        <StoreBadge store="android" href={PLAY} delay={delay + 0.06} />
+      </div>
+      {!PLAY && (
+        <Rise as="p" delay={delay + 0.12} className="waitlist">
+          {P.waitlist[0]} <Link href="/wordlah/android">{P.waitlist[1]}</Link>
+        </Rise>
+      )}
     </div>
   );
 }

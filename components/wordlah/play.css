@@ -59,6 +59,21 @@
   flex-wrap: wrap;
   gap: 12px;
 }
+.wlp .badges-and {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wlp .waitlist {
+  font-size: 12px;
+  color: color-mix(in srgb, var(--ink) 60%, transparent);
+}
+.wlp .waitlist a {
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: underline dotted;
+  text-underline-offset: 4px;
+}
 .wlp .adults {
   font-size: 12px;
   color: color-mix(in srgb, var(--ink) 60%, transparent);
@@ -708,6 +723,9 @@
 .wlp .end .badges {
   justify-content: center;
 }
+.wlp .end .badges-and {
+  align-items: center;
+}
 
 /* the floating install bar: top right beside the theme switch on a computer, the bottom on a phone; hidden while
    the page's own badges show */
@@ -747,6 +765,9 @@
   }
   .wlp .badges {
     justify-content: center;
+  }
+  .wlp .badges-and {
+    align-items: center;
   }
   .wlp .feature {
     grid-template-columns: minmax(0, 1fr);
