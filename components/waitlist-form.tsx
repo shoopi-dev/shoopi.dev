@@ -2,11 +2,12 @@
 
 import { useActionState } from "react";
 import { joinWaitlist, type WaitlistState } from "@/lib/waitlist";
+import type { Platform } from "./waitlist";
 import { Pop } from "./animate";
 
-/** The email field of an Android waitlist (components/waitlist.tsx); once joined, the thanks takes its place. */
-export function WaitlistForm({ app, date }: { app: string; date?: string }) {
-  const [state, action, pending] = useActionState(joinWaitlist.bind(null, app), {} as WaitlistState);
+/** The email field of an app's waitlist (components/waitlist.tsx); once joined, the thanks takes its place. */
+export function WaitlistForm({ app, platform, date }: { app: string; platform: Platform; date?: string }) {
+  const [state, action, pending] = useActionState(joinWaitlist.bind(null, app, platform), {} as WaitlistState);
 
   if (state.place) {
     return (

@@ -31,14 +31,16 @@ export const wordlah = {
   tagline: ["Guess the", "Singlish", "word, then get the joke"] as [string, string, string],
   subtitle: "One Singlish word a day, the same for everyone. Six tries to find it, then the word card tells you what it means.",
   support,
-  updated: "2026-10-28",
+  updated: "2026-11-01",
   url: "https://wordlah.shoopi.dev",
   ogImage: "https://wordlah.shoopi.dev/wordlah/og.jpg", // 1200x630, public/wordlah/og.jpg
   ogAlt: "WordLah: the Merlion over a dusk sky, above the words A daily Singlish word game",
+  // /get sends a phone to its store once the app is live there, and until then to `soon`: an iPhone to the /ios waitlist,
+  // an Android phone to the /beta while the closed test needs testers. date: the day it lands, as /ios or /android
+  // says it ("November 12"); empty until the store says
   store: {
-    ios: { status: "soon" as "soon" | "live", url: "" },
-    // date: the day it lands on Google Play, as /android says it ("November 12"); empty until Google says
-    android: { status: "soon" as "soon" | "live", url: "", date: "" },
+    ios: { status: "soon" as "soon" | "live", url: "", date: "", soon: "/ios" },
+    android: { status: "soon" as "soon" | "live", url: "", date: "", soon: "/beta" },
   },
   // until Google Play opens the app to everyone: a closed test needs 12 testers for 14 days (/beta, unlisted, as
   // Eureka's). shoopi-testers is the one group for all the apps
@@ -262,6 +264,7 @@ export const wordlah = {
       title: "What this website collects",
       body: [
         "These pages are served from shoopi.dev, which uses Vercel Analytics and Speed Insights. Those measure page views and load performance in aggregate and do not use cookies to identify you or follow you across sites.",
+        "If you join the waitlist for the iPhone or Android version, the email you give is kept, with when you joined, only to send you the store link the day WordLah is out there. It is never used for anything else or shared, and it is deleted once that email is sent. To be taken off sooner, email me.",
       ],
     },
     {
@@ -280,10 +283,10 @@ export const wordlah = {
         "RevenueCat checks purchases and keeps their record against your account identifier.",
         "Google shows and measures the ads, and decides how it uses what its ad software collects, under its own privacy policy.",
         "PostHog counts how the app is used, and keeps the copy of the game tables described above, in its EU cloud.",
-        "Vercel hosts this website.",
+        "Vercel hosts this website, and Upstash keeps the waitlists' emails for it.",
       ],
       after: [
-        "Supabase, Google, RevenueCat, PostHog and Vercel are companies in the United States, and some of the data may be processed there. Where it comes from the EEA or the UK, the transfer relies on the European Commission's standard contractual clauses or the EU-U.S. Data Privacy Framework.",
+        "Supabase, Google, RevenueCat, PostHog, Vercel and Upstash are companies in the United States, and some of the data may be processed there. Where it comes from the EEA or the UK, the transfer relies on the European Commission's standard contractual clauses or the EU-U.S. Data Privacy Framework.",
         "Nobody else. I do not sell your data or hand it to anyone.",
       ],
     },

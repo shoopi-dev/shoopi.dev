@@ -3,7 +3,8 @@
 import { site } from "@/data/site";
 
 /**
- * The Android waitlists (components/waitlist.tsx): one Redis sorted set per app, `waitlist:<app>:android`, holding
+ * The waitlists (components/waitlist.tsx): one Redis sorted set per app and platform, `waitlist:<app>:android` or
+ * `waitlist:<app>:ios`, holding
  * emails scored by when each joined, in the project's Upstash Redis (Vercel > Storage). Joining twice changes nothing,
  * and an email's place in its set is the "#N on the list" the page shows. Read a list with
  * `ZRANGE waitlist:eureka:android 0 -1` in Upstash's console.
@@ -14,15 +15,15 @@ export type WaitlistState = { place?: number; problem?: string };
 // which a visitor could change
 const apps = new Set([...site.apps.map((a) => a.name.toLowerCase()), "wordlah"]);
 
-export async function joinWaitlist(app: string, _: WaitlistState, form: FormData): Promise<WaitlistState> {
+export async function joinWaitlist(app: string, platform: string, _: WaitlistState, form: FormData): Promise<WaitlistState> {
   const email = String(form.get("email") ?? "").trim().toLowerCase();
-  if (!apps.has(app)) return { problem: "There's no list for this app." };
+  if (!apps.has(app) || (platform !== "android" && platform !== "ios")) return { problem: "There's no list for this app." };
   if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { problem: "That doesn't look like an email." };
   }
   // ponytail: no bot check; add a honeypot field or a per-address limit if junk shows up in a list
   try {
-    return { place: await join(`waitlist:${app}:android`, email) };
+    return { place: await join(`waitlist:${app}:${platform}`, email) };
   } catch (e) {
     console.error("[waitlist]", e);
     return { problem: "Couldn't save that. Try again in a minute." };
