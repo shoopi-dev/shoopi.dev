@@ -1,6 +1,7 @@
 import { stampstory } from "@/data/stampstory";
 
-type Store = { status: "soon" | "live"; url: string };
+/** A store, and `soon`: the path a device goes to until the app is live there (an Android phone: /android by default). */
+type Store = { status: "soon" | "live"; url: string; soon?: string };
 
 /** The team's provider token: App Store Connect only counts a campaign (`ct`) next to it. */
 const APPLE_PROVIDER_TOKEN = "129420621";
@@ -26,9 +27,10 @@ export function storeRedirect(request: Request, store: { ios: Store; android: St
 }
 
 /**
- * Where an app's /get sends this device: an iPhone or iPad to the App Store once the app is live there, an Android
- * phone to Google Play once the app is live there (until then to /android, its beta sign-up or waitlist), and everything else to
- * the landing page, which has the buttons.
+ * Where an app's /get sends this device: an iPhone or iPad to the App Store once the app is live there (until then to
+ * its `soon` page when the app has one, such as WordLah's /ios waitlist), an Android phone to Google Play once the app
+ * is live there (until then to its `soon` page, else /android, its beta sign-up or waitlist), and everything else to the
+ * landing page, which has the buttons.
  * An iPad asking for the desktop site reads as a Mac and gets the landing page: the user agent cannot tell them apart.
  * The App Store link carries the campaign, so App Analytics (Acquisition > Campaigns) counts downloads per source.
  */
@@ -39,14 +41,19 @@ export function storeLink(
   home: string = stampstory.url,
 ) {
   const ua = userAgent ?? "";
-  if (/iPhone|iPad|iPod/i.test(ua) && store.ios.status === "live" && store.ios.url) {
-    const url = new URL(store.ios.url);
-    url.searchParams.set("pt", APPLE_PROVIDER_TOKEN);
-    url.searchParams.set("ct", campaign);
-    url.searchParams.set("mt", "8");
-    return url.toString();
+  if (/iPhone|iPad|iPod/i.test(ua)) {
+    if (store.ios.status === "live" && store.ios.url) {
+      const url = new URL(store.ios.url);
+      url.searchParams.set("pt", APPLE_PROVIDER_TOKEN);
+      url.searchParams.set("ct", campaign);
+      url.searchParams.set("mt", "8");
+      return url.toString();
+    }
+    if (store.ios.soon) return `${home}${store.ios.soon}`;
   }
-  if (/Android/i.test(ua)) return store.android.status === "live" && store.android.url ? store.android.url : `${home}/android`;
+  if (/Android/i.test(ua)) {
+    return store.android.status === "live" && store.android.url ? store.android.url : `${home}${store.android.soon ?? "/android"}`;
+  }
   return home;
 }
 

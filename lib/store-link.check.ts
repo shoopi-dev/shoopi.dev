@@ -36,6 +36,17 @@ assert.equal(storeLink(IPHONE_INSTAGRAM, "web", both), appStore("web"));
 // a store marked live without a url never becomes an empty redirect
 assert.equal(storeLink(ANDROID_INSTAGRAM, "web", { ...both, android: { status: "live", url: "" } }), `${home}/android`);
 
+// WordLah before either store: an iPhone lands on its /ios waitlist, an Android phone on its /beta, a computer at home
+const wl = { ios: { status: "soon" as const, url: "", soon: "/ios" }, android: { status: "soon" as const, url: "", soon: "/beta" } };
+const wlHome = "https://wordlah.shoopi.dev";
+assert.equal(storeLink(IPHONE_SAFARI, "reddit", wl, wlHome), `${wlHome}/ios`);
+assert.equal(storeLink(IPAD, "web", wl, wlHome), `${wlHome}/ios`);
+assert.equal(storeLink(ANDROID_INSTAGRAM, "web", wl, wlHome), `${wlHome}/beta`);
+assert.equal(storeLink(MAC, "web", wl, wlHome), wlHome);
+// once the App Store has it, an iPhone goes there with its campaign
+const wlIos = "https://apps.apple.com/app/id6827368191";
+assert.equal(storeLink(IPHONE_SAFARI, "reddit", { ...wl, ios: { status: "live", url: wlIos, soon: "/ios" } }, wlHome), `${wlIos}?pt=129420621&ct=reddit&mt=8`);
+
 // the campaign: what the link says, else the in-app browser, else the referrer
 const get = "https://stampstory.shoopi.dev/get";
 assert.equal(campaignOf(`${get}?c=reddit`, IPHONE_INSTAGRAM, null), "reddit");

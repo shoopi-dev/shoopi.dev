@@ -7,30 +7,40 @@ import { WaitlistForm } from "@/components/waitlist-form";
 import { externalProps } from "@/lib/link";
 import { social } from "@/lib/seo";
 
-type Store = { status: "soon" | "live"; url: string };
+type Store = { status: "soon" | "live"; url: string; date?: string };
+
+/** The platform a waitlist is for: its page is /<platform>, its list waitlist:<app>:<platform>. */
+export type Platform = "android" | "ios";
+
+// how each platform's page names itself, its store, and the other platform
+const PLATFORM = {
+  android: { device: "Android", store: "Google Play", storeLink: "Play Store", other: "ios", otherDevice: "iPhone", otherStore: "App Store" },
+  ios: { device: "iPhone", store: "the App Store", storeLink: "App Store", other: "android", otherDevice: "Android", otherStore: "Google Play" },
+} as const;
 
 /**
- * An app's /android before Google Play has the app: when it lands, and an email field for the day it does
- * (lib/waitlist.ts). A new app's page is these lines in app/<app>/android/page.tsx:
+ * An app's /android or /ios before that store has the app: when it lands, and an email field for the day it does
+ * (lib/waitlist.ts). A new app's page is these lines in app/<app>/<platform>/page.tsx:
  *
- *   export const metadata = waitlistMetadata(app);
- *   export default function Page() { return <AndroidWaitlist app={app} links={appDoc.links} />; }
+ *   export const metadata = waitlistMetadata(app, "ios");
+ *   export default function Page() { return <AppWaitlist app={app} platform="ios" links={appDoc.links} />; }
  *
  * The app's name, in lower case, names its list, its icon (public/<app>/icon.png) and its home (/<app>).
- * `store.android.date` is the day as the page says it ("November 12"); empty, the page says "soon".
+ * `store.<platform>.date` is the day as the page says it ("November 12"); empty, the page says "soon".
  */
 export type WaitlistApp = {
   name: string;
   url: string;
   ogImage: string;
-  store: { ios: Store; android: Store & { date?: string } };
+  store: { ios: Store; android: Store };
 };
 
-export function waitlistMetadata(app: WaitlistApp): Metadata {
-  const date = app.store.android.date;
-  const title = `${app.name} on Android: join the waitlist`;
-  const description = `${app.name} is coming to Google Play${date ? ` on ${date}` : ""}. Leave your email and get the Play Store link the day it's live.`;
-  const url = `${app.url}/android`;
+export function waitlistMetadata(app: WaitlistApp, platform: Platform = "android"): Metadata {
+  const p = PLATFORM[platform];
+  const date = app.store[platform].date;
+  const title = `${app.name} on ${p.device}: join the waitlist`;
+  const description = `${app.name} is coming to ${p.store}${date ? ` on ${date}` : ""}. Leave your email and get the ${p.storeLink} link the day it's live.`;
+  const url = `${app.url}/${platform}`;
   return {
     title: { absolute: title },
     description,
@@ -46,9 +56,16 @@ const T = {
   footer: 0.5,
 };
 
+/** Android's waitlist, as Eureka and StampStory have it. */
 export function AndroidWaitlist({ app, links }: { app: WaitlistApp; links: DocApp["links"] }) {
+  return <AppWaitlist app={app} platform="android" links={links} />;
+}
+
+export function AppWaitlist({ app, platform, links }: { app: WaitlistApp; platform: Platform; links: DocApp["links"] }) {
   const slug = app.name.toLowerCase();
-  const { ios, android } = app.store;
+  const p = PLATFORM[platform];
+  const store = app.store[platform];
+  const other = app.store[p.other];
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-4xl flex-col">
       <BackLink href={`/${slug}`} label={app.name} delay={T.hero} />
@@ -64,35 +81,35 @@ export function AndroidWaitlist({ app, links }: { app: WaitlistApp; links: DocAp
             />
           </Pop>
           <Rise as="p" delay={T.hero + 0.1} className="text-xs font-semibold uppercase tracking-wide text-ink/70">
-            {app.name} on Android
+            {app.name} on {p.device}
           </Rise>
           <Rise
             as="h1"
             delay={T.hero + 0.14}
             className="font-display text-3xl font-bold leading-snug tracking-tight text-balance sm:text-5xl"
           >
-            Coming {android.date || "soon"}
+            Coming {store.date || "soon"}
           </Rise>
           <Rise as="p" delay={T.hero + 0.22} className="max-w-xl text-balance text-ink/70">
-            {ios.status === "live" && `${app.name} is already on the App Store. `}
-            {android.date ? `The Android version lands on ${android.date}. ` : "The Android version is on its way. "}
-            {"Leave your email and I'll send you the Play Store link the day it's live. Nothing else, ever."}
+            {other.status === "live" && `${app.name} is already on ${PLATFORM[p.other].store}. `}
+            {store.date ? `The ${p.device} version lands on ${store.date}. ` : `The ${p.device} version is on its way. `}
+            {`Leave your email and I'll send you the ${p.storeLink} link the day it's live. Nothing else, ever.`}
           </Rise>
           <Rise delay={T.form} className="mt-2 flex w-full justify-center">
-            <WaitlistForm app={slug} date={android.date} />
+            <WaitlistForm app={slug} platform={platform} date={store.date} />
           </Rise>
         </section>
 
         <div className="mt-auto flex flex-col items-center pt-24">
-          {ios.status === "live" && (
+          {other.status === "live" && (
             <Rise as="p" delay={T.footer} className="text-center text-xs text-ink/60">
-              Already on iPhone?{" "}
+              Already on {p.otherDevice}?{" "}
               <a
-                href={ios.url}
-                {...externalProps(ios.url)}
+                href={other.url}
+                {...externalProps(other.url)}
                 className="font-semibold text-ink underline decoration-dotted underline-offset-4"
               >
-                Get {app.name} on the App Store <span aria-hidden>↗</span>
+                Get {app.name} on {p.otherStore} <span aria-hidden>↗</span>
               </a>
             </Rise>
           )}
