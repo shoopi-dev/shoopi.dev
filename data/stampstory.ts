@@ -39,17 +39,10 @@ export const stampstory = {
     handle: site.handle,
     country: "Singapore",
   },
+  // live on both: the App Store since 2026-09-25, Google Play since 2026-11-03 (/android and /beta send people there)
   store: {
-    // flip to the real link the moment review clears
     ios: { status: "live" as "soon" | "live", url: "https://apps.apple.com/app/id6809707590" },
-    // date: the day it lands on Google Play, as /android says it ("November 12"); empty until Google says
-    android: { status: "soon" as "soon" | "live", url: "", date: "" },
-  },
-  // until Google Play opens the app to everyone: a closed test needs 12 testers for 14 days (/beta, unlisted)
-  beta: {
-    group: "https://groups.google.com/g/stampstory-testers",
-    optIn: "https://play.google.com/apps/testing/dev.shoopi.stampstory",
-    install: "https://play.google.com/store/apps/details?id=dev.shoopi.stampstory",
+    android: { status: "live" as "soon" | "live", url: "https://play.google.com/store/apps/details?id=dev.shoopi.stampstory" },
   },
 
   /** The landing page's scroll story (components/stampstory-landing): a sample traveler's trip, told in stages. */
@@ -87,7 +80,7 @@ export const stampstory = {
       ],
       again: "Watch again",
     },
-    bar: { ios: "On iPhone now", android: "Android is coming soon", join: "Join the waitlist" },
+    bar: { ios: "On iPhone now", android: "On Android now" },
     skip: { long: "Skip to the end", short: "Skip" },
   },
 

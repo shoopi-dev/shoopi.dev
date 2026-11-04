@@ -231,6 +231,11 @@ export const site = {
   // "1 new SaaS client, 2 cancellations". The section hides while empty
   updates: [
     {
+      date: "2026-11-03",
+      title: "StampStory is on Google Play",
+      body: "App one is on Android now, in every country.",
+    },
+    {
       date: "2026-10-21",
       title: "Eureka is on the App Store",
       body: "App two. Android has a waitlist.",

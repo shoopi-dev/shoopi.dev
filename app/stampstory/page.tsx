@@ -9,9 +9,8 @@ import { social } from "@/lib/seo";
 
 // names what the app is, next to the App Store title: several other things are called StampStory
 const title = "StampStory: Travel Passport - where have you been?";
-// iOS first, Android follows: say "iPhone" until the Play link is live
 const description =
-  "Scratch map and travel passport for iPhone: mark every country you have visited and share the passport it makes. No account, no server, and your countries never leave your phone.";
+  "Scratch map and travel passport for iPhone and Android: mark every country you have visited and share the passport it makes. No account, no server, and your countries never leave your phone.";
 
 export const metadata: Metadata = {
   title: { absolute: title },

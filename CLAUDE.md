@@ -24,4 +24,5 @@ To give an app one:
 
 Try signups only on `next dev`, which keeps the lists in memory: previews and production write to the real lists.
 Read a list with `ZRANGE waitlist:<app>:android 0 -1` in Upstash's console.
-When the app is on Google Play, set `store.android` live (`/get` then sends Android there) and email the list from hi@shoopi.dev.
+When the app is on Google Play, set `store.android` live with the Play link (`/get`, the landing's badges and the home page's app list then send Android there), make `/<app>/android` and `/<app>/beta` 308 redirects to it (route handlers, as `app/stampstory/android/route.ts`), drop `/android` from `app/sitemap.ts`, and email the list from hi@shoopi.dev.
+The list itself stays in Upstash.

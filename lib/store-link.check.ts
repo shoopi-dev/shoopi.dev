@@ -18,23 +18,23 @@ const LINK_PREVIEW = "facebookexternalhit/1.1 (+http://www.facebook.com/external
 const appStore = (campaign: string) => `${stampstory.store.ios.url}?pt=129420621&ct=${campaign}&mt=8`;
 const home = stampstory.url;
 
-// today: iOS is live, Android is a closed test, so Android phones land on the beta sign-up
+const play = "https://play.google.com/store/apps/details?id=dev.shoopi.stampstory";
+
+// today: StampStory is live on both stores, so each phone lands in its own and a computer on the landing page
 assert.equal(storeLink(IPHONE_INSTAGRAM, "instagram"), appStore("instagram"));
 assert.equal(storeLink(IPAD), appStore("web"));
-assert.equal(storeLink(ANDROID_INSTAGRAM), `${home}/android`);
+assert.equal(storeLink(ANDROID_INSTAGRAM), play);
 assert.equal(storeLink(MAC), home);
 assert.equal(storeLink(LINK_PREVIEW), home);
 assert.equal(storeLink(null), home);
 
-// the day Google Play goes live, Android follows without touching this code
-const play = "https://play.google.com/store/apps/details?id=dev.shoopi.stampstory";
+// before Google Play has an app, an Android phone lands on its /android waitlist; a store marked live without a url
+// never becomes an empty redirect
 const ios = stampstory.store.ios.url;
 const both = { ios: { status: "live" as const, url: ios }, android: { status: "live" as const, url: play } };
-assert.equal(storeLink(ANDROID_INSTAGRAM, "web", both), play);
-assert.equal(storeLink(IPHONE_INSTAGRAM, "web", both), appStore("web"));
-
-// a store marked live without a url never becomes an empty redirect
+assert.equal(storeLink(ANDROID_INSTAGRAM, "web", { ...both, android: { status: "soon", url: "" } }), `${home}/android`);
 assert.equal(storeLink(ANDROID_INSTAGRAM, "web", { ...both, android: { status: "live", url: "" } }), `${home}/android`);
+assert.equal(storeLink(IPHONE_INSTAGRAM, "web", both), appStore("web"));
 
 // WordLah before either store: an iPhone lands on its /ios waitlist, an Android phone on its /beta, a computer at home
 const wl = { ios: { status: "soon" as const, url: "", soon: "/ios" }, android: { status: "soon" as const, url: "", soon: "/beta" } };
