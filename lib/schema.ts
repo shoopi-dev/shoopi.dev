@@ -20,6 +20,20 @@ const id = {
 const personRef = { "@type": "Person", "@id": id.person, name: site.fullName, url: HOME };
 const orgRef = { "@type": "Organization", "@id": id.org, name: "shoopi.dev", url: HOME };
 
+type Store = { status: "soon" | "live"; url: string };
+
+/** What an app runs on and where to install it, from the stores it is live on. */
+function platforms(store: { ios: Store; android: Store }) {
+  const live = [
+    { os: "iOS", ...store.ios },
+    { os: "Android", ...store.android },
+  ].filter((p) => p.status === "live" && p.url);
+  return {
+    operatingSystem: live.map((p) => p.os).join(", ") || "iOS",
+    installUrl: live.length ? live.map((p) => p.url) : undefined,
+  };
+}
+
 const gaiaCard = site.projects.find((p) => p.name === "Gaia");
 
 const stampstoryApp = {
@@ -31,8 +45,7 @@ const stampstoryApp = {
   description: `${s.subtitle} No account, no server, no analytics.`,
   image: `${s.url}/stampstory/icon.png`,
   applicationCategory: "TravelApplication",
-  operatingSystem: s.store.android.status === "live" ? "iOS, Android" : "iOS",
-  installUrl: s.store.ios.status === "live" ? s.store.ios.url : undefined,
+  ...platforms(s.store),
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   author: personRef,
   publisher: orgRef,
@@ -47,8 +60,7 @@ const eurekaApp = {
   description: e.subtitle,
   image: `${e.url}/eureka/icon.png`,
   applicationCategory: "ProductivityApplication",
-  operatingSystem: e.store.android.status === "live" ? "iOS, Android" : "iOS",
-  installUrl: e.store.ios.status === "live" ? e.store.ios.url : undefined,
+  ...platforms(e.store),
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   author: personRef,
   publisher: orgRef,

@@ -56,7 +56,7 @@ const T = {
   footer: 0.5,
 };
 
-/** Android's waitlist, as Eureka and StampStory have it. */
+/** Android's waitlist, as Eureka has it (and StampStory had, until Google Play). */
 export function AndroidWaitlist({ app, links }: { app: WaitlistApp; links: DocApp["links"] }) {
   return <AppWaitlist app={app} platform="android" links={links} />;
 }

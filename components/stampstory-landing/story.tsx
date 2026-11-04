@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import { stampstory as s } from "@/data/stampstory";
-import { APPLE_PATH, StoreBadge } from "@/components/stampstory";
+import { APPLE_PATH, PlayGlyph, StoreBadge } from "@/components/stampstory";
 import { externalProps } from "@/lib/link";
 import { start } from "./story-engine";
 import "./story.css";
@@ -23,7 +23,6 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const S = s.story;
 const IOS = s.store.ios.status === "live" ? s.store.ios.url : undefined;
 const PLAY = s.store.android.status === "live" ? s.store.android.url : undefined;
-const WAITLIST = "/stampstory/android";
 const ICON = "/stampstory/icon.png";
 const TRAVELER = "/stampstory/story/traveler.webp";
 
@@ -35,22 +34,12 @@ function Apple() {
   );
 }
 
-/** The stores' badges, the site's own; Android says "Coming soon" and offers the waitlist under them. */
+/** The stores' badges, the site's own. */
 function Badges({ className = "", delay = 0 }: { className?: string; delay?: number }) {
   return (
-    <div className={`flex flex-col items-center gap-3 ${className}`}>
-      <div className="flex flex-wrap items-center justify-center gap-3">
-        <StoreBadge store="ios" href={IOS} delay={delay} />
-        <StoreBadge store="android" href={PLAY} delay={delay + 0.06} />
-      </div>
-      {!PLAY && (
-        <p className="text-xs text-ink/60">
-          On Android?{" "}
-          <Link href={WAITLIST} className="font-semibold text-ink underline decoration-dotted underline-offset-4">
-            Join the waitlist
-          </Link>
-        </p>
-      )}
+    <div className={`flex flex-wrap items-center justify-center gap-3 ${className}`}>
+      <StoreBadge store="ios" href={IOS} delay={delay} />
+      <StoreBadge store="android" href={PLAY} delay={delay + 0.06} />
     </div>
   );
 }
@@ -375,9 +364,12 @@ export function StampStoryStory() {
               App Store
             </a>
           )}
-          <Link className="get only-android" href={WAITLIST}>
-            {S.bar.join}
-          </Link>
+          {PLAY && (
+            <a className="get only-android" href={PLAY} {...externalProps(PLAY)}>
+              <PlayGlyph />
+              Google Play
+            </a>
+          )}
         </div>
         <button type="button" className="glass-pill skip off">
           <span className="long">{S.skip.long}</span>
