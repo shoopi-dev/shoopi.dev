@@ -6,9 +6,11 @@ import { FooterLinks, footerClass } from "@/components/doc";
 import { BackLink, HOME_URL, StoreTrademarks } from "@/components/stampstory";
 import { WordlahPlay } from "@/components/wordlah/play";
 import { social } from "@/lib/seo";
+import { JsonLd } from "@/components/json-ld";
+import { wordlahGraph } from "@/lib/schema";
 
 const description =
-  "WordLah is a daily Singlish word game: one five-letter word a day, the same for everyone, six tries to find it, then the word card tells you what it means. Coming soon to iPhone and Android.";
+  "WordLah is a daily Singlish word game: one five-letter word a day, the same for everyone, six tries to find it, then the word card tells you what it means. On the App Store, and coming soon to Google Play.";
 
 export const metadata: Metadata = {
   title: { absolute: w.title },
@@ -27,6 +29,7 @@ export const metadata: Metadata = {
 export default function WordLahPage() {
   return (
     <>
+      <JsonLd data={wordlahGraph} />
       <BackLink href={HOME_URL} label={<Lockup className="text-base" />} delay={0.05} />
       <WordlahPlay />
       <div className="mx-auto w-full max-w-4xl px-4 pb-24">

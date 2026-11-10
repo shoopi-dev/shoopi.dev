@@ -252,7 +252,8 @@ export function start(root: El): () => void {
   if (reduced) boardpiece.classList.add("in");
   else once(boardpiece, () => boardpiece.classList.add("in"), 0.3);
 
-  // the install bar, hidden while the page's own badges show
+  // the install bar, hidden while the page's own badges show; on Android it offers the beta, not the App Store
+  if (/Android/i.test(navigator.userAgent)) root.classList.add("android");
   const bar = $(".install");
   const seen = new Set<Element>();
   const io = new IntersectionObserver(

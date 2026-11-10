@@ -1,6 +1,7 @@
 import { site } from "@/data/site";
 import { stampstory as s } from "@/data/stampstory";
 import { eureka as e } from "@/data/eureka";
+import { wordlah as w } from "@/data/wordlah";
 
 /* Structured data for the pages that are about these entities: the home page and the apps'
    landing pages. One @id per entity, so every mention points at the same Person and Organization
@@ -14,6 +15,7 @@ const id = {
   gaia: `${HOME}/#gaia`,
   app: `${s.url}/#stampstory`,
   eureka: `${e.url}/#eureka`,
+  wordlah: `${w.url}/#wordlah`,
 };
 
 // references that still say who they are, so a page carrying only a fragment stays readable
@@ -66,6 +68,21 @@ const eurekaApp = {
   publisher: orgRef,
 };
 
+const wordlahApp = {
+  "@type": "MobileApplication",
+  "@id": id.wordlah,
+  name: w.name,
+  alternateName: "WordLah! Singlish Word Game", // the App Store title
+  url: w.url,
+  description: w.subtitle,
+  image: `${w.url}/wordlah/icon.png`,
+  applicationCategory: "GameApplication",
+  ...platforms(w.store),
+  offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  author: personRef,
+  publisher: orgRef,
+};
+
 export const homeGraph = {
   "@context": "https://schema.org",
   "@graph": [
@@ -76,7 +93,7 @@ export const homeGraph = {
       givenName: "Itay",
       familyName: "Blokh",
       alternateName: "sho0pi",
-      description: `${site.summary} Maker of StampStory, a travel passport app, Eureka, voice-first idea notes, and Gaia, an open-source AI agent.`,
+      description: `${site.summary} Maker of StampStory, a travel passport app, Eureka, voice-first idea notes, WordLah, a daily Singlish word game, and Gaia, an open-source AI agent.`,
       image: `${HOME}/avatar.jpg`,
       jobTitle: site.jobTitle,
       url: HOME,
@@ -142,6 +159,7 @@ export const homeGraph = {
     },
     stampstoryApp,
     eurekaApp,
+    wordlahApp,
   ],
 };
 
@@ -174,6 +192,22 @@ export const eurekaGraph = {
       publisher: orgRef,
     },
     eurekaApp,
+  ],
+};
+
+/** wordlah.shoopi.dev is its own site to Google too, so it names itself "WordLah" */
+export const wordlahGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${w.url}/#website`,
+      name: w.name,
+      url: w.url,
+      inLanguage: "en",
+      publisher: orgRef,
+    },
+    wordlahApp,
   ],
 };
 
