@@ -6,6 +6,7 @@ import Link from "next/link";
 import { wordlah as w } from "@/data/wordlah";
 import { Rise } from "@/components/animate";
 import { StoreBadge } from "@/components/stampstory";
+import { externalProps } from "@/lib/link";
 import { ANSWER, CARD_WORDS, DAY, PUZZLE } from "./game";
 import { ART, Board, Bubble, Flip, Leaderboard, Row, ShareGrid, Skyline, Sun, Tile, WordCard } from "./pieces";
 import { start } from "./play-engine";
@@ -25,7 +26,7 @@ const PLAY = w.store.android.status === "live" ? w.store.android.url : undefined
 const ICON = "/wordlah/icon.png";
 const KEYS = ["QWERTYUIOP", "ASDFGHJKL", "+ZXCVBNM-"];
 
-/** The stores' badges, the site's own; both say "Coming soon" until the app is out, and Android offers the waitlist. */
+/** The stores' badges, the site's own: a store without WordLah yet says "Coming soon", and Android offers the waitlist. */
 function Badges({ delay = 0 }: { delay?: number }) {
   return (
     <div className="badges-and" data-badges>
@@ -147,13 +148,31 @@ function Phone() {
 export function WordlahPlay() {
   const root = useRef<HTMLDivElement>(null);
   useEffect(() => start(root.current!), []);
-  const [before, word, after] = w.tagline;
+  const [before, after] = w.tagline.split(w.taglineWord);
 
   return (
     <div ref={root} className="wlp">
-      <div className="install glass-pill hide" aria-hidden>
+      {/* the floating install bar: the App Store on an iPhone or a computer once it has WordLah, the beta on Android */}
+      <div className="install glass-pill hide" role="complementary" aria-label={`Get ${w.name}`}>
         <img src={ICON} alt="" width={26} height={26} />
-        <span>{P.bar}</span>
+        {IOS ? (
+          <>
+            <span className="not-android">{P.bar.ios}</span>
+            <a className="get not-android" href={IOS} {...externalProps(IOS)}>
+              {P.bar.get}
+            </a>
+          </>
+        ) : (
+          <span className="not-android">{P.bar.soon}</span>
+        )}
+        {!PLAY && (
+          <>
+            <span className="only-android">{P.bar.android}</span>
+            <Link className="get only-android" href="/wordlah/beta">
+              {P.bar.join}
+            </Link>
+          </>
+        )}
       </div>
 
       <main className="wrap">
@@ -164,7 +183,9 @@ export function WordlahPlay() {
               {w.name}
             </Rise>
             <Rise as="h1" delay={0.1}>
-              {before} <em>{word}</em> {after}
+              {before}
+              <em>{w.taglineWord}</em>
+              {after}
             </Rise>
             <Rise as="p" delay={0.16} className="sub">
               {w.subtitle}

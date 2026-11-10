@@ -233,11 +233,13 @@ export default async function Home() {
                 {site.apps.map((p, i) => (
                   <AppIcon key={p.name} p={p} delay={T.home + i * 0.06} />
                 ))}
-                {/* one slot for the next app, unnamed until it ships */}
-                <AppIcon
-                  p={{ name: "???", emoji: "", description: "", status: "soon" }}
-                  delay={T.home + site.apps.length * 0.06}
-                />
+                {/* one slot for the next app, unnamed until it ships, while the four places have room for it */}
+                {site.apps.length < 3 && (
+                  <AppIcon
+                    p={{ name: "???", emoji: "", description: "", status: "soon" }}
+                    delay={T.home + site.apps.length * 0.06}
+                  />
+                )}
                 <AlsoFolder items={also} delay={T.home + (site.apps.length + 1) * 0.06} />
               </div>
             </section>

@@ -22,13 +22,14 @@ export const supportMail = (() => {
  * Everything the WordLah pages say. Keep it true to what the app does: the app repo's CLAUDE.md (what is stored, the
  * wallet, the account and its sync, guests, the board, the ads, the analytics and their events) is where each sentence
  * comes from, and a new SDK, data flow or analytics event changes this first.
- * Unlisted until launch: the pages are noindex (app/wordlah/layout.tsx), and out of the sitemap and site.apps.
+ * Public since the App Store released it (2026-11-10): in the sitemap and in site.apps, and on the home page.
  */
 export const wordlah = {
   name: "WordLah",
   title: "WordLah: a daily Singlish word game",
-  /** The landing page's headline, its middle word in the game's teal. */
-  tagline: ["Guess the", "Singlish", "word, then get the joke"] as [string, string, string],
+  tagline: "Guess the Singlish word, then get the joke",
+  /** The tagline's word the landing page's headline shows in the game's teal. */
+  taglineWord: "Singlish",
   subtitle: "One Singlish word a day, the same for everyone. Six tries to find it, then the word card tells you what it means.",
   support,
   updated: "2026-11-01",
@@ -39,7 +40,7 @@ export const wordlah = {
   // an Android phone to the /beta while the closed test needs testers. date: the day it lands, as /ios or /android
   // says it ("November 12"); empty until the store says
   store: {
-    ios: { status: "soon" as "soon" | "live", url: "", date: "", soon: "/ios" },
+    ios: { status: "live" as "soon" | "live", url: "https://apps.apple.com/app/wordlah-singlish-word-game/id6827368191", date: "", soon: "/ios" },
     android: { status: "soon" as "soon" | "live", url: "", date: "", soon: "/beta" },
   },
   // until Google Play opens the app to everyone: a closed test needs 12 testers for 14 days (/beta, unlisted, as
@@ -57,7 +58,8 @@ export const wordlah = {
    */
   play: {
     adults: "Free to play, with ads. For adults 18 and over.",
-    bar: "WordLah is coming to iPhone and Android",
+    // the floating install bar: on an iPhone or a computer, the App Store once it has WordLah; on Android, the beta
+    bar: { ios: "Out now on iPhone", soon: "Coming to iPhone and Android", android: "Coming to Android", get: "App Store", join: "Join the beta" },
     waitlist: ["On Android?", "Join the waitlist"],
     card: {
       kicker: "after every game",

@@ -135,6 +135,16 @@ export const site = {
       revenue: 0,
       link: "https://eureka.shoopi.dev",
     },
+    {
+      name: "WordLah",
+      emoji: "🦁",
+      icon: "/wordlah/icon.png",
+      description:
+        "Daily Singlish word game: guess the five-letter word in six tries, then the word card tells you what it means.",
+      status: "live",
+      revenue: 0,
+      link: "https://wordlah.shoopi.dev",
+    },
   ] satisfies Project[]) as Project[],
   work: {
     tagline: "Websites, systems, and R&D for people building something real.",

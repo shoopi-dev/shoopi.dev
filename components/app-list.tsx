@@ -2,11 +2,12 @@ import { Fragment } from "react";
 import { site } from "@/data/site";
 import { stampstory } from "@/data/stampstory";
 import { eureka } from "@/data/eureka";
+import { wordlah } from "@/data/wordlah";
 import { externalProps } from "@/lib/link";
 import { Pop } from "./animate";
 
 /* each app's own page data: its tagline and where to get it */
-const pages = { [stampstory.name]: stampstory, [eureka.name]: eureka };
+const pages = { [stampstory.name]: stampstory, [eureka.name]: eureka, [wordlah.name]: wordlah };
 
 /** the apps in words, under the springboard: the icons above do the tapping, this says what each
     app is, so a search for the app finds its page. Two plain rows, no badges */

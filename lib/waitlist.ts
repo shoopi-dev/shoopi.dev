@@ -11,9 +11,8 @@ import { site } from "@/data/site";
  */
 export type WaitlistState = { place?: number; problem?: string };
 
-// any app on the home page may have a list, and WordLah, unlisted until it launches; the page names its own,
-// which a visitor could change
-const apps = new Set([...site.apps.map((a) => a.name.toLowerCase()), "wordlah"]);
+// any app on the home page may have a list; the page names its own, which a visitor could change
+const apps = new Set(site.apps.map((a) => a.name.toLowerCase()));
 
 export async function joinWaitlist(app: string, platform: string, _: WaitlistState, form: FormData): Promise<WaitlistState> {
   const email = String(form.get("email") ?? "").trim().toLowerCase();
