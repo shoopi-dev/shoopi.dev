@@ -87,6 +87,16 @@ export default function SupportPage() {
             Email support
           </a>
         </p>
+
+        <h2 className="mt-10 border-t border-ink/10 pt-8 font-display text-lg font-bold tracking-tight">
+          Word lists
+        </h2>
+        <p className="mt-3 text-[15px] leading-7 text-ink/80">{s.wordLists.intro}</p>
+        {s.wordLists.notice.map((line) => (
+          <p key={line} className="mt-3 text-[13px] leading-6 text-ink/60">
+            {line}
+          </p>
+        ))}
       </DocPage>
     </>
   );
