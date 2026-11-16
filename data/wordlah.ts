@@ -154,6 +154,17 @@ export const wordlah = {
     },
   ],
 
+  // the lists the app's allowed guesses are made from (WordLah's tools/guesses/build.py); SCOWL's licence asks for its
+  // notice in the app's supporting documentation, word for word
+  wordLists: {
+    intro:
+      "The words WordLah takes as guesses come from ENABLE, a public-domain word list, and from SCOWL (Spell Checker Oriented Word Lists), used under its notice:",
+    notice: [
+      "Copyright 2000-2026 by Kevin Atkinson",
+      'Permission to use, copy, modify, distribute, and sell any part of SCOWLv2, or word lists created from it, is hereby granted without fee, provided that the above copyright notice appears in all copies and that both the above copyright notice and this notice appear in supporting documentation. Kevin Atkinson makes no representations about the suitability of this database for any purpose. It is provided "as is" without express or implied warranty.',
+    ],
+  },
+
   privacy: [
     {
       id: "short",
