@@ -32,7 +32,7 @@ export const wordlah = {
   taglineWord: "Singlish",
   subtitle: "One Singlish word a day, the same for everyone. Six tries to find it, then the word card tells you what it means.",
   support,
-  updated: "2026-11-01",
+  updated: "2026-11-19",
   url: "https://wordlah.shoopi.dev",
   ogImage: "https://wordlah.shoopi.dev/wordlah/og.jpg", // 1200x630, public/wordlah/og.jpg
   ogAlt: "WordLah: the Merlion over a dusk sky, above the words A daily Singlish word game",
@@ -110,7 +110,7 @@ export const wordlah = {
     },
     {
       q: "I watched a short ad and got nothing.",
-      a: "The reward comes only when the ad has played to the end; closing it early gives nothing. If no ad is ready, try again in a minute or two. If you watched it through and still got nothing, email me with the time it happened.",
+      a: "The reward comes only when the ad has played to the end; closing it early gives nothing. If no ad is ready, try again in a minute or two, and if ads never load on one Wi-Fi, it may block them: try mobile data. If you watched it through and still got nothing, email me with the time it happened.",
     },
     {
       q: "Do I have to sign in?",
@@ -216,7 +216,7 @@ export const wordlah = {
       id: "ads",
       title: "Ads",
       body: [
-        "Ads are served by Google AdMob, through the Google Mobile Ads software built into the app. WordLah shows two kinds: a banner on the game screen, and short ads that play only when you tap to watch one: for 50 tokens or a booster, at most three a day, or to open a previous day's puzzle from the calendar (not with No ads).",
+        "Ads are served by Google AdMob, through the Google Mobile Ads software built into the app. WordLah shows two kinds: a banner on the game screen, and short ads that play only when you tap to watch one: for 50 tokens or a booster, at most three a day, or to open a previous day's puzzle from the calendar (not with No ads). If no ad comes, the puzzle opens without one.",
       ],
       list: [
         "What Google collects. To choose, show and measure ads and to prevent fraud, Google's software sends Google information such as your phone's advertising identifier (on Android only), an identifier for this app on your phone, your internet address and the rough location it implies, your phone's model, system and language, the app and its version, and which ads were shown and tapped. Google uses it as its own privacy policy describes, and explains how at policies.google.com/technologies/partner-sites. Your WordLah account is never shared with Google for ads.",
@@ -242,7 +242,7 @@ export const wordlah = {
       id: "usage",
       title: "How the app is used",
       body: [
-        "The app counts what is done in it, to learn what to make better: when it is opened and put away, which screens are seen, signing in, playing as a guest and saving, starting a day, each guess played (which try it was, never its letters), a word turned down and why, how a game ended, the boosters used and bought, the shop and purchases, short ads tapped and watched and the banner tapped, the leaderboard and previous games opened, Share my sky, pokes at the Merlion, and the daily reminder asked for, turned on or off (with its hour) and opened.",
+        "The app counts what is done in it, to learn what to make better: when it is opened and put away, which screens are seen, signing in, playing as a guest and saving, starting a day, each guess played (which try it was, never its letters), a word turned down and why, how a game ended, the boosters used and bought, the shop and purchases, short ads tapped and watched (and, when none came, why: not started yet, still loading, the network or Google's error code) and the banner tapped, the leaderboard and previous games opened, Share my sky, pokes at the Merlion, and the daily reminder asked for, turned on or off (with its hour) and opened.",
         "Each of these events carries your account identifier, a guest's included. On the sign-in page, before you have an account, it carries a random identifier made on your phone instead, which joins your account's when you sign in or play as a guest. Every event also carries your phone's system and model, the app version, your language and your time zone, and PostHog keeps with your account how you signed in, whether you are a guest, and your name on the leaderboard. They never carry the letters you guess, your email or your name from Apple or Google.",
         "The events go from your phone to PostHog, in its EU cloud. PostHog works out roughly where an event came from, its country and city, from the internet address it came from, and then discards the address without storing it.",
         "To read the counts beside how the game is played, PostHog also keeps a copy of WordLah's game tables, refreshed from the server every 6 hours: games, results, when each day's word was handed out, wallet changes, leaderboard names, and the word list and its schedule. The copy never includes anything from your Apple or Google sign-in, such as your email.",
