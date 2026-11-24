@@ -30,9 +30,9 @@ export const wordlah = {
   tagline: "Guess the Singlish word, then get the joke",
   /** The tagline's word the landing page's headline shows in the game's teal. */
   taglineWord: "Singlish",
-  subtitle: "One Singlish word a day, the same for everyone. Six tries to find it, then the word card tells you what it means.",
+  subtitle: "One Singlish word a day, the same for everyone, and a harder 6-letter one to finish. Six tries to find it, then the word card tells you what it means.",
   support,
-  updated: "2026-11-19",
+  updated: "2026-11-24",
   url: "https://wordlah.shoopi.dev",
   ogImage: "https://wordlah.shoopi.dev/wordlah/og.jpg", // 1200x630, public/wordlah/og.jpg
   ogAlt: "WordLah: the Merlion over a dusk sky, above the words A daily Singlish word game",
@@ -159,6 +159,9 @@ export const wordlah = {
   wordLists: {
     intro:
       "The words WordLah takes as guesses come from ENABLE, a public-domain word list, and from SCOWL (Spell Checker Oriented Word Lists), used under its notice:",
+    // the place names: Wikipedia's lists, and mledoze/countries, whose ODbL asks for this notice
+    places:
+      "Place names come from Wikipedia's lists of Singapore's subzones and MRT stations and of Malaysia's towns and districts, and the names of countries, their capitals and their peoples from mledoze/countries (github.com/mledoze/countries), made available under the Open Database License (ODbL) v1.0.",
     notice: [
       "Copyright 2000-2026 by Kevin Atkinson",
       'Permission to use, copy, modify, distribute, and sell any part of SCOWLv2, or word lists created from it, is hereby granted without fee, provided that the above copyright notice appears in all copies and that both the above copyright notice and this notice appear in supporting documentation. Kevin Atkinson makes no representations about the suitability of this database for any purpose. It is provided "as is" without express or implied warranty.',
@@ -202,7 +205,7 @@ export const wordlah = {
       table: {
         head: ["What", "Why it exists"] as [string, string],
         rows: [
-          ["Each day's game: the puzzle number, the word with its meaning, your guesses, any Hint letters, faded letters or extra row, and whether you played it later from the calendar", "So a game you leave is waiting when you come back, and for your streak and stats"],
+          ["Each day's games (the 5-letter word and the 6-letter challenge): the puzzle number, the word with its meaning, your guesses, any Hint letters, faded letters or extra row, and whether you played it later from the calendar", "So a game you leave is waiting when you come back, and for your streak and stats"],
           ["When the server handed you each day's word, and for each day you finished on the day: whether you solved it, your tries and your time", "To check results and rank the daily leaderboard"],
           ["The name WordLah made up for you when your account was made", "The name the daily leaderboard shows"],
           ["Every change to your wallet: tokens and boosters bought, earned and used, No ads, and the day of each short ad", "Your tokens, boosters and No ads, and the limit of three short ads a day"],
@@ -242,7 +245,7 @@ export const wordlah = {
       id: "usage",
       title: "How the app is used",
       body: [
-        "The app counts what is done in it, to learn what to make better: when it is opened and put away, which screens are seen, signing in, playing as a guest and saving, starting a day, each guess played (which try it was, never its letters), a word turned down and why, how a game ended, the boosters used and bought, the shop and purchases, short ads tapped and watched (and, when none came, why: not started yet, still loading, the network or Google's error code) and the banner tapped, the leaderboard and previous games opened, Share my sky, pokes at the Merlion, and the daily reminder asked for, turned on or off (with its hour) and opened.",
+        "The app counts what is done in it, to learn what to make better: when it is opened and put away, which screens are seen, signing in, playing as a guest and saving, starting a day's word (and which of the day's two words it is, as every game event says), each guess played (which try it was, never its letters), a word turned down and why, how a game ended, the boosters used and bought, the shop and purchases, short ads tapped and watched (and, when none came, why: not started yet, still loading, the network or Google's error code) and the banner tapped, the leaderboard and previous games opened, Share my sky, pokes at the Merlion, and the daily reminder asked for, turned on or off (with its hour) and opened.",
         "Each of these events carries your account identifier, a guest's included. On the sign-in page, before you have an account, it carries a random identifier made on your phone instead, which joins your account's when you sign in or play as a guest. Every event also carries your phone's system and model, the app version, your language and your time zone, and PostHog keeps with your account how you signed in, whether you are a guest, and your name on the leaderboard. They never carry the letters you guess, your email or your name from Apple or Google.",
         "The events go from your phone to PostHog, in its EU cloud. PostHog works out roughly where an event came from, its country and city, from the internet address it came from, and then discards the address without storing it.",
         "To read the counts beside how the game is played, PostHog also keeps a copy of WordLah's game tables, refreshed from the server every 6 hours: games, results, when each day's word was handed out, wallet changes, leaderboard names, and the word list and its schedule. The copy never includes anything from your Apple or Google sign-in, such as your email.",
@@ -365,7 +368,7 @@ export const wordlah = {
       id: "what",
       title: "What WordLah does",
       body: [
-        "WordLah is a daily word game: one five-letter word a day, most of them Singlish, six tries to find it, and a joke when you do. It runs on your device. The meanings and origins it shows are written in good faith for fun; Singlish is spoken more than written, and they are not a dictionary.",
+        "WordLah is a daily word game: a five-letter word a day and a harder six-letter one, most of them Singlish, six tries to find the first and seven for the second, and a joke when you do. It runs on your device. The meanings and origins it shows are written in good faith for fun; Singlish is spoken more than written, and they are not a dictionary.",
       ],
     },
     {

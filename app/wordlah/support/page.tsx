@@ -47,7 +47,7 @@ export default function SupportPage() {
           <>
             <p>
               WordLah is a daily Singlish word game: a new five-letter word every day, six tries to
-              find it, and a joke when you do. Something broken, missing, or just odd? One person
+              find it, a harder six-letter one to finish, and a joke when you do. Something broken, missing, or just odd? One person
               answers the inbox, usually within a few days.
             </p>
             <p className="mt-4 flex flex-wrap items-center gap-3">
@@ -97,6 +97,7 @@ export default function SupportPage() {
             {line}
           </p>
         ))}
+        <p className="mt-3 text-[15px] leading-7 text-ink/80">{s.wordLists.places}</p>
       </DocPage>
     </>
   );
